@@ -16,6 +16,7 @@
     "module": "preserve",
     "baseUrl": "./",
     "paths": {
+      "@features/*": ["src/app/features/*"],
       "@layout/*": ["src/app/layout/*"],
       "@models/*": ["src/app/shared/models/*"],
       "@shared/*": ["src/app/shared/*"]
