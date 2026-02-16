@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "skills": {
+    "angular-best-practices-v20": {
+      "source": "develite98/angular-best-practices",
+      "sourceType": "github",
+      "computedHash": "90f006e1591cd12b3fdef03a579b0667b4b949e395e5f158dd24f883d06bfb2a"
+    },
+    "angular-component": {
+      "source": "analogjs/angular-skills",
+      "sourceType": "github",
+      "computedHash": "2789fdf11e2a70832ce2e6e79954018325a010ebdd45c5d4b1e7bfdf44679b7c"
+    },
+    "angular-forms": {
+      "source": "analogjs/angular-skills",
+      "sourceType": "github",
+      "computedHash": "a2e28f7c7c1b9b13f0a8212f403515886f9d23bf13732a355b1f5d01f5cc9d69"
+    },
+    "angular-http": {
+      "source": "analogjs/angular-skills",
+      "sourceType": "github",
+      "computedHash": "ad8821177929ea09eb94e7fc386d842c76c7f39b6c4d7aa3176ba3596dbabecc"
+    },
+    "angular-routing": {
+      "source": "analogjs/angular-skills",
+      "sourceType": "github",
+      "computedHash": "e54b8803da246042525e67effe7ea2a9dc26d5a50e857125793f579c7027aef3"
+    },
+    "angular-signals": {
+      "source": "analogjs/angular-skills",
+      "sourceType": "github",
+      "computedHash": "ddedef1232295f200b966778bc36d16fc07d2113ad1dbc73d75d14eb544953bc"
+    }
+  }
+}
