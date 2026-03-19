@@ -1,3 +1,4 @@
+export * from './auth.dto';
 export * from './brand.dto';
 export * from './category.dto';
 export * from './discount.dto';
