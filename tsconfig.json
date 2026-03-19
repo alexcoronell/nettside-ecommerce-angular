@@ -18,7 +18,8 @@
     "paths": {
       "@features/*": ["src/app/features/*"],
       "@layout/*": ["src/app/layout/*"],
-      "@models/*": ["src/app/shared/models/*"],
+      "@domain/*": ["src/app/domain/*"],
+      "@infrastructure/*": ["src/app/infrastructure/*"],
       "@shared/*": ["src/app/shared/*"]
     }
   },
