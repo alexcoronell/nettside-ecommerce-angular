@@ -16,10 +16,11 @@
     "module": "preserve",
     "baseUrl": "./",
     "paths": {
-      "@features/*": ["src/app/features/*"],
-      "@layout/*": ["src/app/layout/*"],
+      "@core/*": ["src/app/core/*"],
       "@domain/*": ["src/app/domain/*"],
+      "@features/*": ["src/app/features/*"],
       "@infrastructure/*": ["src/app/infrastructure/*"],
+      "@layout/*": ["src/app/layout/*"],
       "@shared/*": ["src/app/shared/*"]
     }
   },
