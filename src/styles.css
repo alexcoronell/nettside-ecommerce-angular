@@ -4,6 +4,7 @@
 
 @theme {
   --color-primary: #0066ff;
+  --color-primary-hover: #0052cc;
   --color-secondary: #cce0ff;
   --color-background: #e5f0ff;
   --color-dark-background: #001433;
@@ -14,4 +15,26 @@
 
 body {
   @apply bg-background text-dark-text dark:bg-dark-background dark:text-light-text;
+}
+
+input,
+textarea {
+  @apply border-primary/50 focus:border-primary text-dark-text/70 border outline-none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-primary-hover dark:text-light-text font-bold;
+}
+
+.btn {
+  @apply text-light-text flex w-full justify-center rounded-md px-3 py-2 text-sm/6 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2;
+}
+
+.btn-primary {
+  @apply bg-primary text-light-text hover:bg-primary-hover focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-2;
 }
