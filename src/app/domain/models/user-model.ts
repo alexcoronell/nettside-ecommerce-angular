@@ -1,13 +1,14 @@
-import { BaseModel } from 'src/app/domain/models/base-model';
+import { BaseModel } from './base-model';
+import { UserRole } from '@domain/enums';
 
 export interface User extends BaseModel {
   firstname: string;
   lastname: string;
   email: string;
-  password: string;
+  password?: string;
   phoneNumber: string;
   isActive: boolean;
-  role: string; //This will be an enum
+  role: UserRole;
   department: string;
   city: string;
   address: string;

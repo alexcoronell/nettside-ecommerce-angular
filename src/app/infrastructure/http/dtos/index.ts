@@ -10,6 +10,7 @@ export * from './product-supplier.dto';
 export * from './product-tag.dto';
 export * from './purchase-detail.dto';
 export * from './purchase.dto';
+export * from './registration.dto';
 export * from './sale-detail.dto';
 export * from './sale.dto';
 export * from './shipment.dto';

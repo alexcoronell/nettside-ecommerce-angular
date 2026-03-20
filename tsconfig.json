@@ -18,6 +18,7 @@
     "paths": {
       "@core/*": ["src/app/core/*"],
       "@domain/*": ["src/app/domain/*"],
+      "@environments/*": ["src/environments/*"],
       "@features/*": ["src/app/features/*"],
       "@infrastructure/*": ["src/app/infrastructure/*"],
       "@layout/*": ["src/app/layout/*"],
