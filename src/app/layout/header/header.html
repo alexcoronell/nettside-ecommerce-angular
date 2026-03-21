@@ -1,5 +1,13 @@
-<header class="relative flex items-center justify-between px-4 py-9">
-  <app-menu-header />
-  <app-logo-header />
-  <app-actions-header />
+<header
+  class="bg-dark-background dark:bg-darker-background text-light-text shadow-primary-hover/30 dark:shadow-primary/30 px-4 py-4 shadow-md"
+>
+  <div class="mx-auto flex max-w-7xl flex-nowrap items-center gap-4">
+    <app-logo-header class="shrink-0" />
+    <app-search-header class="flex-1" />
+    <app-menu-header class="shrink-0 lg:hidden" />
+    <app-actions-header class="shrink-0" />
+  </div>
+  <div class="mx-auto hidden max-w-7xl lg:flex lg:items-center lg:justify-center">
+    <app-menu-header />
+  </div>
 </header>
