@@ -5,7 +5,9 @@
 @theme {
   --color-primary: #0066ff;
   --color-primary-hover: #0052cc;
-  --color-secondary: #cce0ff;
+  --color-primary-light: #cce0ff;
+  --color-secondary: #f57c00;
+  --color-secondary-hover: #ff8c00;
   --color-background: #e5f0ff;
   --color-dark-background: #001433;
   --color-darker-background: #000e24;
@@ -17,11 +19,6 @@ body {
   @apply bg-background text-dark-text dark:bg-dark-background dark:text-light-text;
 }
 
-input,
-textarea {
-  @apply border-primary/50 focus:border-primary text-dark-text/70 border outline-none;
-}
-
 h1,
 h2,
 h3,
@@ -31,10 +28,31 @@ h6 {
   @apply text-primary-hover dark:text-light-text font-bold;
 }
 
+a {
+  @apply cursor-pointer;
+}
+
+button {
+  @apply disabled:cursor-not-allowed;
+}
+
+input,
+textarea {
+  @apply border-primary/50 focus:border-primary text-dark-text/70 border outline-none;
+}
+
 .btn {
   @apply text-light-text flex w-full justify-center rounded-md px-3 py-2 text-sm/6 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2;
 }
 
 .btn-primary {
   @apply bg-primary text-light-text hover:bg-primary-hover focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-2;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-light-text hover:bg-secondary-hover focus-visible:outline-secondary focus-visible:outline-2 focus-visible:outline-offset-2;
+}
+
+.btn-link {
+  @apply hover:text-shadow-primary/50 px-1 underline text-shadow-md;
 }

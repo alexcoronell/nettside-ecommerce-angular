@@ -4,10 +4,10 @@
   <div class="mx-auto flex max-w-7xl flex-nowrap items-center gap-4">
     <app-logo-header class="shrink-0" />
     <app-search-header class="flex-1" />
-    <app-menu-header class="shrink-0 lg:hidden" />
-    <app-actions-header class="shrink-0" />
+    <app-actions-header class="hidden shrink-0 lg:block" />
   </div>
-  <div class="mx-auto hidden max-w-7xl lg:flex lg:items-center lg:justify-center">
+  <div class="mx-auto flex max-w-7xl justify-between pt-4 lg:items-center lg:justify-center">
     <app-menu-header />
+    <app-actions-header class="shrink-0 lg:hidden" />
   </div>
 </header>
