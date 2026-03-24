@@ -28,17 +28,30 @@ h6 {
   @apply text-primary-hover dark:text-light-text font-bold;
 }
 
-a {
-  @apply cursor-pointer;
-}
-
+a,
 button {
-  @apply disabled:cursor-not-allowed;
+  @apply cursor-pointer;
 }
 
 input,
 textarea {
-  @apply border-primary/50 focus:border-primary text-dark-text/70 border outline-none;
+  @apply border-primary/50 focus:border-primary text-dark-text/70 border outline-none block w-full rounded-md bg-white/5 px-3 py-1.5 dark:text-light-text outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 placeholder:dark:text-gray-400/60 focus:outline-2 focus:-outline-offset-2 sm:text-sm/6;
+}
+
+.form-group {
+  @apply relative pb-6;
+}
+
+.form-group div {
+  @apply mt-1;
+}
+
+.form-group label {
+  @apply block text-sm/6 font-medium text-primary/80;
+}
+
+button {
+  @apply disabled:cursor-not-allowed;
 }
 
 .btn {

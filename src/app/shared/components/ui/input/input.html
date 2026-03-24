@@ -1,0 +1,19 @@
+<div class="form-group">
+    <label [for]="id()">
+        {{ label() }}
+    </label>
+
+    <div class="mt-1">
+        <input [id]="id()" [type]="type()" [formField]="field()" [autocomplete]="autocomplete()"
+            [placeholder]="placeholder()" [attr.aria-describedby]="isInvalid() ? id() + '-error' : null"
+            [attr.aria-invalid]="isInvalid() || null" [class.outline-red-500]="isInvalid()" />
+    </div>
+
+    @if (isInvalid()) {
+    <ul [id]="id() + '-error'" role="alert" class="mt-1 space-y-0.5">
+        @for (error of errors(); track error.message) {
+        <li class="text-xs absolute text-red-400">{{ error.message }}</li>
+        }
+    </ul>
+    }
+</div>

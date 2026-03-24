@@ -4,42 +4,11 @@
   </div>
 
   <div class="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form class="space-y-3">
-      <div>
-        <label for="email" class="block text-sm/6 font-medium">Email address</label>
-        <div class="mt-1">
-          <input
-            id="email"
-            type="email"
-            name="email"
-            required
-            autocomplete="email"
-            class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
-          />
-        </div>
-      </div>
-
-      <div>
-        <div class="flex items-center justify-between">
-          <label for="password" class="block text-sm/6 font-medium">Password</label>
-          <div class="text-sm">
-            <a href="#" class="text-primary hover:text-primary-hover font-semibold"
-              >Forgot password?</a
-            >
-          </div>
-        </div>
-        <div class="mt-1">
-          <input
-            id="password"
-            type="password"
-            name="password"
-            required
-            autocomplete="current-password"
-            class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
-          />
-        </div>
-      </div>
-
+    <form (submit)="onSubmit($event)" class="space-y-3" novalidate>
+      <app-input id="email" label="Email" type="email" autocomplete="email" placeholder="tu@correo.com"
+        [field]="loginForm.email" />
+      <app-input id="password" label="Password" type="password" autocomplete="current-password" placeholder="*********"
+        [field]="loginForm.password" />
       <div class="pt-6">
         <button type="submit" class="btn btn-primary">Sign in</button>
       </div>
@@ -47,9 +16,7 @@
 
     <p class="text-dark-text/40 dark:text-light-text/40 mt-10 text-center text-sm/6">
       Don't have an account?
-      <a routerLink="/registration" class="text-primary hover:text-primary-hover font-semibold"
-        >Register here</a
-      >
+      <a routerLink="/registration" class="text-primary hover:text-primary-hover font-semibold">Register here</a>
     </p>
   </div>
 </div>
