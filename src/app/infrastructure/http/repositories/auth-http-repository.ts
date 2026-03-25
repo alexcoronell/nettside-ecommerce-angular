@@ -16,6 +16,6 @@ export class AuthHttpRepository extends BaseHttpRepository implements AuthReposi
   }
 
   logout(): Observable<unknown> {
-    return this.http.post<unknown>(`${this.url}/auth/logout`, {});
+    return this.http.post<unknown>(`${this.url}auth/logout`, {});
   }
 }
