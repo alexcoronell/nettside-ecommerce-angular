@@ -1,14 +1,26 @@
-<div class="flex h-full w-screen flex-col justify-center px-6 py-3 lg:px-8">
+<div class="relative flex h-full w-screen flex-col justify-center px-6 py-3 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
     <h2 class="mt-3 text-center text-2xl/9 tracking-tight">Sign in to your account</h2>
   </div>
 
   <div class="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
     <form (submit)="onSubmit($event)" class="space-y-3" novalidate>
-      <app-input id="email" label="Email" type="email" autocomplete="email" placeholder="tu@correo.com"
-        [field]="loginForm.email" />
-      <app-input id="password" label="Password" type="password" autocomplete="current-password" placeholder="*********"
-        [field]="loginForm.password" />
+      <app-input
+        id="email"
+        label="Email"
+        type="email"
+        autocomplete="email"
+        placeholder="tu@correo.com"
+        [field]="loginForm.email"
+      />
+      <app-input
+        id="password"
+        label="Password"
+        type="password"
+        autocomplete="current-password"
+        placeholder="*********"
+        [field]="loginForm.password"
+      />
       <div class="pt-6">
         <button type="submit" class="btn btn-primary">Sign in</button>
       </div>
@@ -16,7 +28,16 @@
 
     <p class="text-dark-text/40 dark:text-light-text/40 mt-10 text-center text-sm/6">
       Don't have an account?
-      <a routerLink="/registration" class="text-primary hover:text-primary-hover font-semibold">Register here</a>
+      <a routerLink="/registration" class="text-primary hover:text-primary-hover font-semibold"
+        >Register here</a
+      >
     </p>
+    @if (authStore.error()) {
+      <div
+        class="bg-error/70 absolute top-auto right-0 -bottom-12 left-1/2 w-[300px] -translate-x-1/2 p-2 text-center text-white"
+      >
+        {{ authStore.error() }}
+      </div>
+    }
   </div>
 </div>

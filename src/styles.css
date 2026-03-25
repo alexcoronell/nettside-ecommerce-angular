@@ -13,6 +13,7 @@
   --color-darker-background: #000e24;
   --color-dark-text: #000e24;
   --color-light-text: #e5f0ff;
+  --color-error: #ff0000;
 }
 
 body {
@@ -35,7 +36,7 @@ button {
 
 input,
 textarea {
-  @apply border-primary/50 focus:border-primary text-dark-text/70 border outline-none block w-full rounded-md bg-white/5 px-3 py-1.5 dark:text-light-text outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 placeholder:dark:text-gray-400/60 focus:outline-2 focus:-outline-offset-2 sm:text-sm/6;
+  @apply border-primary/50 focus:border-primary text-dark-text/70 dark:text-light-text block w-full rounded-md border bg-white/5 px-3 py-1.5 outline-1 -outline-offset-1 outline-white/10 outline-none placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 sm:text-sm/6 placeholder:dark:text-gray-400/60;
 }
 
 .form-group {
@@ -47,7 +48,7 @@ textarea {
 }
 
 .form-group label {
-  @apply block text-sm/6 font-medium text-primary/80;
+  @apply text-primary/80 block text-sm/6 font-medium;
 }
 
 button {

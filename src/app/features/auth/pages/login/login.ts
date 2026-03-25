@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { form, required, email, minLength } from '@angular/forms/signals';
+import { form, required, email, minLength, submit } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
 
 import { Input } from '@shared/components/ui/input/input';
 
 import { LoginDto } from '@infrastructure/http/dtos';
 
-import { AuthHttpRepository } from '@infrastructure/http/repositories/auth-http-repository';
+import { AuthStore } from '@core/auth/stores/auth-store';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ import { AuthHttpRepository } from '@infrastructure/http/repositories/auth-http-
 })
 export class Login {
   loginModel = signal<LoginDto>({ email: '', password: '' });
-  authRepository = inject(AuthHttpRepository);
+  authStore = inject(AuthStore);
 
   loginForm = form(this.loginModel, (schemaPath) => {
     required(schemaPath.email, { message: 'Email is required' });
@@ -28,9 +28,10 @@ export class Login {
 
   onSubmit(e: Event) {
     e.preventDefault();
-    /* submit(this.loginForm, async () => {
-      const credentials = await this.loginModel();
-      console.log('Submitting:', credentials);
-    }); */
+    void submit(this.loginForm, () => {
+      const credentials = this.loginModel();
+      this.authStore.login(credentials);
+      return Promise.resolve();
+    });
   }
 }
