@@ -13,7 +13,23 @@
       [attr.aria-describedby]="isInvalid() ? id() + '-error' : null"
       [attr.aria-invalid]="isInvalid() || null"
       [class.outline-red-500]="isInvalid()"
+      [style.padding-right.px]="type() === 'password' ? 40 : 0"
     />
+    @if (_type() === 'password') {
+      @if (showPassword()) {
+        <svg
+          [lucideIcon]="lucideEyeOff"
+          (click)="togglePassword()"
+          class="text-primary/50 dark:text-light-text/50 absolute top-1/2 right-3 -translate-y-1/2"
+        ></svg>
+      } @else {
+        <svg
+          [lucideIcon]="lucideEye"
+          (click)="togglePassword()"
+          class="text-primary/50 dark:text-light-text/50 absolute top-1/2 right-3 -translate-y-1/2"
+        ></svg>
+      }
+    }
   </div>
 
   @if (isInvalid()) {
