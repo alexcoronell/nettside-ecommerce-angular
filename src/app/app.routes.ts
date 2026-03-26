@@ -21,11 +21,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('@features/auth/pages/registration/registration').then((c) => c.Registration),
       },
+      {
+        path: 'admin',
+        children: adminRoutes,
+      },
     ],
-  },
-  {
-    path: 'admin',
-    children: adminRoutes,
   },
   {
     path: '**',

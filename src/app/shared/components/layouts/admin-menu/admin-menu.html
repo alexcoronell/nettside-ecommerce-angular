@@ -1,0 +1,9 @@
+<nav class="mx-auto w-full max-w-7xl pt-3">
+  <ul class="flex items-center justify-center gap-4">
+    @for (item of adminNavItems; track item.label) {
+      <li>
+        <a [routerLink]="item.route">{{ item.label }}</a>
+      </li>
+    }
+  </ul>
+</nav>
