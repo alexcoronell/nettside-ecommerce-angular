@@ -1,6 +1,7 @@
 export * from './auth.dto';
 export * from './brand.dto';
 export * from './category.dto';
+export * from './count.dto';
 export * from './discount.dto';
 export * from './payment-method.dto';
 export * from './product-discount.dto';
