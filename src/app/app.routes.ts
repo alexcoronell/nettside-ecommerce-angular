@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { adminRoutes } from '@features/admin/admin.routes';
 import { MainLayout } from '@layout/main-layout/main-layout';
 import { HomePage } from '@features/catalog/pages/home-page/home-page';
 
@@ -21,5 +22,13 @@ export const routes: Routes = [
           import('@features/auth/pages/registration/registration').then((c) => c.Registration),
       },
     ],
+  },
+  {
+    path: 'admin',
+    children: adminRoutes,
+  },
+  {
+    path: '**',
+    redirectTo: '',
   },
 ];
