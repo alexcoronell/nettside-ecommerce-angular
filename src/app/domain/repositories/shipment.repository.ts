@@ -1,5 +1,5 @@
 import { BaseRepository } from '@domain/shared/base.repository';
 import { Shipment } from '@domain/models';
-import { CreateShipmentDto } from '@infrastructure/http/dtos/shipment.dto';
+import { CreateShipmentDto, UpdateShipmentDto } from '@infrastructure/http/dtos/shipment.dto';
 
-export abstract class ShipmentRepository extends BaseRepository<Shipment, CreateShipmentDto> {}
+export abstract class ShipmentRepository extends BaseRepository<Shipment, CreateShipmentDto, UpdateShipmentDto> { }

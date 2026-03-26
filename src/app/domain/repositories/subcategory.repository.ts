@@ -1,6 +1,6 @@
 import { BaseRepository } from '@domain/shared/base.repository';
 import { Subcategory } from '@domain/models';
-import { CreateSubcategoryDto } from '@infrastructure/http/dtos/subcategory.dto';
+import { CreateSubcategoryDto, UpdateSubcategoryDto } from '@infrastructure/http/dtos/subcategory.dto';
 import { PaginationParams, PaginatedResult } from '@domain/types';
 
 export interface SubcategoryFilters {
@@ -10,7 +10,8 @@ export interface SubcategoryFilters {
 
 export abstract class SubcategoryRepository extends BaseRepository<
   Subcategory,
-  CreateSubcategoryDto
+  CreateSubcategoryDto,
+  UpdateSubcategoryDto
 > {
   abstract override getAll(
     filters?: SubcategoryFilters,

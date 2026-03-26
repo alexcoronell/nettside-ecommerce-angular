@@ -1,7 +1,7 @@
 import { BaseRepository } from '@domain/shared/base.repository';
 import { PaginationParams } from '@domain/types';
 import { Product } from '@domain/models';
-import { CreateProductDto } from '@infrastructure/http/dtos/product.dto';
+import { CreateProductDto, UpdateProductDto } from '@infrastructure/http/dtos/product.dto';
 import { PaginatedResult } from '@domain/types';
 
 export interface ProductFilters {
@@ -13,7 +13,7 @@ export interface ProductFilters {
   search?: string;
 }
 
-export abstract class ProductRepository extends BaseRepository<Product, CreateProductDto> {
+export abstract class ProductRepository extends BaseRepository<Product, CreateProductDto, UpdateProductDto> {
   abstract override getAll(
     filters?: ProductFilters,
     pagination?: PaginationParams
