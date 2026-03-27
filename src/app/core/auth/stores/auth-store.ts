@@ -27,7 +27,7 @@ export class AuthStore {
 
   constructor() {
     if (this.isBrowser) {
-      const storedUser = sessionStorage.getItem('user');
+      const storedUser = localStorage.getItem('user');
       if (storedUser) {
         try {
           const parsedUser: unknown = JSON.parse(storedUser);
