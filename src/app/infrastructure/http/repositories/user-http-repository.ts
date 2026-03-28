@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { httpResource, HttpResourceRef } from '@angular/common/http';
 
 import { BaseHttpRepository } from '../shared/base-http.repository';
@@ -12,9 +12,10 @@ import { PaginationParams, PaginatedResult } from '@domain/types';
   providedIn: 'root',
 })
 export class UserHttpRepository extends BaseHttpRepository implements UserRepository {
-  private readonly url = `${this.apiUrl}user`
-  async count(): Promise<CountDto> {
-    return fetch(`${this.url}/count`).then((res) => res.json());
+  private readonly url = `${this.apiUrl}user`;
+
+  count(): Promise<CountDto> {
+    return firstValueFrom(this.http.get<CountDto>(`${this.url}/count`));
   }
 
   getAll(paginationParams?: PaginationParams): HttpResourceRef<PaginatedResult<UserResponseDto>> {
@@ -28,30 +29,21 @@ export class UserHttpRepository extends BaseHttpRepository implements UserReposi
     }
     return httpResource(() => `${this.url}?${queryParams.toString()}`) as HttpResourceRef<PaginatedResult<User>>;
   }
+
+
   getById(id: number): Promise<User> {
-    return fetch(`${this.url}/${id}`).then((res) => res.json());
+    return firstValueFrom(this.http.get<User>(`${this.url}/${id}.toString()`));
   }
+
   create(entity: CreateUserDto): Promise<User> {
-    return fetch(`${this.url}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(entity),
-    }).then((res) => res.json());
+    return firstValueFrom(this.http.post<User>(`${this.url}`, entity));
   }
+
   update(id: number, entity: UpdateUserDto): Promise<User> {
-    return fetch(`${this.url}/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(entity),
-    }).then((res) => res.json());
+    return firstValueFrom(this.http.put<User>(`${this.url}/${id}.toString()`, entity));
   }
-  delete(id: number): Promise<void> {
-    return fetch(`${this.url}/${id}`, {
-      method: 'DELETE',
-    }).then((res) => res.json());
+
+  delete(id: number): Promise<unknown> {
+    return firstValueFrom(this.http.delete<unknown>(`${this.url}/${id}.toString()`));
   }
 }

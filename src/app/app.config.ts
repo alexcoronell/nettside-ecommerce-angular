@@ -4,6 +4,8 @@ import { provideRouter } from '@angular/router';
 import { API_URL } from '@core/tokens/api-url.token';
 import { API_KEY } from '@core/tokens/api-key.token';
 import { apiKeyInterceptor } from '@core/auth/interceptors/api-key-interceptor';
+import { jwtInterceptor } from '@core/auth/interceptors/jwt-interceptor';
+import { refreshTokenInterceptor } from '@core/auth/interceptors/refresh-token-interceptor';
 import { environment } from '@environments/environment';
 
 import { routes } from './app.routes';
@@ -17,6 +19,6 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withInterceptors([apiKeyInterceptor])),
+    provideHttpClient(withInterceptors([apiKeyInterceptor, jwtInterceptor, refreshTokenInterceptor])),
   ],
 };
