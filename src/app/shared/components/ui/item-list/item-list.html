@@ -1,0 +1,11 @@
+<div class="h-full w-screen border px-3 py-6">
+  <h1 class="text-center text-5xl font-bold">Item List</h1>
+  <div class="mx-auto w-full max-w-7xl space-y-3">
+    <app-header-item-list />
+    <table class="item-list-table">
+      <app-item-list-table-header />
+      <ng-content />
+      <app-item-list-table-footer />
+    </table>
+  </div>
+</div>

@@ -1,12 +1,21 @@
-@if (isLoading()) {
-<p>Loading...</p>
-} @else if (error()) {
-<p>Error: {{ error()?.message }}</p>
-} @else {
-@for (user of users(); track user.id) {
-<p>{{ user.email }}</p>
-}
-@empty {
-<p>No users found</p>
-}
-}
+<app-item-list>
+  <tbody>
+    @if (isLoading()) {
+      <tr>
+        <td colspan="3">Loading...</td>
+      </tr>
+    } @else if (error()) {
+      <tr>
+        <td colspan="3">Error: {{ error()?.message }}</td>
+      </tr>
+    } @else {
+      @for (user of users(); track user.id) {
+        <tr>
+          <td>{{ user.email }}</td>
+        </tr>
+      } @empty {
+        <p>No users found</p>
+      }
+    }
+  </tbody>
+</app-item-list>

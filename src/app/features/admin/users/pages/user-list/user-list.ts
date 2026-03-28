@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { UserAdminStore } from '../../store/user-admin.store';
+import { UserAdminStore } from '@features/admin/users/store/user-admin.store';
+import { ItemList } from '@shared/components/ui/item-list/item-list';
 
 @Component({
   selector: 'app-user-list',
-  imports: [],
+  imports: [ItemList],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
 })

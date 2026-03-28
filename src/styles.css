@@ -70,3 +70,11 @@ button {
 .btn-link {
   @apply hover:text-shadow-primary/50 px-1 underline text-shadow-md;
 }
+
+.item-list-table {
+  @apply mx-auto;
+}
+
+.item-list-table thead tr {
+  @apply border-b;
+}
