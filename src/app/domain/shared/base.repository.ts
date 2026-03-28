@@ -8,5 +8,5 @@ export abstract class BaseRepository<T, CreateDto, UpdateDto> {
   abstract getById(id: number): Promise<T>;
   abstract create(entity: CreateDto): Promise<T>;
   abstract update(id: number, entity: UpdateDto): Promise<T>;
-  abstract delete(id: number): Promise<void>;
+  abstract delete(id: number): Promise<unknown>;
 }
