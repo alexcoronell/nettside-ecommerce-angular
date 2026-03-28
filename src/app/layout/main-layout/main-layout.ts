@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Header } from '../header/header';
-import { Footer } from '../footer/footer';
 import { RouterOutlet } from '@angular/router';
+import { Header } from '@shared/components/layouts/header/header';
+import { Footer } from '@shared/components/layouts/footer/footer';
 
 @Component({
   selector: 'app-main-layout',
