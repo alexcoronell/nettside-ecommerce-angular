@@ -10,8 +10,7 @@ import { environment } from '@environments/environment';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 export const appConfig: ApplicationConfig = {
   providers: [
     { provide: API_URL, useValue: environment.API_URL },
@@ -19,6 +18,9 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withInterceptors([apiKeyInterceptor, jwtInterceptor, refreshTokenInterceptor])),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([apiKeyInterceptor, jwtInterceptor, refreshTokenInterceptor])
+    ),
   ],
 };
