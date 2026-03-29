@@ -1,18 +1,12 @@
-<tfoot class="w-full border">
-  <tr>
-    <td colspan="100%">
-      <div class="flex items-center justify-between px-6 py-6">
-        <p>Showing 1 to 10 of 100 items</p>
-        <div class="flex gap-3">
-          <button>Previous</button>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>...</button>
-          <button>10</button>
-          <button>Next</button>
-        </div>
-      </div>
-    </td>
-  </tr>
-</tfoot>
+<div class="flex flex-col items-center gap-y-3 md:relative md:flex-row md:justify-center">
+  <p class="text-sm opacity-70 md:absolute md:top-1/2 md:right-0 md:-translate-y-1/2">
+    Showing 1 to 10 of 100 items
+  </p>
+  <div class="flex gap-3">
+    <button><svg [lucideIcon]="lucideChevronFirst" class="text-white/80"></svg></button>
+    <button><svg [lucideIcon]="lucideChevronLeft" class="text-white/80"></svg></button>
+    <input type="text" value="1" readonly class="text-center" style="width: 60px" />
+    <button><svg [lucideIcon]="lucideChevronRight" class="text-white/80"></svg></button>
+    <button><svg [lucideIcon]="lucideChevronLast" class="text-white/80"></svg></button>
+  </div>
+</div>
