@@ -1,16 +1,33 @@
-<div class="flex items-center justify-between gap-3 border py-3">
-  <div class="flex flex-1 gap-3 border">
-    <button class="text-nowrap">Add Item</button>
-    <button>Back</button>
-    <input type="text" placeholder="Search" />
+<div class="flex w-full flex-col items-center justify-between gap-3 py-3 lg:flex-row">
+  <div class="flex shrink gap-3 max-lg:w-full max-lg:max-w-full lg:shrink-0">
+    <div class="flex items-center gap-3">
+      <button
+        class="btn btn-primary w-10 max-w-10 shrink text-nowrap lg:w-[120px] lg:max-w-[120px] lg:min-w-[120px]"
+      >
+        <svg [lucideIcon]="lucidePlus" class="text-white/80"></svg>
+        <span class="hidden lg:block">Add Item</span>
+      </button>
+      <button
+        class="btn btn-light w-10 max-w-10 shrink lg:w-[120px] lg:max-w-[120px] lg:min-w-[120px]"
+      >
+        <svg [lucideIcon]="lucideArrowLeft" class="dark:text-dark-text text-white/80"></svg>
+        <span class="hidden lg:block">Back</span>
+      </button>
+    </div>
+    <div class="w-full max-w-full lg:shrink-0">
+      <input type="text" placeholder="Search" />
+    </div>
   </div>
-  <div class="flex border">
-    <select class="min-w-24">
+  <div class="flex w-full items-center justify-between gap-3 md:justify-end lg:shrink">
+    <select class="w-full min-w-24 text-center md:w-auto">
       <option value="">10</option>
       <option value="">25</option>
       <option value="">50</option>
       <option value="">100</option>
     </select>
-    <button>Refresh</button>
+    <button class="btn btn-secondary w-[100px] max-w-[100px] min-w-[100px] shrink">
+      <svg [lucideIcon]="lucideRefreshCcw" class="text-white/80"></svg>
+      <span class="hidden lg:block">Refresh</span>
+    </button>
   </div>
 </div>

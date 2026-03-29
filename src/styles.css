@@ -8,12 +8,17 @@
   --color-primary-light: #cce0ff;
   --color-secondary: #f57c00;
   --color-secondary-hover: #ff8c00;
+  --color-light: #ffffff;
   --color-background: #e5f0ff;
   --color-dark-background: #001433;
   --color-darker-background: #000e24;
   --color-dark-text: #000e24;
   --color-light-text: #e5f0ff;
   --color-error: #ff0000;
+}
+
+* {
+  @apply transition-all duration-300 ease-in-out;
 }
 
 body {
@@ -35,8 +40,13 @@ button {
 }
 
 input,
-textarea {
+textarea,
+select {
   @apply border-primary/50 focus:border-primary text-dark-text/70 dark:text-light-text block w-full rounded-md border bg-white/5 px-3 py-1.5 outline-1 -outline-offset-1 outline-white/10 outline-none placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 sm:text-sm/6 placeholder:dark:text-gray-400/60;
+}
+
+select {
+  @apply w-auto py-2 text-center;
 }
 
 .form-group {
@@ -56,7 +66,7 @@ button {
 }
 
 .btn {
-  @apply text-light-text flex w-full justify-center rounded-md px-3 py-2 text-sm/6 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2;
+  @apply text-light-text flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm/6 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2;
 }
 
 .btn-primary {
@@ -65,6 +75,10 @@ button {
 
 .btn-secondary {
   @apply bg-secondary text-light-text hover:bg-secondary-hover focus-visible:outline-secondary focus-visible:outline-2 focus-visible:outline-offset-2;
+}
+
+.btn-light {
+  @apply bg-primary/50 text-light-text hover:bg-primary-hover focus-visible:outline-primary dark:bg-light/80 dark:text-dark-text dark:hover:bg-light focus-visible:outline-2 focus-visible:outline-offset-2;
 }
 
 .btn-link {
