@@ -83,17 +83,19 @@ export class AuthStore {
   }
 
   logout() {
+    this._user.set(null);
+    if (this.isBrowser) {
+      localStorage.removeItem('user');
+    }
+    void this.router.navigate(['/login']);
+
     this.authRepository.logout().subscribe({
       next: () => {
-        this._user.set(null);
-        localStorage.removeItem('user');
-        void this.router.navigate(['/login']);
+        // Backend successfully logged out
       },
       error: () => {
-        this._error.set('Something went wrong');
-        setTimeout(() => {
-          this._error.set(null);
-        }, 3000);
+        // Backend failed to logout, but we already cleared local state
+        console.error('Failed to logout from backend');
       },
     });
   }

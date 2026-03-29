@@ -1,11 +1,16 @@
 import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
-import { inject } from '@angular/core';
+import { inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { catchError, switchMap, throwError } from 'rxjs';
 
 import { AuthHttpRepository } from '@infrastructure/http/repositories/auth-http-repository';
+import { AuthStore } from '../stores/auth-store';
 
 export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
   const authRepository = inject(AuthHttpRepository);
+  const authStore = inject(AuthStore);
+  const platformId = inject(PLATFORM_ID);
+  const isBrowser = isPlatformBrowser(platformId);
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
@@ -13,7 +18,9 @@ export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
         return authRepository.refreshToken().pipe(
           switchMap(() => next(req)),
           catchError(() => {
-            authRepository.logout();
+            if (isBrowser) {
+              authStore.logout();
+            }
             return throwError(() => error);
           })
         );
