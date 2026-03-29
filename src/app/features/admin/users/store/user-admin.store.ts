@@ -20,8 +20,4 @@ export class UserAdminStore {
   loadUsers() {
     this.resource.reload();
   }
-
-  reset() {
-    this.resource.destroy();
-  }
 }

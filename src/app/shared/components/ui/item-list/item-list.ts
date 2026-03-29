@@ -11,4 +11,6 @@ import { ItemListTableFooter } from '../item-list-table-footer/item-list-table-f
 })
 export class ItemList {
   title = input.required<string>();
+  refresh = input.required<() => void>();
+  add = input.required<string>();
 }

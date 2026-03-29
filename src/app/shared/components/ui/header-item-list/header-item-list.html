@@ -2,6 +2,7 @@
   <div class="flex shrink gap-3 max-lg:w-full max-lg:max-w-full lg:shrink-0">
     <div class="flex items-center gap-3">
       <button
+        routerLink="create"
         class="btn btn-primary w-10 max-w-10 shrink text-nowrap lg:w-[120px] lg:max-w-[120px] lg:min-w-[120px]"
       >
         <svg [lucideIcon]="lucidePlus" class="text-white/80"></svg>
@@ -9,6 +10,7 @@
       </button>
       <button
         class="btn btn-light w-10 max-w-10 shrink lg:w-[120px] lg:max-w-[120px] lg:min-w-[120px]"
+        routerLink="/admin/dashboard"
       >
         <svg [lucideIcon]="lucideArrowLeft" class="dark:text-dark-text text-white/80"></svg>
         <span class="hidden lg:block">Back</span>
@@ -25,7 +27,10 @@
       <option value="">50</option>
       <option value="">100</option>
     </select>
-    <button class="btn btn-secondary w-[100px] max-w-[100px] min-w-[100px] shrink">
+    <button
+      class="btn btn-secondary w-[100px] max-w-[100px] min-w-[100px] shrink"
+      (click)="onRefresh()"
+    >
       <svg [lucideIcon]="lucideRefreshCcw" class="text-white/80"></svg>
       <span class="hidden lg:block">Refresh</span>
     </button>

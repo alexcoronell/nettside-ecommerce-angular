@@ -1,15 +1,16 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { UserAdminStore } from '@features/admin/users/store/user-admin.store';
 import { ItemList } from '@shared/components/ui/item-list/item-list';
+import { ItemListTableActions } from '@shared/components/ui/item-list-table-actions/item-list-table-actions';
 
 @Component({
   selector: 'app-user-list',
-  imports: [ItemList],
+  imports: [ItemList, ItemListTableActions],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserList implements OnInit, OnDestroy {
+export class UserList implements OnInit {
   private readonly userAdminStore = inject(UserAdminStore);
 
   readonly users = this.userAdminStore.users;
@@ -19,11 +20,15 @@ export class UserList implements OnInit, OnDestroy {
   title = 'Users';
   columns = ['Fullname', 'Email', 'Phone', 'Role'];
 
+  readonly refreshUsers = () => {
+    this.loadUsers();
+  };
+
   ngOnInit(): void {
-    this.userAdminStore.loadUsers();
+    this.loadUsers();
   }
 
-  ngOnDestroy(): void {
-    this.userAdminStore.reset();
+  loadUsers(): void {
+    this.userAdminStore.loadUsers();
   }
 }

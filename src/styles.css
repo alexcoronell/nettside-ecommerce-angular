@@ -14,6 +14,7 @@
   --color-darker-background: #000e24;
   --color-dark-text: #000e24;
   --color-light-text: #e5f0ff;
+  --color-danger: #ff0000;
   --color-error: #ff0000;
 }
 
@@ -104,4 +105,12 @@ button {
 
 .item-list-table tbody tr td {
   @apply border-b border-white/20 py-1 pt-2;
+}
+
+.table-column-actions {
+  @apply w-[135px] text-center;
+}
+
+.table-col-id {
+  @apply w-[78px] text-center;
 }

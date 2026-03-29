@@ -1,21 +1,23 @@
-<app-item-list [title]="title">
+<app-item-list [title]="title" [refresh]="refreshUsers" [add]="'create'">
   <table class="item-list-table w-full">
-    <thead>
+    <thead class="w-full">
       <tr>
-        @for (column of columns; track $index) {
-          <th>{{ column }}</th>
-        }
-        <th>Actions</th>
+        <th class="table-col-id text-center">Id</th>
+        <th>Fullname</th>
+        <th class="max-md:hidden">Email</th>
+        <th class="max-lg:hidden">Phone</th>
+        <th class="max-sm:hidden">Role</th>
+        <th class="table-column-actions">Actions</th>
       </tr>
     </thead>
     <tbody>
       @if (isLoading()) {
         <tr>
-          <td colspan="3">Loading...</td>
+          <td colspan="5" class="text-center">Loading...</td>
         </tr>
       } @else if (error()) {
         <tr>
-          <td colspan="3">
+          <td colspan="5" class="text-center">
             Error:
             @if (error()?.message?.includes('401')) {
               You don't have permission to access this resource.
@@ -27,13 +29,13 @@
       } @else {
         @for (user of users(); track user.id) {
           <tr>
+            <td class="table-col-id">{{ user.id }}</td>
             <td>{{ user.firstname }} {{ user.lastname }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.phoneNumber }}</td>
-            <td>{{ user.role }}</td>
-            <td>
-              <button>Edit</button>
-              <button>Delete</button>
+            <td class="max-md:hidden">{{ user.email }}</td>
+            <td class="max-lg:hidden">{{ user.phoneNumber }}</td>
+            <td class="max-sm:hidden">{{ user.role }}</td>
+            <td class="table-column-actions">
+              <app-item-list-table-actions />
             </td>
           </tr>
         } @empty {
