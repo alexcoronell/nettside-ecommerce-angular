@@ -1,4 +1,4 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { Injectable, computed, inject } from '@angular/core';
 
 /* Services */
 import { UserHttpRepository } from '@infrastructure/http/repositories/user-http-repository';
@@ -12,7 +12,16 @@ export class UserAdminStore {
   readonly resource = this.userHttpRepository.getAll();
 
   /* Computed Signals */
-  readonly users = computed(() => this.resource.value()?.data ?? []);
+  readonly users = computed(() => this.resource.value().data);
+  readonly usersCalled = computed(() => true);
   readonly isLoading = computed(() => this.resource.isLoading());
   readonly error = computed(() => this.resource.error());
+
+  loadUsers() {
+    this.resource.reload();
+  }
+
+  reset() {
+    this.resource.destroy();
+  }
 }
