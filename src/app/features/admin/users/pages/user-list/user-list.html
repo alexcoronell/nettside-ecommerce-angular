@@ -13,7 +13,9 @@
     <tbody>
       @if (isLoading()) {
         <tr>
-          <td colspan="5" class="text-center">Loading...</td>
+          <td colspan="5" class="text-center">
+            <app-spinner-tables />
+          </td>
         </tr>
       } @else if (error()) {
         <tr>

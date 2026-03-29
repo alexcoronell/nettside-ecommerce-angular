@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/cor
 import { UserAdminStore } from '@features/admin/users/store/user-admin.store';
 import { ItemList } from '@shared/components/ui/item-list/item-list';
 import { ItemListTableActions } from '@shared/components/ui/item-list-table-actions/item-list-table-actions';
+import { SpinnerTables } from '@shared/components/ui/spinner-tables/spinner-tables';
 
 @Component({
   selector: 'app-user-list',
-  imports: [ItemList, ItemListTableActions],
+  imports: [ItemList, ItemListTableActions, SpinnerTables],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
