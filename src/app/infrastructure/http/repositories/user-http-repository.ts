@@ -22,28 +22,29 @@ export class UserHttpRepository extends BaseHttpRepository implements UserReposi
     const queryParams = new URLSearchParams();
     if (paginationParams) {
       Object.entries(paginationParams).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
+        if (value !== undefined && value !== '' && value !== null) {
           queryParams.append(key, String(value));
         }
       });
     }
-    return httpResource(() => `${this.url}?${queryParams.toString()}`) as HttpResourceRef<PaginatedResult<User>>;
+    return httpResource(() => `${this.url}?${queryParams.toString()}`) as HttpResourceRef<
+      PaginatedResult<User>
+    >;
   }
 
-
   getById(id: number): Promise<User> {
-    return firstValueFrom(this.http.get<User>(`${this.url}/${id}.toString()`));
+    return firstValueFrom(this.http.get<User>(`${this.url}/${id.toString()}`));
   }
 
   create(entity: CreateUserDto): Promise<User> {
-    return firstValueFrom(this.http.post<User>(`${this.url}`, entity));
+    return firstValueFrom(this.http.post<User>(this.url, entity));
   }
 
   update(id: number, entity: UpdateUserDto): Promise<User> {
-    return firstValueFrom(this.http.put<User>(`${this.url}/${id}.toString()`, entity));
+    return firstValueFrom(this.http.put<User>(`${this.url}/${id.toString()}`, entity));
   }
 
   delete(id: number): Promise<unknown> {
-    return firstValueFrom(this.http.delete<unknown>(`${this.url}/${id}.toString()`));
+    return firstValueFrom(this.http.delete<unknown>(`${this.url}/${id.toString()}`));
   }
 }
