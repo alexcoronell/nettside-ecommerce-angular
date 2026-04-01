@@ -20,9 +20,13 @@ export class UserAdminStore {
 
   /* Computed Signals */
   readonly users = computed(() => this.resource.value().data);
+  readonly total = computed(() => this.resource.value().meta.total);
   readonly usersCalled = computed(() => true);
   readonly isLoading = computed(() => this.resource.isLoading());
   readonly error = computed(() => this.resource.error());
+  readonly totalPages = computed(() => this.resource.value().meta.totalPages);
+  readonly hasNextPage = computed(() => this.resource.value().meta.hasNextPage);
+  readonly hasPreviousPage = computed(() => this.resource.value().meta.hasPreviousPage);
 
   readonly paginationParams = computed<PaginationParams>(() => ({
     page: this.page(),
@@ -37,5 +41,21 @@ export class UserAdminStore {
 
   loadUsers() {
     this.resource.reload();
+  }
+
+  firstPage() {
+    this.page.set(1);
+  }
+
+  lastPage() {
+    this.page.set(this.totalPages());
+  }
+
+  nextPage() {
+    this.page.set(this.page() + 1);
+  }
+
+  previousPage() {
+    this.page.set(this.page() - 1);
   }
 }

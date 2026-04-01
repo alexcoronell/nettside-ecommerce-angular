@@ -11,6 +11,18 @@ import { ItemListTableFooter } from '../item-list-table-footer/item-list-table-f
 })
 export class ItemList {
   title = input.required<string>();
-  refresh = output();
   add = input.required<string>();
+
+  page = input<number>(1);
+  limit = input<number>(10);
+  total = input<number>(0);
+  totalPages = input<number>(1);
+  hasPreviousPage = input<boolean>(false);
+  hasNextPage = input<boolean>(false);
+
+  refresh = output();
+  firstPage = output();
+  lastPage = output();
+  nextPage = output();
+  previousPage = output();
 }

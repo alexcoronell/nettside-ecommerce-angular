@@ -1,4 +1,19 @@
-<app-item-list [title]="title" (refresh)="loadUsers()" [add]="'create'">
+<app-item-list
+  [title]="title"
+  (refresh)="loadUsers()"
+  (firstPage)="onFirstPage()"
+  (lastPage)="onLastPage()"
+  (nextPage)="onNextPage()"
+  (previousPage)="onPreviousPage()"
+  [add]="'create'"
+  [page]="page()"
+  [limit]="limit()"
+  [total]="total()"
+  [total]="total()"
+  [totalPages]="totalPages()"
+  [hasPreviousPage]="hasPreviousPage()"
+  [hasNextPage]="hasNextPage()"
+>
   <table class="item-list-table w-full">
     <thead class="w-full">
       <tr>

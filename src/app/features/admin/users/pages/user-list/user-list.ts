@@ -17,11 +17,21 @@ export class UserList implements OnInit {
   readonly users = this.userAdminStore.users;
   readonly isLoading = this.userAdminStore.isLoading;
   readonly error = this.userAdminStore.error;
+  readonly totalPages = this.userAdminStore.totalPages;
+  readonly hasNextPage = this.userAdminStore.hasNextPage;
+  readonly hasPreviousPage = this.userAdminStore.hasPreviousPage;
+  readonly page = this.userAdminStore.page;
+  readonly limit = this.userAdminStore.limit;
+  readonly total = this.userAdminStore.total;
 
   title = 'Users';
   columns = ['Fullname', 'Email', 'Phone', 'Role'];
 
   refresh = output();
+  firstPage = output();
+  lastPage = output();
+  nextPage = output();
+  previousPage = output();
 
   ngOnInit(): void {
     this.loadUsers();
@@ -29,5 +39,21 @@ export class UserList implements OnInit {
 
   loadUsers(): void {
     this.userAdminStore.loadUsers();
+  }
+
+  onFirstPage() {
+    this.userAdminStore.firstPage();
+  }
+
+  onLastPage() {
+    this.userAdminStore.lastPage();
+  }
+
+  onNextPage() {
+    this.userAdminStore.nextPage();
+  }
+
+  onPreviousPage() {
+    this.userAdminStore.previousPage();
   }
 }

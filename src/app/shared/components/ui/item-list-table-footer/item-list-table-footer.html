@@ -1,12 +1,20 @@
 <div class="flex flex-col items-center gap-y-3 md:relative md:flex-row md:justify-center">
   <p class="text-sm opacity-70 md:absolute md:top-1/2 md:right-0 md:-translate-y-1/2">
-    Showing 1 to 10 of 100 items
+    {{ showing() }}
   </p>
   <div class="flex gap-3">
-    <button><svg [lucideIcon]="lucideChevronFirst" class="text-white/80"></svg></button>
-    <button><svg [lucideIcon]="lucideChevronLeft" class="text-white/80"></svg></button>
+    <button (click)="firstPage.emit()" [disabled]="!hasPreviousPage()">
+      <svg [lucideIcon]="lucideChevronFirst" class="text-white/80"></svg>
+    </button>
+    <button (click)="previousPage.emit()" [disabled]="!hasPreviousPage()">
+      <svg [lucideIcon]="lucideChevronLeft" class="text-white/80"></svg>
+    </button>
     <input type="text" value="1" readonly class="text-center" style="width: 60px" />
-    <button><svg [lucideIcon]="lucideChevronRight" class="text-white/80"></svg></button>
-    <button><svg [lucideIcon]="lucideChevronLast" class="text-white/80"></svg></button>
+    <button (click)="nextPage.emit()" [disabled]="!hasNextPage()">
+      <svg [lucideIcon]="lucideChevronRight" class="text-white/80"></svg>
+    </button>
+    <button (click)="lastPage.emit()" [disabled]="!hasNextPage()">
+      <svg [lucideIcon]="lucideChevronLast" class="text-white/80"></svg>
+    </button>
   </div>
 </div>

@@ -1,8 +1,21 @@
 <div class="h-full w-screen px-3 py-6">
   <h1 class="mb-6 text-center text-5xl font-bold">{{ title() }}</h1>
   <div class="mx-auto w-full max-w-7xl space-y-3">
-    <app-header-item-list (refresh)="refresh.emit()" />
+    <app-header-item-list
+      (refresh)="refresh.emit()"
+      (firstPage)="firstPage.emit()"
+      (lastPage)="lastPage.emit()"
+      (nextPage)="nextPage.emit()"
+      (previousPage)="previousPage.emit()"
+    />
     <ng-content />
-    <app-item-list-table-footer />
+    <app-item-list-table-footer
+      [page]="page()"
+      [limit]="limit()"
+      [total]="total()"
+      [totalPages]="totalPages()"
+      [hasPreviousPage]="hasPreviousPage()"
+      [hasNextPage]="hasNextPage()"
+    />
   </div>
 </div>
