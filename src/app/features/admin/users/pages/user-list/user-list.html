@@ -1,4 +1,4 @@
-<app-item-list [title]="title" [refresh]="refreshUsers" [add]="'create'">
+<app-item-list [title]="title" (refresh)="loadUsers()" [add]="'create'">
   <table class="item-list-table w-full">
     <thead class="w-full">
       <tr>
@@ -13,13 +13,13 @@
     <tbody>
       @if (isLoading()) {
         <tr>
-          <td colspan="5" class="text-center">
+          <td colspan="6" class="py-12 text-center">
             <app-spinner-tables />
           </td>
         </tr>
       } @else if (error()) {
         <tr>
-          <td colspan="5" class="text-center">
+          <td colspan="6" class="text-center">
             Error:
             @if (error()?.message?.includes('401')) {
               You don't have permission to access this resource.

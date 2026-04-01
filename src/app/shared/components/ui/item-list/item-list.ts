@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { HeaderItemList } from '../header-item-list/header-item-list';
 import { ItemListTableFooter } from '../item-list-table-footer/item-list-table-footer';
 
@@ -11,6 +11,6 @@ import { ItemListTableFooter } from '../item-list-table-footer/item-list-table-f
 })
 export class ItemList {
   title = input.required<string>();
-  refresh = input.required<() => void>();
+  refresh = output();
   add = input.required<string>();
 }

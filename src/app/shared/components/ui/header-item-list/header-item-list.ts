@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideDynamicIcon, LucidePlus, LucideArrowLeft, LucideRefreshCcw } from '@lucide/angular';
 @Component({
@@ -9,12 +9,12 @@ import { LucideDynamicIcon, LucidePlus, LucideArrowLeft, LucideRefreshCcw } from
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderItemList {
-  refresh = input.required<() => void>();
+  refresh = output();
   lucidePlus = LucidePlus;
   lucideArrowLeft = LucideArrowLeft;
   lucideRefreshCcw = LucideRefreshCcw;
 
   onRefresh() {
-    this.refresh()();
+    this.refresh.emit();
   }
 }

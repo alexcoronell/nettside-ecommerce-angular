@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, output } from '@angular/core';
 import { UserAdminStore } from '@features/admin/users/store/user-admin.store';
 import { ItemList } from '@shared/components/ui/item-list/item-list';
 import { ItemListTableActions } from '@shared/components/ui/item-list-table-actions/item-list-table-actions';
@@ -21,9 +21,7 @@ export class UserList implements OnInit {
   title = 'Users';
   columns = ['Fullname', 'Email', 'Phone', 'Role'];
 
-  readonly refreshUsers = () => {
-    this.loadUsers();
-  };
+  refresh = output();
 
   ngOnInit(): void {
     this.loadUsers();
