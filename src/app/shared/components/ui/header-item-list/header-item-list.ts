@@ -9,6 +9,7 @@ import { LucideDynamicIcon, LucidePlus, LucideArrowLeft, LucideRefreshCcw } from
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderItemList {
+  searchUsers = output<string>();
   refresh = output();
   lucidePlus = LucidePlus;
   lucideArrowLeft = LucideArrowLeft;
@@ -16,5 +17,10 @@ export class HeaderItemList {
 
   onRefresh() {
     this.refresh.emit();
+  }
+
+  onSearchUsers(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.searchUsers.emit(value);
   }
 }

@@ -27,6 +27,7 @@ export class UserHttpRepository extends BaseHttpRepository implements UserReposi
         }
       });
     }
+    console.log('QUERY ===> ', queryParams.toString());
     return httpResource(() => `${this.url}?${queryParams.toString()}`) as HttpResourceRef<
       PaginatedResult<User>
     >;

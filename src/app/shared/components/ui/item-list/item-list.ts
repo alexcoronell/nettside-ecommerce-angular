@@ -21,6 +21,7 @@ export class ItemList {
   hasNextPage = input<boolean>(false);
 
   refresh = output();
+  searchUsers = output<string>();
   firstPage = output();
   lastPage = output();
   nextPage = output();

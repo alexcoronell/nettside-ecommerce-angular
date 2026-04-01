@@ -32,6 +32,7 @@ export class UserList implements OnInit {
   lastPage = output();
   nextPage = output();
   previousPage = output();
+  searchUsers = output<string>();
 
   ngOnInit(): void {
     this.loadUsers();
@@ -39,6 +40,10 @@ export class UserList implements OnInit {
 
   loadUsers(): void {
     this.userAdminStore.loadUsers();
+  }
+
+  onSearchUsers(search: string) {
+    this.userAdminStore.searchUsers(search);
   }
 
   onFirstPage() {

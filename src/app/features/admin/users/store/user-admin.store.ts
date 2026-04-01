@@ -39,6 +39,11 @@ export class UserAdminStore {
 
   readonly resource = this.userHttpRepository.getAll(this.paginationParams());
 
+  searchUsers(search: string) {
+    this.search.set(search);
+    this.loadUsers();
+  }
+
   loadUsers() {
     this.resource.reload();
   }

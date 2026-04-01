@@ -17,7 +17,7 @@
       </button>
     </div>
     <div class="w-full max-w-full lg:shrink-0">
-      <input type="text" placeholder="Search" />
+      <input type="text" placeholder="Search" (keyup)="onSearchUsers($event)" />
     </div>
   </div>
   <div class="flex w-full items-center justify-between gap-3 md:justify-end lg:shrink">

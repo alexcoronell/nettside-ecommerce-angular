@@ -9,10 +9,10 @@
   [page]="page()"
   [limit]="limit()"
   [total]="total()"
-  [total]="total()"
   [totalPages]="totalPages()"
   [hasPreviousPage]="hasPreviousPage()"
   [hasNextPage]="hasNextPage()"
+  (searchUsers)="onSearchUsers($event)"
 >
   <table class="item-list-table w-full">
     <thead class="w-full">
