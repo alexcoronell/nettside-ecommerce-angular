@@ -12,6 +12,7 @@ import { CreateUserDto } from '@infrastructure/http/dtos';
 export class UserAdminStore {
   private readonly userHttpRepository = inject(UserHttpRepository);
 
+  /* Signals */
   readonly page = signal(1);
   readonly limit = signal(10);
   readonly sortBy = signal('id');
@@ -22,7 +23,6 @@ export class UserAdminStore {
   /* Computed Signals */
   readonly users = computed(() => this.resource.value().data);
   readonly total = computed(() => this.resource.value().meta.total);
-  readonly usersCalled = computed(() => true);
   readonly isLoading = computed(() => this.resource.isLoading());
   readonly error = computed(() => this.resource.error());
   readonly totalPages = computed(() => this.resource.value().meta.totalPages);
@@ -38,7 +38,7 @@ export class UserAdminStore {
     filterBy: this.filterBy(),
   }));
 
-  readonly resource = this.userHttpRepository.getAll(this.paginationParams());
+  readonly resource = this.userHttpRepository.getAll(() => this.paginationParams());
 
   searchUsers(search: string) {
     this.search.set(search);
@@ -69,6 +69,15 @@ export class UserAdminStore {
       return;
     }
     this.page.set(this.page() - 1);
+  }
+
+  resetSignals() {
+    this.page.set(1);
+    this.limit.set(10);
+    this.sortBy.set('id');
+    this.sortOrder.set('DESC');
+    this.search.set(null);
+    this.filterBy.set(null);
   }
 
   createUser(dto: CreateUserDto) {

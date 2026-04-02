@@ -18,19 +18,21 @@ export class UserHttpRepository extends BaseHttpRepository implements UserReposi
     return firstValueFrom(this.http.get<CountDto>(`${this.url}/count`));
   }
 
-  getAll(paginationParams?: PaginationParams): HttpResourceRef<PaginatedResult<UserResponseDto>> {
-    const queryParams = new URLSearchParams();
-    if (paginationParams) {
-      Object.entries(paginationParams).forEach(([key, value]) => {
-        if (value !== undefined && value !== '' && value !== null) {
-          queryParams.append(key, String(value));
-        }
-      });
-    }
-    console.log('QUERY ===> ', queryParams.toString());
-    return httpResource(() => `${this.url}?${queryParams.toString()}`) as HttpResourceRef<
-      PaginatedResult<User>
-    >;
+  getAll(
+    paginationParams?: PaginationParams | (() => PaginationParams)
+  ): HttpResourceRef<PaginatedResult<UserResponseDto>> {
+    return httpResource(() => {
+      const params = typeof paginationParams === 'function' ? paginationParams() : paginationParams;
+      const queryParams = new URLSearchParams();
+      if (params) {
+        Object.entries(params).forEach(([key, value]) => {
+          if (value !== undefined && value !== '' && value !== null) {
+            queryParams.append(key, String(value));
+          }
+        });
+      }
+      return `${this.url}?${queryParams.toString()}`;
+    }) as HttpResourceRef<PaginatedResult<User>>;
   }
 
   getById(id: number): Promise<User> {

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 export abstract class BaseRepository<T, CreateDto, UpdateDto> {
   abstract count(): Promise<CountDto>;
   abstract getAll(
-    pagination?: PaginationParams
+    pagination?: PaginationParams | (() => PaginationParams)
   ): HttpResourceRef<PaginatedResult<T>> | Promise<PaginatedResult<T>>;
   abstract getById(id: number): Promise<T>;
   abstract create(entity: CreateDto): Observable<T> | Promise<T>;
