@@ -43,11 +43,15 @@ button {
 input,
 textarea,
 select {
-  @apply border-primary/50 focus:border-primary text-dark-text/70 dark:text-light-text block w-full rounded-md border bg-white/5 px-3 py-1.5 outline-1 -outline-offset-1 outline-white/10 outline-none placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 sm:text-sm/6 placeholder:dark:text-gray-400/60;
+  @apply border-primary/50 focus:border-primary text-dark-text/70 dark:text-light-text block w-full rounded-md border bg-white/5 px-3 py-1.5 outline-1 -outline-offset-1 outline-white/10 outline-none placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 sm:text-sm/6 placeholder:dark:text-gray-400/60;
 }
 
 select {
   @apply w-auto w-full py-2 text-center;
+}
+
+.form-group input[type='checkbox'] {
+  @apply hidden;
 }
 
 .AdminForm {

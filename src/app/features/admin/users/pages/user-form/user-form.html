@@ -2,7 +2,7 @@
   <h1>{{ title() }}</h1>
   <div class="AdminForm__container">
     <form (ngSubmit)="onSubmit($event)">
-      <div class="md:grid md:grid-cols-2 md:gap-x-6 lg:grid-cols-3">
+      <div class="md:grid md:grid-cols-2 md:items-end md:gap-x-6 lg:grid-cols-3">
         <app-input
           id="firstname"
           label="Firstname"
@@ -84,12 +84,10 @@
           placeholder="123 Main St"
           [field]="userForm.address"
         />
-        <app-input
+        <app-checkbox
           id="isActive"
           label="Is Active"
-          type="checkbox"
-          autocomplete="isActive"
-          placeholder="tu@correo.com"
+          (toggleIsActive)="onToggleIsActive()"
           [field]="userForm.isActive"
         />
       </div>

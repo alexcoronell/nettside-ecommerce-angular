@@ -6,11 +6,27 @@
       [formField]="field()"
       [attr.aria-describedby]="isInvalid() ? id() + '-error' : null"
       [attr.aria-invalid]="isInvalid() || null"
-      class="text-primary focus:ring-primary h-4 w-4 rounded border-gray-300"
+      class="hidden"
     />
     <label [for]="id()">
       {{ label() }}
     </label>
+    <div
+      class="border-primary flex h-6 w-6 items-center justify-center border-2"
+      [class.bg-primary]="isChecked()"
+      (click)="onToggleChecked()"
+    >
+      <svg
+        class="h-4 w-4"
+        [class.text-white]="isChecked()"
+        [class.text-transparent]="!isChecked()"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
   </div>
 
   @if (isInvalid()) {

@@ -1,9 +1,10 @@
-import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, output, ChangeDetectionStrategy } from '@angular/core';
 import { form, required, email, minLength, submit } from '@angular/forms/signals';
 
 /* Components */
 import { Input } from '@shared/components/ui/input/input';
 import { Select } from '@shared/components/ui/select/select';
+import { Checkbox } from '@shared/components/ui/checkbox/checkbox';
 
 /* Domain */
 import { UserRole } from '@domain/enums';
@@ -24,13 +25,14 @@ interface UserModel {
 
 @Component({
   selector: 'app-user-form',
-  imports: [Input, Select],
+  imports: [Input, Select, Checkbox],
   templateUrl: './user-form.html',
   styleUrl: './user-form.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserForm {
   title = signal<string>('Create User');
+  toggleIsActive = output<boolean>();
   userModel = signal<UserModel>({
     firstname: '',
     lastname: '',
@@ -42,8 +44,9 @@ export class UserForm {
     city: '',
     address: '',
     neighborhood: '',
-    isActive: true,
+    isActive: false,
   });
+
   userRoles = signal<Record<string, string>[]>([
     { value: UserRole.ADMIN, label: 'Admin' },
     { value: UserRole.SELLER, label: 'Seller' },
@@ -70,5 +73,9 @@ export class UserForm {
       console.log(user);
       return Promise.resolve();
     });
+  }
+
+  onToggleIsActive() {
+    this.userModel.update((user) => ({ ...user, isActive: !user.isActive }));
   }
 }
