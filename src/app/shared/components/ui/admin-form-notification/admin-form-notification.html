@@ -1,0 +1,10 @@
+@if (showNotification() && message().length > 0) {
+  <div
+    class="admin-form-notification"
+    [class.admin-form-notification--success]="type() === 'success'"
+    [class.admin-form-notification--error]="type() === 'error'"
+  >
+    <p>{{ message() }}</p>
+    <button class="absolute right-6" (click)="hide()">X</button>
+  </div>
+}

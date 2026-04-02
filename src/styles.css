@@ -16,6 +16,7 @@
   --color-light-text: #e5f0ff;
   --color-danger: #ff0000;
   --color-error: #ff0000;
+  --color-success: #00ff00;
 }
 
 * {
@@ -133,4 +134,16 @@ button {
 
 .table-col-id {
   @apply w-[78px] text-center;
+}
+
+.admin-form-notification {
+  @apply absolute top-4 right-4 left-auto z-50 flex w-full max-w-[500px] items-center justify-center gap-x-6 border-2 px-6 py-4 font-medium;
+}
+
+.admin-form-notification--success {
+  @apply border-success bg-success/10 text-success;
+}
+
+.admin-form-notification--error {
+  @apply border-error bg-error/10 text-error;
 }

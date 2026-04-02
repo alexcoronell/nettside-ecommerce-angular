@@ -1,5 +1,6 @@
 import { Component, signal, output, inject, ChangeDetectionStrategy } from '@angular/core';
 import { form, required, email, minLength, submit } from '@angular/forms/signals';
+import { Router } from '@angular/router';
 
 /* Components */
 import { Input } from '@shared/components/ui/input/input';
@@ -14,6 +15,7 @@ import { CreateUserDto } from '@infrastructure/http/dtos';
 
 /* Stores */
 import { UserAdminStore } from '../../store/user-admin.store';
+import { AdminFormNotificationStore } from '@shared/stores/admin-form-notification-store';
 
 interface UserModel {
   firstname: string;
@@ -38,8 +40,11 @@ interface UserModel {
 })
 export class UserForm {
   private readonly userAdminStore = inject(UserAdminStore);
+  private readonly adminFormNotificationStore = inject(AdminFormNotificationStore);
+  private readonly router = inject(Router);
 
   title = signal<string>('Create User');
+  isLoading = signal<boolean>(false);
   toggleIsActive = output<boolean>();
   userModel = signal<UserModel>({
     firstname: '',
@@ -77,14 +82,39 @@ export class UserForm {
   onSubmit(e: Event) {
     e.preventDefault();
     void submit(this.userForm, () => {
+      this.isLoading.set(true);
       const user: CreateUserDto = this.userModel();
       this.userAdminStore.createUser(user).subscribe({
         next: () => {
-          alert('User created successfully');
+          this.adminFormNotificationStore.show('User created successfully', 'success');
         },
         error: (error) => {
-          alert('Error creating user');
+          this.isLoading.set(false);
+          this.adminFormNotificationStore.show('Error creating user', 'error');
           console.error(error);
+          setTimeout(() => {
+            this.adminFormNotificationStore.hide();
+          }, 3000);
+        },
+        complete: () => {
+          setTimeout(() => {
+            this.isLoading.set(false);
+            this.adminFormNotificationStore.hide();
+            this.userModel.set({
+              firstname: '',
+              lastname: '',
+              email: '',
+              phoneNumber: '',
+              password: '',
+              role: UserRole.SELLER,
+              department: '',
+              city: '',
+              address: '',
+              neighborhood: '',
+              isActive: true,
+            });
+            void this.router.navigate(['/admin/users']);
+          }, 3000);
         },
       });
       return Promise.resolve();
