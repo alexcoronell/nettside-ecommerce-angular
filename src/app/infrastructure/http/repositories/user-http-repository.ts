@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { httpResource, HttpResourceRef } from '@angular/common/http';
 
 import { BaseHttpRepository } from '../shared/base-http.repository';
@@ -37,12 +37,12 @@ export class UserHttpRepository extends BaseHttpRepository implements UserReposi
     return firstValueFrom(this.http.get<User>(`${this.url}/${id.toString()}`));
   }
 
-  create(entity: CreateUserDto): Promise<User> {
-    return firstValueFrom(this.http.post<User>(this.url, entity));
+  create(dto: CreateUserDto): Observable<User> {
+    return this.http.post<User>(this.url, dto);
   }
 
-  update(id: number, entity: UpdateUserDto): Promise<User> {
-    return firstValueFrom(this.http.put<User>(`${this.url}/${id.toString()}`, entity));
+  update(id: number, dto: UpdateUserDto): Promise<User> {
+    return firstValueFrom(this.http.put<User>(`${this.url}/${id.toString()}`, dto));
   }
 
   delete(id: number): Promise<unknown> {

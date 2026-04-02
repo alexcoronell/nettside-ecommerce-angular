@@ -1,4 +1,4 @@
-import { Component, signal, output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, output, inject, ChangeDetectionStrategy } from '@angular/core';
 import { form, required, email, minLength, submit } from '@angular/forms/signals';
 
 /* Components */
@@ -8,6 +8,12 @@ import { Checkbox } from '@shared/components/ui/checkbox/checkbox';
 
 /* Domain */
 import { UserRole } from '@domain/enums';
+
+/* DTOs */
+import { CreateUserDto } from '@infrastructure/http/dtos';
+
+/* Stores */
+import { UserAdminStore } from '../../store/user-admin.store';
 
 interface UserModel {
   firstname: string;
@@ -31,6 +37,8 @@ interface UserModel {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserForm {
+  private readonly userAdminStore = inject(UserAdminStore);
+
   title = signal<string>('Create User');
   toggleIsActive = output<boolean>();
   userModel = signal<UserModel>({
@@ -44,7 +52,7 @@ export class UserForm {
     city: '',
     address: '',
     neighborhood: '',
-    isActive: false,
+    isActive: true,
   });
 
   userRoles = signal<Record<string, string>[]>([
@@ -69,8 +77,16 @@ export class UserForm {
   onSubmit(e: Event) {
     e.preventDefault();
     void submit(this.userForm, () => {
-      const user = this.userModel();
-      console.log(user);
+      const user: CreateUserDto = this.userModel();
+      this.userAdminStore.createUser(user).subscribe({
+        next: () => {
+          alert('User created successfully');
+        },
+        error: (error) => {
+          alert('Error creating user');
+          console.error(error);
+        },
+      });
       return Promise.resolve();
     });
   }

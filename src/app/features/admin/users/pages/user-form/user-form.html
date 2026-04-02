@@ -1,7 +1,7 @@
 <div class="AdminForm max-w-[400px] md:max-w-none md:px-6 xl:max-w-6xl">
   <h1>{{ title() }}</h1>
   <div class="AdminForm__container">
-    <form (ngSubmit)="onSubmit($event)">
+    <form (submit)="onSubmit($event)" novalidate>
       <div class="md:grid md:grid-cols-2 md:items-end md:gap-x-6 lg:grid-cols-3">
         <app-input
           id="firstname"
