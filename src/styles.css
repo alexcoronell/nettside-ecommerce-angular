@@ -47,7 +47,19 @@ select {
 }
 
 select {
-  @apply w-auto py-2 text-center;
+  @apply w-auto w-full py-2 text-center;
+}
+
+.AdminForm {
+  @apply mx-auto py-6;
+}
+
+.AdminForm h1 {
+  @apply mb-6 text-center text-3xl font-bold;
+}
+
+.AdminForm__container {
+  @apply mx-auto w-full px-3;
 }
 
 .form-group {
@@ -60,6 +72,10 @@ select {
 
 .form-group label {
   @apply text-primary/80 block text-sm/6 font-medium;
+}
+
+.form-group select {
+  @apply py-2 text-left;
 }
 
 button {

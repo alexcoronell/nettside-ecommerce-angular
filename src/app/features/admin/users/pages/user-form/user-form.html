@@ -1,1 +1,102 @@
-<p>user-form works!</p>
+<div class="AdminForm max-w-[400px] md:max-w-none md:px-6 xl:max-w-6xl">
+  <h1>{{ title() }}</h1>
+  <div class="AdminForm__container">
+    <form (ngSubmit)="onSubmit($event)">
+      <div class="md:grid md:grid-cols-2 md:gap-x-6 lg:grid-cols-3">
+        <app-input
+          id="firstname"
+          label="Firstname"
+          type="text"
+          autocomplete="firstname"
+          placeholder="John"
+          [field]="userForm.firstname"
+        />
+        <app-input
+          id="lastname"
+          label="Lastname"
+          type="text"
+          autocomplete="lastname"
+          placeholder="Doe"
+          [field]="userForm.lastname"
+        />
+        <app-input
+          id="email"
+          label="Email"
+          type="email"
+          autocomplete="email"
+          placeholder="johndoe@email.com"
+          [field]="userForm.email"
+        />
+        <app-input
+          id="phoneNumber"
+          label="Phone Number"
+          type="text"
+          autocomplete="phoneNumber"
+          placeholder="3001234567"
+          [field]="userForm.phoneNumber"
+        />
+        <app-input
+          id="password"
+          label="Password"
+          type="password"
+          autocomplete="password"
+          placeholder="********"
+          [field]="userForm.password"
+        />
+        <app-select
+          id="role"
+          label="Role"
+          type="text"
+          autocomplete="role"
+          placeholder="Admin"
+          [field]="userForm.role"
+          [options]="userRoles()"
+        />
+        <app-input
+          id="department"
+          label="Department"
+          type="text"
+          autocomplete="department"
+          placeholder="Arizona"
+          [field]="userForm.department"
+        />
+        <app-input
+          id="city"
+          label="City"
+          type="text"
+          autocomplete="city"
+          placeholder="Phoenix"
+          [field]="userForm.city"
+        />
+        <app-input
+          id="neighborhood"
+          label="Neighborhood"
+          type="text"
+          autocomplete="neighborhood"
+          placeholder="Downtown"
+          [field]="userForm.neighborhood"
+        />
+        <app-input
+          id="address"
+          label="Address"
+          type="text"
+          autocomplete="address"
+          placeholder="123 Main St"
+          [field]="userForm.address"
+        />
+        <app-input
+          id="isActive"
+          label="Is Active"
+          type="checkbox"
+          autocomplete="isActive"
+          placeholder="tu@correo.com"
+          [field]="userForm.isActive"
+        />
+      </div>
+      <div class="flex items-center justify-center gap-6">
+        <button type="submit" class="btn btn-primary min-w-[120px]">Save</button>
+        <button type="button" class="btn btn-light min-w-[120px]">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
