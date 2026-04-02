@@ -58,10 +58,16 @@ export class UserAdminStore {
   }
 
   nextPage() {
+    if (this.page() === this.totalPages()) {
+      return;
+    }
     this.page.set(this.page() + 1);
   }
 
   previousPage() {
+    if (this.page() === 1) {
+      return;
+    }
     this.page.set(this.page() - 1);
   }
 
