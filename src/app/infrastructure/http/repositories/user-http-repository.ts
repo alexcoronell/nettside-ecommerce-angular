@@ -6,7 +6,7 @@ import { BaseHttpRepository } from '../shared/base-http.repository';
 import { User } from '@domain/models';
 import { CountDto, UserResponseDto, CreateUserDto, UpdateUserDto } from '@infrastructure/http/dtos';
 import { UserRepository } from '@domain/repositories/user.repository';
-import { PaginationParams, PaginatedResult } from '@domain/types';
+import { PaginationParams, PaginatedResult, ItemResult } from '@domain/types';
 import { generateQueryParams } from '@shared/utils';
 
 @Injectable({
@@ -28,8 +28,8 @@ export class UserHttpRepository extends BaseHttpRepository implements UserReposi
     }) as HttpResourceRef<PaginatedResult<User>>;
   }
 
-  getById(id: number): Promise<User> {
-    return firstValueFrom(this.http.get<User>(`${this.url}/${id.toString()}`));
+  getById(id: number): Observable<ItemResult<UserResponseDto>> {
+    return this.http.get<ItemResult<UserResponseDto>>(`${this.url}/${id.toString()}`);
   }
 
   create(dto: CreateUserDto): Observable<User> {

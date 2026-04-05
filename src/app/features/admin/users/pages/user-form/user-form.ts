@@ -1,6 +1,14 @@
-import { Component, signal, output, inject, ChangeDetectionStrategy } from '@angular/core';
-import { form, required, email, minLength, submit } from '@angular/forms/signals';
-import { Router } from '@angular/router';
+import { Component, OnInit, signal, output, inject, ChangeDetectionStrategy } from '@angular/core';
+import {
+  form,
+  required,
+  email,
+  minLength,
+  submit,
+  validate,
+  readonly,
+} from '@angular/forms/signals';
+import { Router, ActivatedRoute } from '@angular/router';
 
 /* Components */
 import { Input } from '@shared/components/ui/input/input';
@@ -11,11 +19,14 @@ import { Checkbox } from '@shared/components/ui/checkbox/checkbox';
 import { UserRole } from '@domain/enums';
 
 /* DTOs */
-import { CreateUserDto } from '@infrastructure/http/dtos';
+import { CreateUserDto, UserResponseDto } from '@infrastructure/http/dtos';
 
 /* Stores */
 import { UserAdminStore } from '../../store/user-admin.store';
 import { AdminFormNotificationStore } from '@shared/stores/admin-form-notification-store';
+
+/* Types */
+import { StatusForm } from '@shared/types';
 
 interface UserModel {
   firstname: string;
@@ -38,10 +49,15 @@ interface UserModel {
   styleUrl: './user-form.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserForm {
+export class UserForm implements OnInit {
   private readonly userAdminStore = inject(UserAdminStore);
   private readonly adminFormNotificationStore = inject(AdminFormNotificationStore);
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+
+  userId = signal<number | null>(null);
+  user = signal<UserResponseDto | null>(null);
+  statusForm = signal<StatusForm>('create');
 
   title = signal<string>('Create User');
   isLoading = signal<boolean>(false);
@@ -75,8 +91,27 @@ export class UserForm {
     minLength(schemaPath.phoneNumber, 10, {
       message: 'Phone number must be at least 10 digits long',
     });
-    required(schemaPath.password, { message: 'Password is required' });
-    minLength(schemaPath.password, 8, { message: 'Password must be at least 8 characters long' });
+    validate(schemaPath.password, ({ value }) => {
+      const password = value() || '';
+      if (!this.userId() && !password) {
+        return { kind: 'required', message: 'Password is required' };
+      }
+      if (password && password.length < 8) {
+        return { kind: 'minLength', message: 'Password must be at least 8 characters long' };
+      }
+      return null;
+    });
+    readonly(schemaPath.firstname, () => this.statusForm() === 'detail');
+    readonly(schemaPath.lastname, () => this.statusForm() === 'detail');
+    readonly(schemaPath.email, () => this.statusForm() === 'detail');
+    readonly(schemaPath.phoneNumber, () => this.statusForm() === 'detail');
+    readonly(schemaPath.password, () => this.statusForm() === 'detail');
+    readonly(schemaPath.role, () => this.statusForm() === 'detail');
+    readonly(schemaPath.department, () => this.statusForm() === 'detail');
+    readonly(schemaPath.city, () => this.statusForm() === 'detail');
+    readonly(schemaPath.address, () => this.statusForm() === 'detail');
+    readonly(schemaPath.neighborhood, () => this.statusForm() === 'detail');
+    readonly(schemaPath.isActive, () => this.statusForm() === 'detail');
   });
 
   onSubmit(e: Event) {
@@ -125,5 +160,27 @@ export class UserForm {
 
   onToggleIsActive() {
     this.userModel.update((user) => ({ ...user, isActive: !user.isActive }));
+  }
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.userId.set(Number(id));
+      this.title.set('Detail User');
+      this.userAdminStore.loadUser(Number(id)).subscribe({
+        next: (response) => {
+          this.user.set(response.data);
+          this.userModel.set(response.data as unknown as UserModel);
+          this.statusForm.set('detail');
+        },
+        error: (error) => {
+          this.adminFormNotificationStore.show('Error loading user', 'error');
+          console.error(error);
+          setTimeout(() => {
+            this.adminFormNotificationStore.hide();
+          }, 3000);
+        },
+      });
+    }
   }
 }

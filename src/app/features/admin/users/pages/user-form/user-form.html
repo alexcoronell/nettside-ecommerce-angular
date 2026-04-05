@@ -36,14 +36,16 @@
             placeholder="3001234567"
             [field]="userForm.phoneNumber"
           />
-          <app-input
-            id="password"
-            label="Password"
-            type="password"
-            autocomplete="password"
-            placeholder="********"
-            [field]="userForm.password"
-          />
+          @if (!userId()) {
+            <app-input
+              id="password"
+              label="Password"
+              type="password"
+              autocomplete="password"
+              placeholder="********"
+              [field]="userForm.password"
+            />
+          }
           <app-select
             id="role"
             label="Role"

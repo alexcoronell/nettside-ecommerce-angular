@@ -84,6 +84,10 @@ export class UserAdminStore {
     this.filterBy.set(null);
   }
 
+  loadUser(id: number) {
+    return this.userHttpRepository.getById(id);
+  }
+
   createUser(dto: CreateUserDto) {
     return this.userHttpRepository.create(dto);
   }
