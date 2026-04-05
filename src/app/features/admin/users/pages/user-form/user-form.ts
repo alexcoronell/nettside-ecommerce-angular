@@ -99,7 +99,6 @@ export class UserForm {
         complete: () => {
           setTimeout(() => {
             this.isLoading.set(false);
-            this.adminFormNotificationStore.hide();
             this.userModel.set({
               firstname: '',
               lastname: '',
@@ -114,7 +113,10 @@ export class UserForm {
               isActive: true,
             });
             void this.router.navigate(['/admin/users']);
-          }, 3000);
+            setTimeout(() => {
+              this.adminFormNotificationStore.hide();
+            }, 2000);
+          }, 1500);
         },
       });
       return Promise.resolve();

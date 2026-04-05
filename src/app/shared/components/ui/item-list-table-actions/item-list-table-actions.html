@@ -1,6 +1,6 @@
-<button class="text-secondary mr-1 opacity-100">
-  <svg [lucideIcon]="lucidePencil" size="16"></svg>
+<button class="text-secondary mr-1.5" [routerLink]="[itemId()]">
+  <svg [lucideIcon]="lucideEye" size="18"></svg>
 </button>
-<button class="text-danger ml-1">
-  <svg [lucideIcon]="lucideTrash2" size="16"></svg>
+<button class="text-danger ml-1.5" (click)="deleteItem.emit(itemId())">
+  <svg [lucideIcon]="lucideTrash2" size="18"></svg>
 </button>

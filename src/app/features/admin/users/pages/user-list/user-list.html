@@ -53,7 +53,7 @@
             <td class="max-lg:hidden">{{ user.phoneNumber }}</td>
             <td class="max-sm:hidden">{{ user.role }}</td>
             <td class="table-column-actions">
-              <app-item-list-table-actions />
+              <app-item-list-table-actions [itemId]="user.id" (deleteItem)="onDeleteItem($event)" />
             </td>
           </tr>
         } @empty {

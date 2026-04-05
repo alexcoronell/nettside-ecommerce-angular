@@ -12,7 +12,7 @@ export const usersRoutes: Routes = [
       import('@features/admin/users/pages/user-form/user-form').then((c) => c.UserForm),
   },
   {
-    path: 'edit/:id',
+    path: ':id',
     loadComponent: () =>
       import('@features/admin/users/pages/user-form/user-form').then((c) => c.UserForm),
   },

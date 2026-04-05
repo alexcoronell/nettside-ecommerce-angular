@@ -87,4 +87,13 @@ export class UserAdminStore {
   createUser(dto: CreateUserDto) {
     return this.userHttpRepository.create(dto);
   }
+
+  async deleteUser(id: number) {
+    try {
+      await this.userHttpRepository.delete(id);
+      this.resource.reload();
+    } catch (error) {
+      console.error('Error deleting user', error);
+    }
+  }
 }

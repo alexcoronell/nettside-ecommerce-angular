@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { UserAdminStore } from '@features/admin/users/store/user-admin.store';
 import { ItemList } from '@shared/components/ui/item-list/item-list';
 import { ItemListTableActions } from '@shared/components/ui/item-list-table-actions/item-list-table-actions';
 import { SpinnerTables } from '@shared/components/ui/spinner-tables/spinner-tables';
+import { AdminDeleteConfirmStore } from '@shared/stores/admin-delete-confirm-store';
 
 @Component({
   selector: 'app-user-list',
@@ -13,6 +14,7 @@ import { SpinnerTables } from '@shared/components/ui/spinner-tables/spinner-tabl
 })
 export class UserList implements OnInit {
   private readonly userAdminStore = inject(UserAdminStore);
+  private readonly adminDeleteConfirmStore = inject(AdminDeleteConfirmStore);
 
   readonly users = this.userAdminStore.users;
   readonly isLoading = this.userAdminStore.isLoading;
@@ -26,14 +28,6 @@ export class UserList implements OnInit {
 
   title = 'Users';
   columns = ['Fullname', 'Email', 'Phone', 'Role'];
-
-  refresh = output();
-  firstPage = output();
-  lastPage = output();
-  nextPage = output();
-  previousPage = output();
-  itemsPerPage = output<number>();
-  searchUsers = output<string>();
 
   ngOnInit(): void {
     this.loadUsers();
@@ -65,5 +59,14 @@ export class UserList implements OnInit {
 
   onPreviousPage() {
     this.userAdminStore.previousPage();
+  }
+
+  onDeleteItem(id: number) {
+    this.adminDeleteConfirmStore.show(
+      `Are you sure you want to delete user with id ${String(id)}?`,
+      () => {
+        void this.userAdminStore.deleteUser(id);
+      }
+    );
   }
 }

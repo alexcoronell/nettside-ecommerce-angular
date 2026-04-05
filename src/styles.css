@@ -15,6 +15,7 @@
   --color-dark-text: #000e24;
   --color-light-text: #e5f0ff;
   --color-danger: #ff0000;
+  --color-danger-hover: #cc0000;
   --color-error: #ff0000;
   --color-success: #00ff00;
 }
@@ -113,6 +114,10 @@ button {
 
 .btn-link {
   @apply hover:text-shadow-primary/50 px-1 underline text-shadow-md;
+}
+
+.btn-danger {
+  @apply bg-danger text-light-text hover:bg-danger-hover focus-visible:outline-danger focus-visible:outline-2 focus-visible:outline-offset-2;
 }
 
 .item-list-table {
