@@ -7,6 +7,7 @@ import { User } from '@domain/models';
 import { CountDto, UserResponseDto, CreateUserDto, UpdateUserDto } from '@infrastructure/http/dtos';
 import { UserRepository } from '@domain/repositories/user.repository';
 import { PaginationParams, PaginatedResult } from '@domain/types';
+import { generateQueryParams } from '@shared/utils';
 
 @Injectable({
   providedIn: 'root',
@@ -22,16 +23,8 @@ export class UserHttpRepository extends BaseHttpRepository implements UserReposi
     paginationParams?: PaginationParams | (() => PaginationParams)
   ): HttpResourceRef<PaginatedResult<UserResponseDto>> {
     return httpResource(() => {
-      const params = typeof paginationParams === 'function' ? paginationParams() : paginationParams;
-      const queryParams = new URLSearchParams();
-      if (params) {
-        Object.entries(params).forEach(([key, value]) => {
-          if (value !== undefined && value !== '' && value !== null) {
-            queryParams.append(key, String(value));
-          }
-        });
-      }
-      return `${this.url}?${queryParams.toString()}`;
+      const queryParams = generateQueryParams(paginationParams);
+      return `${this.url}?${queryParams}`;
     }) as HttpResourceRef<PaginatedResult<User>>;
   }
 
