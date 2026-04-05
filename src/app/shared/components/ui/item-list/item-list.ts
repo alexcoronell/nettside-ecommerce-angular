@@ -14,13 +14,14 @@ export class ItemList {
   add = input.required<string>();
 
   page = input<number>(1);
-  limit = input<number>(10);
-  total = input<number>(0);
+  limit = input.required<number>();
+  total = input.required<number>();
   totalPages = input<number>(1);
   hasPreviousPage = input<boolean>(false);
   hasNextPage = input<boolean>(false);
 
   refresh = output();
+  itemsPerPage = output<number>();
   searchUsers = output<string>();
   firstPage = output();
   lastPage = output();

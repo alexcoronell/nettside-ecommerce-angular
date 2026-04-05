@@ -1,10 +1,5 @@
 <app-item-list
   [title]="title"
-  (refresh)="loadUsers()"
-  (firstPage)="onFirstPage()"
-  (lastPage)="onLastPage()"
-  (nextPage)="onNextPage()"
-  (previousPage)="onPreviousPage()"
   [add]="'create'"
   [page]="page()"
   [limit]="limit()"
@@ -12,6 +7,12 @@
   [totalPages]="totalPages()"
   [hasPreviousPage]="hasPreviousPage()"
   [hasNextPage]="hasNextPage()"
+  (refresh)="loadUsers()"
+  (firstPage)="onFirstPage()"
+  (lastPage)="onLastPage()"
+  (nextPage)="onNextPage()"
+  (previousPage)="onPreviousPage()"
+  (itemsPerPage)="onItemsPerPage($event)"
   (searchUsers)="onSearchUsers($event)"
 >
   <table class="item-list-table w-full">

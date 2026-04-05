@@ -48,7 +48,7 @@ select {
 }
 
 select {
-  @apply w-auto w-full py-2 text-center;
+  @apply w-auto py-2 text-center;
 }
 
 .form-group input[type='checkbox'] {
@@ -80,7 +80,15 @@ select {
 }
 
 .form-group select {
-  @apply py-2 text-left;
+  @apply w-full py-2 text-left;
+}
+
+.admin-search-input {
+  @apply py-[0.5rem];
+}
+
+.admin-select-items-per-page {
+  @apply min-w-24 py-[0.7rem] text-center;
 }
 
 button {

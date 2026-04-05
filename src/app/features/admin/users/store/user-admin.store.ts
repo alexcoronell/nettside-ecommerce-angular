@@ -49,6 +49,10 @@ export class UserAdminStore {
     this.resource.reload();
   }
 
+  setLimit(limit: number) {
+    this.limit.set(limit);
+  }
+
   firstPage() {
     this.page.set(1);
   }
