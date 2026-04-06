@@ -56,7 +56,6 @@ export class AuthStore {
     this.authRepository.login(payload).subscribe({
       next: (response) => {
         this._user.set(response.data);
-        console.log(this.isBrowser);
         if (this.isBrowser) {
           localStorage.setItem('user', JSON.stringify(this._user()));
         }

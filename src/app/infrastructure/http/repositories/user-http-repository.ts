@@ -32,12 +32,12 @@ export class UserHttpRepository extends BaseHttpRepository implements UserReposi
     return this.http.get<ItemResult<UserResponseDto>>(`${this.url}/${id.toString()}`);
   }
 
-  create(dto: CreateUserDto): Observable<User> {
-    return this.http.post<User>(this.url, dto);
+  create(dto: CreateUserDto): Observable<UserResponseDto> {
+    return this.http.post<UserResponseDto>(this.url, dto);
   }
 
-  update(id: number, dto: UpdateUserDto): Promise<User> {
-    return firstValueFrom(this.http.put<User>(`${this.url}/${id.toString()}`, dto));
+  update(id: number, dto: UpdateUserDto): Observable<UserResponseDto> {
+    return this.http.patch<UserResponseDto>(`${this.url}/${id.toString()}`, dto);
   }
 
   delete(id: number): Promise<unknown> {

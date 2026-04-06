@@ -4,7 +4,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { UserHttpRepository } from '@infrastructure/http/repositories/user-http-repository';
 
 import { PaginationParams } from '@domain/types';
-import { CreateUserDto } from '@infrastructure/http/dtos';
+import { CreateUserDto, UpdateUserDto } from '@infrastructure/http/dtos';
 
 @Injectable({
   providedIn: 'root',
@@ -90,6 +90,10 @@ export class UserAdminStore {
 
   createUser(dto: CreateUserDto) {
     return this.userHttpRepository.create(dto);
+  }
+
+  updateUser(id: number, dto: UpdateUserDto) {
+    return this.userHttpRepository.update(id, dto);
   }
 
   async deleteUser(id: number) {

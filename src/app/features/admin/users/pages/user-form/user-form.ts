@@ -20,7 +20,7 @@ import { AdminFormButtons } from '@shared/components/ui/admin-form-buttons/admin
 import { UserRole } from '@domain/enums';
 
 /* DTOs */
-import { CreateUserDto, UserResponseDto } from '@infrastructure/http/dtos';
+import { CreateUserDto, UpdateUserDto, UserResponseDto } from '@infrastructure/http/dtos';
 
 /* Stores */
 import { UserAdminStore } from '../../store/user-admin.store';
@@ -115,46 +115,95 @@ export class UserForm implements OnInit {
     readonly(schemaPath.isActive, () => this.statusForm() === 'detail');
   });
 
+  onCreate() {
+    const user: CreateUserDto = this.userModel();
+    this.userAdminStore.createUser(user).subscribe({
+      next: () => {
+        this.adminFormNotificationStore.show('User created successfully', 'success');
+      },
+      error: (error) => {
+        this.isLoading.set(false);
+        this.adminFormNotificationStore.show('Error creating user', 'error');
+        console.error(error);
+        setTimeout(() => {
+          this.adminFormNotificationStore.hide();
+        }, 3000);
+      },
+      complete: () => {
+        setTimeout(() => {
+          this.isLoading.set(false);
+          this.userModel.set({
+            firstname: '',
+            lastname: '',
+            email: '',
+            phoneNumber: '',
+            password: '',
+            role: UserRole.SELLER,
+            department: '',
+            city: '',
+            address: '',
+            neighborhood: '',
+            isActive: true,
+          });
+          void this.router.navigate(['/admin/users']);
+          setTimeout(() => {
+            this.adminFormNotificationStore.hide();
+          }, 2000);
+        }, 1500);
+      },
+    });
+  }
+
+  onUpdate() {
+    const user: UpdateUserDto = this.userModel() as UpdateUserDto;
+    const userId = this.userId();
+    if (!userId) return;
+    this.userAdminStore.updateUser(userId, user).subscribe({
+      next: () => {
+        this.adminFormNotificationStore.show('User updated successfully', 'success');
+      },
+      error: (error) => {
+        this.isLoading.set(false);
+        this.adminFormNotificationStore.show('Error updating user', 'error');
+        console.error(error);
+        setTimeout(() => {
+          this.adminFormNotificationStore.hide();
+        }, 3000);
+      },
+      complete: () => {
+        setTimeout(() => {
+          this.isLoading.set(false);
+          this.userModel.set({
+            firstname: '',
+            lastname: '',
+            email: '',
+            phoneNumber: '',
+            password: '',
+            role: UserRole.SELLER,
+            department: '',
+            city: '',
+            address: '',
+            neighborhood: '',
+            isActive: true,
+          });
+          void this.router.navigate(['/admin/users']);
+          setTimeout(() => {
+            this.adminFormNotificationStore.hide();
+          }, 2000);
+        }, 1500);
+      },
+    });
+  }
+
   onSubmit(e: Event) {
     e.preventDefault();
     void submit(this.userForm, () => {
       this.isLoading.set(true);
-      const user: CreateUserDto = this.userModel();
-      this.userAdminStore.createUser(user).subscribe({
-        next: () => {
-          this.adminFormNotificationStore.show('User created successfully', 'success');
-        },
-        error: (error) => {
-          this.isLoading.set(false);
-          this.adminFormNotificationStore.show('Error creating user', 'error');
-          console.error(error);
-          setTimeout(() => {
-            this.adminFormNotificationStore.hide();
-          }, 3000);
-        },
-        complete: () => {
-          setTimeout(() => {
-            this.isLoading.set(false);
-            this.userModel.set({
-              firstname: '',
-              lastname: '',
-              email: '',
-              phoneNumber: '',
-              password: '',
-              role: UserRole.SELLER,
-              department: '',
-              city: '',
-              address: '',
-              neighborhood: '',
-              isActive: true,
-            });
-            void this.router.navigate(['/admin/users']);
-            setTimeout(() => {
-              this.adminFormNotificationStore.hide();
-            }, 2000);
-          }, 1500);
-        },
-      });
+      if (this.statusForm() === 'create') {
+        this.onCreate();
+      } else {
+        this.onUpdate();
+      }
       return Promise.resolve();
     });
   }
