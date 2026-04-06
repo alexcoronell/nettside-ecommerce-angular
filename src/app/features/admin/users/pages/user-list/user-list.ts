@@ -1,13 +1,15 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { UserAdminStore } from '@features/admin/users/store/user-admin.store';
 import { ItemList } from '@shared/components/ui/item-list/item-list';
 import { ItemListTableActions } from '@shared/components/ui/item-list-table-actions/item-list-table-actions';
 import { SpinnerTables } from '@shared/components/ui/spinner-tables/spinner-tables';
 import { AdminDeleteConfirmStore } from '@shared/stores/admin-delete-confirm-store';
+import { UserRole } from '@domain/enums';
 
 @Component({
   selector: 'app-user-list',
-  imports: [ItemList, ItemListTableActions, SpinnerTables],
+  imports: [ItemList, ItemListTableActions, SpinnerTables, NgClass],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,6 +17,8 @@ import { AdminDeleteConfirmStore } from '@shared/stores/admin-delete-confirm-sto
 export class UserList implements OnInit {
   private readonly userAdminStore = inject(UserAdminStore);
   private readonly adminDeleteConfirmStore = inject(AdminDeleteConfirmStore);
+
+  showFiltersButtons = signal<boolean>(false);
 
   readonly users = this.userAdminStore.users;
   readonly isLoading = this.userAdminStore.isLoading;
@@ -25,6 +29,7 @@ export class UserList implements OnInit {
   readonly page = this.userAdminStore.page;
   readonly limit = this.userAdminStore.limit;
   readonly total = this.userAdminStore.total;
+  readonly _resource = this.userAdminStore._resource;
 
   title = 'Users';
   columns = ['Fullname', 'Email', 'Phone', 'Role'];
@@ -33,8 +38,18 @@ export class UserList implements OnInit {
     this.loadUsers();
   }
 
+  readonly userRoles = [
+    { role: UserRole.ADMIN, label: 'Admins' },
+    { role: UserRole.SELLER, label: 'Sellers' },
+    { role: UserRole.CUSTOMER, label: 'Customers' },
+  ];
+
+  toggleShowFilters() {
+    this.showFiltersButtons.set(!this.showFiltersButtons());
+  }
+
   loadUsers(): void {
-    this.userAdminStore.loadUsers();
+    this.userAdminStore.getUsers();
   }
 
   onItemsPerPage(limit: number) {
@@ -59,6 +74,15 @@ export class UserList implements OnInit {
 
   onPreviousPage() {
     this.userAdminStore.previousPage();
+  }
+
+  onRoleChange(role: UserRole | null) {
+    if (role) {
+      this.userAdminStore.setRole(role);
+    } else {
+      this.userAdminStore.setRole(null);
+    }
+    this.loadUsers();
   }
 
   onDeleteItem(id: number) {

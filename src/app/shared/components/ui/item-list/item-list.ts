@@ -12,6 +12,8 @@ import { ItemListTableFooter } from '../item-list-table-footer/item-list-table-f
 export class ItemList {
   title = input.required<string>();
   add = input.required<string>();
+  onShowFilters = output();
+  showFiltersButton = input<boolean>(false);
 
   page = input<number>(1);
   limit = input.required<number>();

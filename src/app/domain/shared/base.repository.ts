@@ -10,7 +10,9 @@ export abstract class BaseRepository<T, CreateDto, UpdateDto> {
   abstract getAll(
     pagination?: PaginationParams | (() => PaginationParams)
   ): HttpResourceRef<PaginatedResult<T>> | Promise<PaginatedResult<T>>;
-  abstract getById(id: number): Promise<ItemResult<T>> | Observable<ItemResult<T>>;
+  abstract getById(
+    id: number
+  ): HttpResourceRef<ItemResult<T>> | Promise<ItemResult<T>> | Observable<ItemResult<T>>;
   abstract create(dto: CreateDto): Observable<T> | Promise<T>;
   abstract update(id: number, dto: UpdateDto): Observable<T> | Promise<T>;
   abstract delete(id: number): Promise<unknown>;

@@ -1,6 +1,12 @@
 import { ChangeDetectionStrategy, Component, output, input, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LucideDynamicIcon, LucidePlus, LucideArrowLeft, LucideRefreshCcw } from '@lucide/angular';
+import {
+  LucideDynamicIcon,
+  LucidePlus,
+  LucideArrowLeft,
+  LucideRefreshCcw,
+  LucideListFilter,
+} from '@lucide/angular';
 @Component({
   selector: 'app-header-item-list',
   imports: [RouterLink, LucideDynamicIcon],
@@ -11,12 +17,16 @@ import { LucideDynamicIcon, LucidePlus, LucideArrowLeft, LucideRefreshCcw } from
 export class HeaderItemList {
   searchUsers = output<string>();
   refresh = output();
+  onShowFilters = output();
+  showFiltersButton = input<boolean>(false);
   itemsPerPage = output<number>();
   limit = input.required<number>();
   total = input.required<number>();
+
   lucidePlus = LucidePlus;
   lucideArrowLeft = LucideArrowLeft;
   lucideRefreshCcw = LucideRefreshCcw;
+  lucideListFilter = LucideListFilter;
 
   defaultItemsPerPageOptions = [
     { label: '5', value: 5 },

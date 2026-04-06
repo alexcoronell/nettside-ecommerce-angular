@@ -29,6 +29,7 @@ export class UserHttpRepository extends BaseHttpRepository implements UserReposi
   }
 
   getById(id: number): Observable<ItemResult<UserResponseDto>> {
+    //return httpResource(() => `${this.url}/${id.toString()}`) as HttpResourceRef<ItemResult<User>>;
     return this.http.get<ItemResult<UserResponseDto>>(`${this.url}/${id.toString()}`);
   }
 

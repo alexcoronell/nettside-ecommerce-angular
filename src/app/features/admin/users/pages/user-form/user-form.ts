@@ -213,7 +213,7 @@ export class UserForm implements OnInit {
   }
 
   loadUser(id: number) {
-    this.userAdminStore.loadUser(id).subscribe({
+    this.userAdminStore.getUser(id).subscribe({
       next: (response) => {
         this.user.set(response.data);
         this.userModel.set(response.data as unknown as UserModel);
@@ -231,11 +231,13 @@ export class UserForm implements OnInit {
 
   onEdit() {
     this.statusForm.set('edit');
+    this.title.set('Edit User');
   }
 
   onCancel() {
     this.userModel.set(this.user() as unknown as UserModel);
     this.statusForm.set('detail');
+    this.title.set('Detail User');
   }
 
   ngOnInit(): void {

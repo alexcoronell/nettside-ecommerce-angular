@@ -5,6 +5,7 @@ import { UserHttpRepository } from '@infrastructure/http/repositories/user-http-
 
 import { PaginationParams } from '@domain/types';
 import { CreateUserDto, UpdateUserDto } from '@infrastructure/http/dtos';
+import { UserRole } from '@domain/enums';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,7 @@ export class UserAdminStore {
   readonly filterBy = signal<Record<string, string> | null>(null);
 
   /* Computed Signals */
+  readonly _resource = computed(() => this.resource.value());
   readonly users = computed(() => this.resource.value().data);
   readonly total = computed(() => this.resource.value().meta.total);
   readonly isLoading = computed(() => this.resource.isLoading());
@@ -42,15 +44,20 @@ export class UserAdminStore {
 
   searchUsers(search: string) {
     this.search.set(search);
-    this.loadUsers();
+    this.getUsers();
   }
 
-  loadUsers() {
+  getUsers() {
     this.resource.reload();
   }
 
   setLimit(limit: number) {
     this.limit.set(limit);
+  }
+
+  setRole(role: UserRole | null) {
+    this.filterBy.set(role ? { role } : null);
+    this.page.set(1);
   }
 
   firstPage() {
@@ -84,7 +91,7 @@ export class UserAdminStore {
     this.filterBy.set(null);
   }
 
-  loadUser(id: number) {
+  getUser(id: number) {
     return this.userHttpRepository.getById(id);
   }
 

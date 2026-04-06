@@ -7,6 +7,7 @@
   [totalPages]="totalPages()"
   [hasPreviousPage]="hasPreviousPage()"
   [hasNextPage]="hasNextPage()"
+  [showFiltersButton]="true"
   (refresh)="loadUsers()"
   (firstPage)="onFirstPage()"
   (lastPage)="onLastPage()"
@@ -14,7 +15,29 @@
   (previousPage)="onPreviousPage()"
   (itemsPerPage)="onItemsPerPage($event)"
   (searchUsers)="onSearchUsers($event)"
+  (onShowFilters)="toggleShowFilters()"
 >
+  @if (showFiltersButtons()) {
+    <div
+      class="flex items-center justify-center gap-2 overflow-hidden py-2 transition-all duration-1000 ease-in-out"
+      [ngClass]="showFiltersButtons() ? 'h-auto opacity-100' : 'h-0 opacity-0'"
+    >
+      @for (role of userRoles; track role.role) {
+        <button
+          class="btn btn-light w-[100px] max-w-[100px] min-w-[100px] shrink"
+          (click)="onRoleChange(role.role)"
+        >
+          {{ role.label }}
+        </button>
+      }
+      <button
+        class="btn btn-light w-[100px] max-w-[100px] min-w-[100px] shrink"
+        (click)="onRoleChange(null)"
+      >
+        X
+      </button>
+    </div>
+  }
   <table class="item-list-table w-full">
     <thead class="w-full">
       <tr>
