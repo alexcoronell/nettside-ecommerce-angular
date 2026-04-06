@@ -94,18 +94,12 @@
             [field]="userForm.isActive"
           />
         </div>
-        <div class="flex items-center justify-center gap-6">
-          <button type="submit" class="btn btn-primary min-w-[120px]" [disabled]="isLoading()">
-            @if (isLoading()) {
-              Saving...
-            } @else {
-              Save
-            }
-          </button>
-          <button type="button" class="btn btn-light min-w-[120px]" [disabled]="isLoading()">
-            Cancel
-          </button>
-        </div>
+        <app-admin-form-buttons
+          [statusForm]="statusForm()"
+          [isLoading]="isLoading()"
+          (onEdit)="onEdit()"
+          (onCancel)="onCancel()"
+        />
       </fieldset>
     </form>
   </div>

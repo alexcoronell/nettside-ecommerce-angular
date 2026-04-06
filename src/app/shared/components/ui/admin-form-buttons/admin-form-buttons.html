@@ -1,0 +1,27 @@
+<div class="flex items-center justify-center gap-6">
+  @if (statusForm() === 'create' || statusForm() === 'edit') {
+    <button type="submit" class="btn btn-primary min-w-[120px]" [disabled]="isLoading()">
+      @if (isLoading()) {
+        Saving...
+      } @else {
+        Save
+      }
+    </button>
+  } @else if (statusForm() === 'detail') {
+    <button type="button" class="btn btn-primary min-w-[128px]" (click)="onEdit.emit()">
+      Edit
+    </button>
+  }
+  @if (statusForm() === 'edit') {
+    <button
+      type="button"
+      class="btn btn-light min-w-[120px]"
+      [disabled]="isLoading()"
+      (click)="onCancel.emit()"
+    >
+      Cancel
+    </button>
+  } @else {
+    <button type="button" class="btn btn-light min-w-[120px]" (click)="onBack()">Back</button>
+  }
+</div>

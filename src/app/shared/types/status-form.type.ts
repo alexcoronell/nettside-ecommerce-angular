@@ -1,1 +1,1 @@
-export type StatusForm = 'create' | 'update' | 'detail';
+export type StatusForm = 'create' | 'edit' | 'detail';

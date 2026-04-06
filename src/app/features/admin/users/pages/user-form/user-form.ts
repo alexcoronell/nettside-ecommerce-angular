@@ -14,6 +14,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Input } from '@shared/components/ui/input/input';
 import { Select } from '@shared/components/ui/select/select';
 import { Checkbox } from '@shared/components/ui/checkbox/checkbox';
+import { AdminFormButtons } from '@shared/components/ui/admin-form-buttons/admin-form-buttons';
 
 /* Domain */
 import { UserRole } from '@domain/enums';
@@ -44,7 +45,7 @@ interface UserModel {
 
 @Component({
   selector: 'app-user-form',
-  imports: [Input, Select, Checkbox],
+  imports: [Input, Select, Checkbox, AdminFormButtons],
   templateUrl: './user-form.html',
   styleUrl: './user-form.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -162,25 +163,38 @@ export class UserForm implements OnInit {
     this.userModel.update((user) => ({ ...user, isActive: !user.isActive }));
   }
 
+  loadUser(id: number) {
+    this.userAdminStore.loadUser(id).subscribe({
+      next: (response) => {
+        this.user.set(response.data);
+        this.userModel.set(response.data as unknown as UserModel);
+        this.statusForm.set('detail');
+      },
+      error: (error) => {
+        this.adminFormNotificationStore.show('Error loading user', 'error');
+        console.error(error);
+        setTimeout(() => {
+          this.adminFormNotificationStore.hide();
+        }, 3000);
+      },
+    });
+  }
+
+  onEdit() {
+    this.statusForm.set('edit');
+  }
+
+  onCancel() {
+    this.userModel.set(this.user() as unknown as UserModel);
+    this.statusForm.set('detail');
+  }
+
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.userId.set(Number(id));
       this.title.set('Detail User');
-      this.userAdminStore.loadUser(Number(id)).subscribe({
-        next: (response) => {
-          this.user.set(response.data);
-          this.userModel.set(response.data as unknown as UserModel);
-          this.statusForm.set('detail');
-        },
-        error: (error) => {
-          this.adminFormNotificationStore.show('Error loading user', 'error');
-          console.error(error);
-          setTimeout(() => {
-            this.adminFormNotificationStore.hide();
-          }, 3000);
-        },
-      });
+      this.loadUser(Number(id));
     }
   }
 }
