@@ -12,7 +12,15 @@ export const generateQueryParams = (
   Object.entries(params).forEach(([key, value]) => {
     if (value === undefined || value === null || value === '') return;
 
-    queryParams.append(key, String(value));
+    if (Array.isArray(value)) {
+      value.forEach((item) => {
+        queryParams.append(key, String(item));
+      });
+    } else if (typeof value === 'object' && value !== null) {
+      queryParams.append(key, JSON.stringify(value));
+    } else {
+      queryParams.append(key, String(value));
+    }
   });
 
   return queryParams.toString();

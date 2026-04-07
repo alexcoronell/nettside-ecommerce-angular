@@ -56,15 +56,11 @@
             <app-spinner-tables />
           </td>
         </tr>
-      } @else if (error()) {
+      } @else if (errorMessage()) {
         <tr>
-          <td colspan="6" class="text-center">
-            Error:
-            @if (error()?.message?.includes('401')) {
-              You don't have permission to access this resource.
-            } @else {
-              Something went wrong. Please try again later.
-            }
+          <td colspan="6" class="py-12 text-center">
+            <p class="text-lg font-bold text-red-500">Error</p>
+            <p class="text-gray-600">{{ errorMessage() }}</p>
           </td>
         </tr>
       } @else {

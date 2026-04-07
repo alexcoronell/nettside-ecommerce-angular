@@ -23,6 +23,7 @@ export class UserList implements OnInit {
   readonly users = this.userAdminStore.users;
   readonly isLoading = this.userAdminStore.isLoading;
   readonly error = this.userAdminStore.error;
+  readonly errorMessage = this.userAdminStore.errorMessage;
   readonly totalPages = this.userAdminStore.totalPages;
   readonly hasNextPage = this.userAdminStore.hasNextPage;
   readonly hasPreviousPage = this.userAdminStore.hasPreviousPage;

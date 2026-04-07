@@ -25,8 +25,34 @@ export class UserAdminStore {
   readonly _resource = computed(() => this.resource.value());
   readonly users = computed(() => this.resource.value().data);
   readonly total = computed(() => this.resource.value().meta.total);
-  readonly isLoading = computed(() => this.resource.isLoading());
+  readonly status = computed(() => this.resource.status());
+  readonly isLoading = computed(() => this.status() === 'loading' || this.status() === 'reloading');
   readonly error = computed(() => this.resource.error());
+
+  readonly errorMessage = computed(() => {
+    const err = this.error();
+    if (!err) return null;
+
+    const e = err as {
+      status?: number;
+      name?: string;
+      message?: string;
+      error?: { status?: number; message?: string };
+    };
+    if (
+      e.status === 0 ||
+      e.error?.status === 0 ||
+      e.name === 'TimeoutError' ||
+      e.message?.includes('0')
+    ) {
+      return 'Cannot connect to the server. Please check if the connection.';
+    }
+    if (e.status === 401) {
+      return "You don't have permission to access this resource.";
+    }
+    return e.message ?? e.error?.message ?? 'Something went wrong. Please try again later.';
+  });
+
   readonly totalPages = computed(() => this.resource.value().meta.totalPages);
   readonly hasNextPage = computed(() => this.resource.value().meta.hasNextPage);
   readonly hasPreviousPage = computed(() => this.resource.value().meta.hasPreviousPage);
