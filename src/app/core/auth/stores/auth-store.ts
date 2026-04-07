@@ -11,6 +11,7 @@ import { LoginDto } from '@infrastructure/http/dtos';
 
 /* Models */
 import { User } from '@domain/models';
+import { mapHttpError } from '@shared/utils/error-mapper.util';
 
 @Injectable({
   providedIn: 'root',
@@ -71,16 +72,7 @@ export class AuthStore {
         this._isLoading.set(false);
       },
       error: (error) => {
-        if (
-          error &&
-          typeof error === 'object' &&
-          'status' in error &&
-          (error as { status: number }).status === 401
-        ) {
-          this._error.set('Invalid credentials');
-        } else {
-          this._error.set('Something went wrong');
-        }
+        this._error.set(mapHttpError(error));
         console.error('[AuthStore] Login failed', error);
         this._isLoading.set(false);
         setTimeout(() => {
@@ -104,9 +96,7 @@ export class AuthStore {
         this._refreshTokenRequest = null;
       }),
       catchError((error: unknown) => {
-        const err = error as { name?: string; message?: string };
-        const errorMsg =
-          err.name === 'TimeoutError' ? 'Refresh Token Timeout' : (err.message ?? 'Unknown error');
+        const errorMsg = mapHttpError(error);
         console.error(`[AuthStore] Refresh token failed: ${errorMsg}`, error);
         this._refreshTokenRequest = null;
         if (this.isBrowser) {

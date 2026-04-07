@@ -1,6 +1,9 @@
 import { BaseRepository } from '@domain/shared/base.repository';
 import { Subcategory } from '@domain/models';
-import { CreateSubcategoryDto, UpdateSubcategoryDto } from '@infrastructure/http/dtos/subcategory.dto';
+import {
+  CreateSubcategoryDto,
+  UpdateSubcategoryDto,
+} from '@infrastructure/http/dtos/subcategory.dto';
 import { PaginationParams, PaginatedResult } from '@domain/types';
 
 export interface SubcategoryFilters {

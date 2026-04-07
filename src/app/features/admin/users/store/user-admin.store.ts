@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+
 import { Injectable, computed, inject, signal } from '@angular/core';
 
 /* Services */
@@ -6,6 +8,7 @@ import { UserHttpRepository } from '@infrastructure/http/repositories/user-http-
 import { PaginationParams } from '@domain/types';
 import { CreateUserDto, UpdateUserDto } from '@infrastructure/http/dtos';
 import { UserRole } from '@domain/enums';
+import { mapHttpError } from '@shared/utils';
 
 @Injectable({
   providedIn: 'root',
@@ -22,9 +25,8 @@ export class UserAdminStore {
   readonly filterBy = signal<Record<string, string> | null>(null);
 
   /* Computed Signals */
-  readonly _resource = computed(() => this.resource.value());
-  readonly users = computed(() => this.resource.value().data);
-  readonly total = computed(() => this.resource.value().meta.total);
+  readonly users = computed(() => this.resource.value()?.data ?? []);
+  readonly total = computed(() => this.resource.value()?.meta?.total ?? 0);
   readonly status = computed(() => this.resource.status());
   readonly isLoading = computed(() => this.status() === 'loading' || this.status() === 'reloading');
   readonly error = computed(() => this.resource.error());
@@ -33,29 +35,19 @@ export class UserAdminStore {
     const err = this.error();
     if (!err) return null;
 
-    const e = err as {
-      status?: number;
-      name?: string;
-      message?: string;
-      error?: { status?: number; message?: string };
-    };
-    if (
-      e.status === 0 ||
-      e.error?.status === 0 ||
-      e.name === 'TimeoutError' ||
-      e.message?.includes('0')
-    ) {
-      return 'Cannot connect to the server. Please check if the connection.';
-    }
-    if (e.status === 401) {
-      return "You don't have permission to access this resource.";
-    }
-    return e.message ?? e.error?.message ?? 'Something went wrong. Please try again later.';
+    console.log('[UserAdminStore] Error detected:', err);
+    return mapHttpError(err);
   });
 
-  readonly totalPages = computed(() => this.resource.value().meta.totalPages);
-  readonly hasNextPage = computed(() => this.resource.value().meta.hasNextPage);
-  readonly hasPreviousPage = computed(() => this.resource.value().meta.hasPreviousPage);
+  readonly totalPages = computed(
+    () => (this.resource.hasValue() ? this.resource.value()?.meta?.totalPages : 1) ?? 1
+  );
+  readonly hasNextPage = computed(
+    () => (this.resource.hasValue() ? this.resource.value()?.meta?.hasNextPage : false) ?? false
+  );
+  readonly hasPreviousPage = computed(
+    () => (this.resource.hasValue() ? this.resource.value()?.meta?.hasPreviousPage : false) ?? false
+  );
 
   readonly paginationParams = computed<PaginationParams>(() => ({
     page: this.page(),

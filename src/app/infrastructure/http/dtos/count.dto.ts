@@ -1,4 +1,4 @@
 export interface CountDto {
-    statusCode: number
-    total: number
+  statusCode: number;
+  total: number;
 }

@@ -59,8 +59,19 @@
       } @else if (errorMessage()) {
         <tr>
           <td colspan="6" class="py-12 text-center">
-            <p class="text-lg font-bold text-red-500">Error</p>
-            <p class="text-gray-600">{{ errorMessage() }}</p>
+            <div
+              class="bg-danger/5 border-danger/10 dark:border-danger/50 my-3 flex w-full flex-col items-center justify-center rounded-lg border p-6 dark:bg-transparent"
+            >
+              <p class="text-danger mb-2 text-xl font-bold">
+                @if (errorMessage()?.includes('connect')) {
+                  Server Connection Error
+                } @else {
+                  Error
+                }
+              </p>
+              <p class="text-dark-text dark:text-light-text">{{ errorMessage() }}</p>
+              <button (click)="loadUsers()" class="btn btn-primary mt-4">Retry Connection</button>
+            </div>
           </td>
         </tr>
       } @else {

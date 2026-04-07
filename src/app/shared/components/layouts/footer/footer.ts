@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 /* Components */
 import { Copyright } from './copyright/copyright';
@@ -9,5 +9,6 @@ import { SocialMedia } from './social-media/social-media';
   imports: [Copyright, SocialMedia],
   templateUrl: './footer.html',
   styleUrl: './footer.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Footer {}

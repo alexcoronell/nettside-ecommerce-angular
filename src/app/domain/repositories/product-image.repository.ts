@@ -1,1 +1,1 @@
-export abstract class ProductImageRepository { }
+export abstract class ProductImageRepository {}

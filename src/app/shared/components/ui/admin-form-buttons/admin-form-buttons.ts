@@ -1,4 +1,4 @@
-import { Component, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { Location } from '@angular/common';
 import { StatusForm } from '@shared/types';
 
@@ -7,6 +7,7 @@ import { StatusForm } from '@shared/types';
   imports: [],
   templateUrl: './admin-form-buttons.html',
   styleUrl: './admin-form-buttons.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminFormButtons {
   private readonly location = inject(Location);

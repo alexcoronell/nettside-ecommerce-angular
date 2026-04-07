@@ -1,1 +1,1 @@
-export abstract class WishlistRepository { }
+export abstract class WishlistRepository {}

@@ -30,7 +30,6 @@ export class UserList implements OnInit {
   readonly page = this.userAdminStore.page;
   readonly limit = this.userAdminStore.limit;
   readonly total = this.userAdminStore.total;
-  readonly _resource = this.userAdminStore._resource;
 
   title = 'Users';
   columns = ['Fullname', 'Email', 'Phone', 'Role'];

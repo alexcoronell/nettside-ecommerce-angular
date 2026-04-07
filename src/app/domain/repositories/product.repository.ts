@@ -13,7 +13,11 @@ export interface ProductFilters {
   search?: string;
 }
 
-export abstract class ProductRepository extends BaseRepository<Product, CreateProductDto, UpdateProductDto> {
+export abstract class ProductRepository extends BaseRepository<
+  Product,
+  CreateProductDto,
+  UpdateProductDto
+> {
   abstract override getAll(
     filters?: ProductFilters,
     pagination?: PaginationParams

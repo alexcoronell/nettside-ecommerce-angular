@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 /* Components */
 import { LogoHeader } from './logo-header/logo-header';
@@ -12,5 +12,6 @@ import { AdminMenu } from '@shared/components/layouts/admin-menu/admin-menu';
   imports: [LogoHeader, MenuHeader, ActionsHeader, SearchHeader, AdminMenu],
   templateUrl: './header.html',
   styleUrl: './header.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {}

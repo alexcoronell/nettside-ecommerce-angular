@@ -1,13 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { TestBed } from '@angular/core/testing';
-import { HttpRequest, HttpHandlerFn, HttpEvent } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { HttpRequest, HttpEvent } from '@angular/common/http';
+import { of } from 'rxjs';
 import { vi } from 'vitest';
 
 import { jwtInterceptor } from './jwt-interceptor';
 
 describe('jwtInterceptor', () => {
   let mockRequest: HttpRequest<unknown>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   let mockNext: any;
 
   beforeEach(() => {

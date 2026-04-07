@@ -1,4 +1,4 @@
-import { Component, inject, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, computed } from '@angular/core';
 import { AdminFormNotificationStore } from '@shared/stores/admin-form-notification-store';
 
 @Component({
@@ -6,6 +6,7 @@ import { AdminFormNotificationStore } from '@shared/stores/admin-form-notificati
   imports: [],
   templateUrl: './admin-form-notification.html',
   styleUrl: './admin-form-notification.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminFormNotification {
   private readonly adminFormNotificationStore = inject(AdminFormNotificationStore);

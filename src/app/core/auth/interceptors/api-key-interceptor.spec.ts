@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { TestBed } from '@angular/core/testing';
 import { HttpRequest, HttpEvent } from '@angular/common/http';
 import { of } from 'rxjs';
@@ -8,15 +10,13 @@ import { API_KEY } from '@core/tokens/api-key.token';
 
 describe('apiKeyInterceptor', () => {
   let mockRequest: HttpRequest<unknown>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   let mockNext: any;
   const mockApiKey = 'test-api-key-123';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        { provide: API_KEY, useValue: mockApiKey }
-      ]
+      providers: [{ provide: API_KEY, useValue: mockApiKey }],
     });
     mockRequest = new HttpRequest('GET', '/test');
     mockNext = vi.fn().mockImplementation(() => of({} as HttpEvent<unknown>));

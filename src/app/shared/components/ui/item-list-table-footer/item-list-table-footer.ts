@@ -1,4 +1,4 @@
-import { Component, input, output, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output, computed } from '@angular/core';
 import {
   LucideDynamicIcon,
   LucideChevronFirst,
@@ -12,6 +12,7 @@ import {
   imports: [LucideDynamicIcon],
   templateUrl: './item-list-table-footer.html',
   styleUrl: './item-list-table-footer.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemListTableFooter {
   page = input<number>(1);
