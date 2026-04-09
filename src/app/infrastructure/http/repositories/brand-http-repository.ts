@@ -1,0 +1,50 @@
+import { Injectable } from '@angular/core';
+import { firstValueFrom, Observable } from 'rxjs';
+import { httpResource, HttpResourceRef } from '@angular/common/http';
+
+import { BaseHttpRepository } from '../shared/base-http.repository';
+import { Brand } from '@domain/models';
+import { CountDto, CreateBrandDto, UpdateBrandDto } from '@infrastructure/http/dtos';
+import { BrandRepository } from '@domain/repositories/brand.repository';
+import { PaginationParams, PaginatedResult, ItemResult } from '@domain/types';
+import { generateQueryParams } from '@shared/utils';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class BrandHttpRepository extends BaseHttpRepository implements BrandRepository {
+  private readonly url = `${this.apiUrl}brand`;
+
+  count(): HttpResourceRef<CountDto | undefined> {
+    return httpResource(() => `${this.url}/count`);
+  }
+
+  getAll(
+    paginationParams?: PaginationParams | (() => PaginationParams)
+  ): HttpResourceRef<PaginatedResult<Brand>> {
+    return httpResource(() => {
+      const queryParams = generateQueryParams(paginationParams);
+      return `${this.url}?${queryParams}`;
+    }) as HttpResourceRef<PaginatedResult<Brand>>;
+  }
+
+  getById(id: number): HttpResourceRef<ItemResult<Brand>> {
+    return httpResource(() => `${this.url}/${id.toString()}`) as HttpResourceRef<ItemResult<Brand>>;
+  }
+
+  getBySlug(slug: string): HttpResourceRef<ItemResult<Brand>> {
+    return httpResource(() => `${this.url}/slug/${slug}`) as HttpResourceRef<ItemResult<Brand>>;
+  }
+
+  create(dto: CreateBrandDto): Observable<Brand> {
+    return this.http.post<Brand>(this.url, dto);
+  }
+
+  update(id: number, dto: UpdateBrandDto): Observable<Brand> {
+    return this.http.patch<Brand>(`${this.url}/${id.toString()}`, dto);
+  }
+
+  delete(id: number): Promise<unknown> {
+    return firstValueFrom(this.http.delete<unknown>(`${this.url}/${id.toString()}`));
+  }
+}

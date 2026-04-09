@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { ItemResult } from '@domain/types';
 
 export abstract class BaseRepository<T, CreateDto, UpdateDto> {
-  abstract count(): Promise<CountDto>;
+  abstract count(): HttpResourceRef<CountDto | undefined> | Promise<CountDto | undefined>;
   abstract getAll(
     pagination?: PaginationParams | (() => PaginationParams)
   ): HttpResourceRef<PaginatedResult<T>> | Promise<PaginatedResult<T>>;
