@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 /* Components */
 import { Input } from '@shared/components/ui/input/input';
+import { InputFile } from '@shared/components/ui/input-file/input-file';
 import { AdminFormButtons } from '@shared/components/ui/admin-form-buttons/admin-form-buttons';
 
 /* Models */
@@ -21,12 +22,12 @@ import { StatusForm } from '@shared/types';
 
 interface BrandModel {
   name: string;
-  logo: string;
+  logo: File;
 }
 
 @Component({
   selector: 'app-brand-form',
-  imports: [Input, AdminFormButtons],
+  imports: [Input, InputFile, AdminFormButtons],
   templateUrl: './brand-form.html',
   styleUrl: './brand-form.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,7 +47,7 @@ export class BrandForm implements OnInit {
   toggleIsActive = output<boolean>();
   brandModel = signal<BrandModel>({
     name: '',
-    logo: '',
+    logo: new File([], ''),
   });
 
   brandForm = form(this.brandModel, (schemaPath) => {
@@ -113,7 +114,7 @@ export class BrandForm implements OnInit {
   onResetModel() {
     this.brandModel.set({
       name: '',
-      logo: '',
+      logo: new File([], ''),
     });
   }
 
