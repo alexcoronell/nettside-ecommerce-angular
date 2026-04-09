@@ -37,11 +37,21 @@ export class BrandHttpRepository extends BaseHttpRepository implements BrandRepo
   }
 
   create(dto: CreateBrandDto): Observable<Brand> {
-    return this.http.post<Brand>(this.url, dto);
+    const formData = new FormData();
+    formData.append('name', dto.name);
+    if (dto.logo && dto.logo.size > 0) {
+      formData.append('file', dto.logo);
+    }
+    return this.http.post<Brand>(this.url, formData);
   }
 
   update(id: number, dto: UpdateBrandDto): Observable<Brand> {
-    return this.http.patch<Brand>(`${this.url}/${id.toString()}`, dto);
+    const formData = new FormData();
+    if (dto.name) formData.append('name', dto.name);
+    if (dto.logo && dto.logo.size > 0) {
+      formData.append('file', dto.logo);
+    }
+    return this.http.patch<Brand>(`${this.url}/${id.toString()}`, formData);
   }
 
   delete(id: number): Promise<unknown> {

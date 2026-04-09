@@ -12,7 +12,7 @@ export type CreateBrandDto = Omit<
   | 'isDeleted'
   | 'logo'
 > & {
-  logo: File;
+  logo?: File;
 };
 
 export type UpdateBrandDto = Partial<CreateBrandDto>;

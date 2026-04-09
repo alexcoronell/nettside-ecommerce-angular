@@ -6,6 +6,5 @@ import { environment } from '@environments/environment';
 export abstract class BaseHttpRepository {
   protected readonly http = inject(HttpClient);
   protected readonly apiUrl = inject(API_URL);
-  protected readonly options = { withCredentials: true } as const;
   protected readonly apiKey = environment.API_KEY;
 }
