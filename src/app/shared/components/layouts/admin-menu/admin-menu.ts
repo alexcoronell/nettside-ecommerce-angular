@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
 })
 export class AdminMenu {
   readonly adminNavItems = [
-    { label: 'Dashboard', route: '/admin/dashboard' },
+    { label: 'Brands', route: '/admin/brands' },
     { label: 'Users', route: '/admin/users' },
   ];
 }

@@ -18,6 +18,11 @@ export const adminRoutes: Routes = [
           import('@features/admin/dashboard/pages/dashboard/dashboard').then((c) => c.Dashboard),
       },
       {
+        path: 'brands',
+        loadChildren: () =>
+          import('@features/admin/brands/brands.routes').then((r) => r.brandsRoutes),
+      },
+      {
         path: 'users',
         loadChildren: () => import('@features/admin/users/users.routes').then((r) => r.usersRoutes),
       },
