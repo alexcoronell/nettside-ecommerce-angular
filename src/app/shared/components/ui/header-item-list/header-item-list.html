@@ -37,6 +37,7 @@
       <button
         class="btn btn-light w-[100px] max-w-[100px] min-w-[100px] shrink overflow-hidden"
         (click)="onShowFilters.emit()"
+        [disabled]="!showFiltersButton()"
       >
         <svg [lucideIcon]="lucideListFilter"></svg>
         <span class="hidden lg:block">Filters</span>

@@ -1,1 +1,79 @@
-<p>brand-list works!</p>
+<app-item-list
+  [title]="title"
+  [add]="'create'"
+  [page]="page()"
+  [limit]="limit()"
+  [total]="total()"
+  [totalPages]="totalPages()"
+  [hasPreviousPage]="hasPreviousPage()"
+  [hasNextPage]="hasNextPage()"
+  (refresh)="loadBrands()"
+  (firstPage)="onFirstPage()"
+  (lastPage)="onLastPage()"
+  (nextPage)="onNextPage()"
+  (previousPage)="onPreviousPage()"
+  (itemsPerPage)="onItemsPerPage($event)"
+  (searchUsers)="onSearchBrands($event)"
+>
+  <table class="item-list-table w-full max-w-4xl">
+    <thead class="w-full">
+      <tr>
+        <th class="table-col-id text-center">Id</th>
+        <th>Name</th>
+        <th class="max-md:hidden">Slug</th>
+        <th class="max-lg:hidden">Logo</th>
+        <th class="table-column-actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (isLoading()) {
+        <tr>
+          <td colspan="5" class="py-12 text-center">
+            <app-spinner-tables />
+          </td>
+        </tr>
+      } @else if (errorMessage()) {
+        <tr>
+          <td colspan="5" class="py-12 text-center">
+            <div
+              class="bg-danger/5 border-danger/10 dark:border-danger/50 my-3 flex w-full flex-col items-center justify-center rounded-lg border p-6 dark:bg-transparent"
+            >
+              <p class="text-danger mb-2 text-xl font-bold">
+                @if (errorMessage()?.includes('connect')) {
+                  Server Connection Error
+                } @else {
+                  Error
+                }
+              </p>
+              <p class="text-dark-text dark:text-light-text">{{ errorMessage() }}</p>
+              <button (click)="loadBrands()" class="btn btn-primary mt-4">Retry Connection</button>
+            </div>
+          </td>
+        </tr>
+      } @else {
+        @for (brand of brands(); track brand.id) {
+          <tr>
+            <td class="table-col-id">{{ brand.id }}</td>
+            <td>{{ brand.name }}</td>
+            <td class="max-md:hidden">{{ brand.slug }}</td>
+            <td class="max-lg:hidden">
+              <img [src]="brand.logo" alt="{{ brand.name }}" class="h-10 w-10 object-cover" />
+            </td>
+            <td class="table-column-actions">
+              <app-item-list-table-actions
+                [itemId]="brand.id"
+                (deleteItem)="onDeleteItem($event)"
+              />
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5" class="py-12 text-center">
+              <p>No brands found</p>
+            </td>
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+</app-item-list>

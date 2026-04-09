@@ -28,8 +28,8 @@ export class BrandHttpRepository extends BaseHttpRepository implements BrandRepo
     }) as HttpResourceRef<PaginatedResult<Brand>>;
   }
 
-  getById(id: number): HttpResourceRef<ItemResult<Brand>> {
-    return httpResource(() => `${this.url}/${id.toString()}`) as HttpResourceRef<ItemResult<Brand>>;
+  getById(id: number): Observable<ItemResult<Brand>> {
+    return this.http.get<ItemResult<Brand>>(`${this.url}/${id.toString()}`);
   }
 
   getBySlug(slug: string): HttpResourceRef<ItemResult<Brand>> {

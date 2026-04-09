@@ -1,1 +1,33 @@
-<p>brand-form works!</p>
+<div class="AdminForm max-w-[400px] md:max-w-none md:px-6 xl:max-w-6xl">
+  <h1>{{ title() }}</h1>
+  <div class="AdminForm__container">
+    <form (submit)="onSubmit($event)" novalidate>
+      <fieldset [disabled]="isLoading()" class="contents">
+        <div class="md:grid md:grid-cols-2 md:items-end md:gap-x-6 lg:grid-cols-3">
+          <app-input
+            id="name"
+            label="Name"
+            type="text"
+            autocomplete="name"
+            placeholder="Nike"
+            [field]="brandForm.name"
+          />
+          <app-input
+            id="logo"
+            label="Logo"
+            type="text"
+            autocomplete="logo"
+            placeholder="https://example.com/logo.png"
+            [field]="brandForm.logo"
+          />
+        </div>
+        <app-admin-form-buttons
+          [statusForm]="statusForm()"
+          [isLoading]="isLoading()"
+          (onEdit)="onEdit()"
+          (onCancel)="onCancel()"
+        />
+      </fieldset>
+    </form>
+  </div>
+</div>
