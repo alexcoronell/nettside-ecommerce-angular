@@ -42,7 +42,7 @@ export class BrandForm implements OnInit {
   brand = signal<Brand | null>(null);
   statusForm = signal<StatusForm>('create');
 
-  title = signal<string>('Create User');
+  title = signal<string>('Create Brand');
   isLoading = signal<boolean>(false);
   toggleIsActive = output<boolean>();
   brandModel = signal<BrandModel>({
@@ -64,7 +64,7 @@ export class BrandForm implements OnInit {
       },
       error: (error) => {
         this.isLoading.set(false);
-        this.adminFormNotificationStore.show('Error creating user', 'error');
+        this.adminFormNotificationStore.show('Error creating brand', 'error');
         console.error(error);
         setTimeout(() => {
           this.adminFormNotificationStore.hide();
@@ -82,11 +82,11 @@ export class BrandForm implements OnInit {
     if (!brandId) return;
     this.brandAdminStore.updateBrand(brandId, brand).subscribe({
       next: () => {
-        this.adminFormNotificationStore.show('User updated successfully', 'success');
+        this.adminFormNotificationStore.show('Brand updated successfully', 'success');
       },
       error: (error) => {
         this.isLoading.set(false);
-        this.adminFormNotificationStore.show('Error updating user', 'error');
+        this.adminFormNotificationStore.show('Error updating brand', 'error');
         console.error(error);
         setTimeout(() => {
           this.adminFormNotificationStore.hide();
@@ -148,7 +148,7 @@ export class BrandForm implements OnInit {
 
   onEdit() {
     this.statusForm.set('edit');
-    this.title.set('Edit User');
+    this.title.set('Edit Brand');
   }
 
   onCancel() {
@@ -159,10 +159,12 @@ export class BrandForm implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
+    if (id && id !== 'new') {
       this.brandId.set(Number(id));
       this.title.set('Detail Brand');
       this.loadBrand(Number(id));
+    } else {
+      this.title.set('Create Brand');
     }
   }
 }

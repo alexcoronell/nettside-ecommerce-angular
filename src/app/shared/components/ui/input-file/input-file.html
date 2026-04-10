@@ -8,7 +8,6 @@
       [id]="id()"
       type="file"
       #fileInput
-      [formField]="field()"
       [accept]="accept"
       (change)="onFileChange($event)"
       [attr.aria-describedby]="isInvalid() ? id() + '-error' : null"
