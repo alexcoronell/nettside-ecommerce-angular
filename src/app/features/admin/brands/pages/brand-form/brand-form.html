@@ -12,7 +12,13 @@
             placeholder="Nike"
             [field]="brandForm.name"
           />
-          <app-input-file id="logo" label="Logo" [field]="brandForm.logo" />
+          <app-input-file
+            id="logo"
+            label="Logo"
+            [field]="brandForm.logo"
+            [(filename)]="fileName"
+            [formIsReadonly]="formIsReadonly()"
+          />
         </div>
         <app-admin-form-buttons
           [statusForm]="statusForm()"

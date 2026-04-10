@@ -1,16 +1,24 @@
 <div class="form-group form-group--file">
+  @if (displayPreviewUrl()) {
+    <div class="mb-4 flex items-center justify-center">
+      <img
+        [src]="displayPreviewUrl()"
+        alt="Preview"
+        class="h-20 w-auto rounded-md border border-white/20 object-contain"
+      />
+    </div>
+  }
+
   <label class="form-group__label">
     {{ label() }}
   </label>
 
   <div class="form-group--file__input overflow-hidden">
     <div
-      class="absolute top-[15px] left-1 m-0 flex w-full max-w-[90%] -translate-y-1/2 items-center gap-x-2 overflow-hidden"
+      class="pointer-events-none absolute top-[15px] left-1 m-0 flex w-full max-w-[90%] -translate-y-1/2 items-center gap-x-2 overflow-hidden"
     >
-      <button class="btn btn-primary btn-label">Choose file</button>
-      <span>{{
-        field()().value() && field()().value().name ? field()().value().name : 'No file chosen'
-      }}</span>
+      <button class="btn btn-primary btn-label" [disabled]="formIsReadonly()">Choose file</button>
+      <span class="truncate">{{ cleanFileName() || 'No file chosen' }}</span>
     </div>
     <input
       [id]="id()"
@@ -18,11 +26,12 @@
       #fileInput
       [accept]="accept"
       (change)="onFileChange($event)"
+      [disabled]="formIsReadonly()"
       [attr.aria-describedby]="isInvalid() ? id() + '-error' : null"
       [attr.aria-invalid]="isInvalid() || null"
       [class.outline-red-500]="isInvalid()"
     />
-    @if (field()().value() && field()().value() !== null) {
+    @if (field()().value() && !formIsReadonly()) {
       <button
         type="button"
         class="text-danger absolute top-1/2 right-2 -translate-y-1/2"

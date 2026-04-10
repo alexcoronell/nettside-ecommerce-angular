@@ -1,4 +1,12 @@
-import { Component, OnInit, signal, output, inject, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  signal,
+  output,
+  inject,
+  ChangeDetectionStrategy,
+  computed,
+} from '@angular/core';
 import { form, required, submit, readonly } from '@angular/forms/signals';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -22,7 +30,7 @@ import { StatusForm } from '@shared/types';
 
 interface BrandModel {
   name: string;
-  logo: File;
+  logo: File | string | null;
 }
 
 @Component({
@@ -41,14 +49,15 @@ export class BrandForm implements OnInit {
   brandId = signal<number | null>(null);
   brand = signal<Brand | null>(null);
   statusForm = signal<StatusForm>('create');
-
   title = signal<string>('Create Brand');
   isLoading = signal<boolean>(false);
   toggleIsActive = output<boolean>();
   brandModel = signal<BrandModel>({
     name: '',
-    logo: new File([], ''),
+    logo: null,
   });
+  readonly fileName = signal<string | undefined>(undefined);
+  readonly formIsReadonly = computed(() => this.statusForm() === 'detail');
 
   brandForm = form(this.brandModel, (schemaPath) => {
     required(schemaPath.name, { message: 'Name is required' });
@@ -57,7 +66,7 @@ export class BrandForm implements OnInit {
   });
 
   onCreate() {
-    const brand: CreateBrandDto = this.brandModel();
+    const brand: CreateBrandDto = this.brandModel() as CreateBrandDto;
     this.brandAdminStore.createBrand(brand).subscribe({
       next: () => {
         this.adminFormNotificationStore.show('Brand created successfully', 'success');
@@ -114,7 +123,7 @@ export class BrandForm implements OnInit {
   onResetModel() {
     this.brandModel.set({
       name: '',
-      logo: new File([], ''),
+      logo: null,
     });
   }
 
@@ -135,6 +144,7 @@ export class BrandForm implements OnInit {
         this.brand.set(response.data);
         this.brandModel.set(response.data as unknown as BrandModel);
         this.statusForm.set('detail');
+        this.fileName.set(response.data.logo);
       },
       error: (error) => {
         this.adminFormNotificationStore.show('Error loading brand', 'error');
