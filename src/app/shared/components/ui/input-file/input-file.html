@@ -1,9 +1,17 @@
-<div class="form-group">
-  <label [for]="id()">
+<div class="form-group form-group--file">
+  <label class="form-group__label">
     {{ label() }}
   </label>
 
-  <div class="mt-1">
+  <div class="form-group--file__input overflow-hidden">
+    <div
+      class="absolute top-[15px] left-1 m-0 flex w-full max-w-[90%] -translate-y-1/2 items-center gap-x-2 overflow-hidden"
+    >
+      <button class="btn btn-primary btn-label">Choose file</button>
+      <span>{{
+        field()().value() && field()().value().name ? field()().value().name : 'No file chosen'
+      }}</span>
+    </div>
     <input
       [id]="id()"
       type="file"
@@ -14,6 +22,15 @@
       [attr.aria-invalid]="isInvalid() || null"
       [class.outline-red-500]="isInvalid()"
     />
+    @if (field()().value() && field()().value() !== null) {
+      <button
+        type="button"
+        class="text-danger absolute top-1/2 right-2 -translate-y-1/2"
+        (click)="deleteFile()"
+      >
+        X
+      </button>
+    }
   </div>
 
   @if (isInvalid()) {
