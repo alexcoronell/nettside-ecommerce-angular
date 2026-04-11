@@ -15,13 +15,17 @@
   (itemsPerPage)="onItemsPerPage($event)"
   (searchUsers)="onSearchBrands($event)"
 >
-  <table class="item-list-table w-full max-w-4xl">
+  <table class="item-list-table w-full">
     <thead class="w-full">
       <tr>
         <th class="table-col-id text-center">Id</th>
         <th>Name</th>
         <th class="max-md:hidden">Slug</th>
-        <th class="max-lg:hidden">Logo</th>
+        <th class="max-sm:hidden">Logo</th>
+        <th class="max-xl:hidden">Created By</th>
+        <th class="max-xl:hidden">Updated By</th>
+        <th class="max-2xl:hidden">Created At</th>
+        <th class="max-2xl:hidden">Updated At</th>
         <th class="table-column-actions">Actions</th>
       </tr>
     </thead>
@@ -56,12 +60,20 @@
             <td class="table-col-id">{{ brand.id }}</td>
             <td>{{ brand.name }}</td>
             <td class="max-md:hidden">{{ brand.slug }}</td>
-            <td class="max-lg:hidden">
+            <td class="max-sm:hidden">
               <app-item-list-image
                 [imageUrl]="brand.logo ?? null"
                 [altText]="brand.logo ? brand.name : null"
               />
             </td>
+            <td class="max-xl:hidden">
+              {{ brand.createdBy.firstname }} {{ brand.createdBy.lastname }}
+            </td>
+            <td class="max-xl:hidden">
+              {{ brand.updatedBy.firstname }} {{ brand.updatedBy.lastname }}
+            </td>
+            <td class="max-2xl:hidden">{{ brand.createdAt | date: 'dd/MM/yyyy' }}</td>
+            <td class="max-2xl:hidden">{{ brand.updatedAt | date: 'dd/MM/yyyy' }}</td>
             <td class="table-column-actions">
               <app-item-list-table-actions
                 [itemId]="brand.id"

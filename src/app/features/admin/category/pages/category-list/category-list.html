@@ -16,12 +16,16 @@
   (itemsPerPage)="onItemsPerPage($event)"
   (searchUsers)="onSearchCategories($event)"
 >
-  <table class="item-list-table w-full max-w-4xl">
+  <table class="item-list-table w-full">
     <thead class="w-full">
       <tr>
         <th class="table-col-id text-center">Id</th>
         <th>Name</th>
         <th class="max-md:hidden">Slug</th>
+        <th class="max-lg:hidden">Created By</th>
+        <th class="max-xl:hidden">Updated By</th>
+        <th class="max-2xl:hidden">Created At</th>
+        <th class="max-2xl:hidden">Updated At</th>
         <th class="table-column-actions">Actions</th>
       </tr>
     </thead>
@@ -58,6 +62,14 @@
             <td class="table-col-id">{{ category.id }}</td>
             <td>{{ category.name }}</td>
             <td class="max-md:hidden">{{ category.slug }}</td>
+            <td class="max-lg:hidden">
+              {{ category.createdBy.firstname }} {{ category.createdBy.lastname }}
+            </td>
+            <td class="max-xl:hidden">
+              {{ category.updatedBy.firstname }} {{ category.updatedBy.lastname }}
+            </td>
+            <td class="max-2xl:hidden">{{ category.createdAt | date: 'dd/MM/yyyy' }}</td>
+            <td class="max-2xl:hidden">{{ category.updatedAt | date: 'dd/MM/yyyy' }}</td>
             <td class="table-column-actions">
               <app-item-list-table-actions
                 [itemId]="category.id"

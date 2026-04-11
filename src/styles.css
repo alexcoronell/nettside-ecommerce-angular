@@ -147,7 +147,7 @@ button {
 }
 
 .item-list-table thead tr {
-  @apply border-b border-white/50;
+  @apply border-b border-white/50 text-sm;
 }
 
 .item-list-table tbody tr td {

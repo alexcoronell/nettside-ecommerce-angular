@@ -43,9 +43,13 @@
       <tr>
         <th class="table-col-id text-center">Id</th>
         <th>Fullname</th>
-        <th class="max-md:hidden">Email</th>
-        <th class="max-lg:hidden">Phone</th>
-        <th class="max-sm:hidden">Role</th>
+        <th class="max-sm:hidden">Email</th>
+        <th class="max-md:hidden">Phone</th>
+        <th class="max-lg:hidden">Role</th>
+        <th class="max-xl:hidden">Created By</th>
+        <th class="max-xl:hidden">Updated By</th>
+        <th class="max-2xl:hidden">Created At</th>
+        <th class="max-2xl:hidden">Updated At</th>
         <th class="table-column-actions">Actions</th>
       </tr>
     </thead>
@@ -79,9 +83,17 @@
           <tr>
             <td class="table-col-id">{{ user.id }}</td>
             <td>{{ user.firstname }} {{ user.lastname }}</td>
-            <td class="max-md:hidden">{{ user.email }}</td>
-            <td class="max-lg:hidden">{{ user.phoneNumber }}</td>
-            <td class="max-sm:hidden">{{ user.role }}</td>
+            <td class="max-sm:hidden">{{ user.email }}</td>
+            <td class="max-md:hidden">{{ user.phoneNumber }}</td>
+            <td class="max-lg:hidden">{{ user.role }}</td>
+            <td class="max-xl:hidden">
+              {{ user.createdBy.firstname }} {{ user.createdBy.lastname }}
+            </td>
+            <td class="max-xl:hidden">
+              {{ user.updatedBy.firstname }} {{ user.updatedBy.lastname }}
+            </td>
+            <td class="max-2xl:hidden">{{ user.createdAt | date: 'dd/MM/yyyy' }}</td>
+            <td class="max-2xl:hidden">{{ user.updatedAt | date: 'dd/MM/yyyy' }}</td>
             <td class="table-column-actions">
               <app-item-list-table-actions [itemId]="user.id" (deleteItem)="onDeleteItem($event)" />
             </td>

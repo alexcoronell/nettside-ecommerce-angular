@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { UserAdminStore } from '@features/admin/user/store/user-admin.store';
 import { ItemList } from '@shared/components/ui/item-list/item-list';
 import { ItemListTableActions } from '@shared/components/ui/item-list-table-actions/item-list-table-actions';
@@ -9,7 +10,7 @@ import { UserRole } from '@domain/enums';
 
 @Component({
   selector: 'app-user-list',
-  imports: [ItemList, ItemListTableActions, SpinnerTables, NgClass],
+  imports: [DatePipe, ItemList, ItemListTableActions, SpinnerTables, NgClass],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

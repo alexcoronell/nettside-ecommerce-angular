@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { ItemList } from '@shared/components/ui/item-list/item-list';
 import { ItemListTableActions } from '@shared/components/ui/item-list-table-actions/item-list-table-actions';
 import { SpinnerTables } from '@shared/components/ui/spinner-tables/spinner-tables';
@@ -7,7 +8,7 @@ import { CategoryAdminStore } from '../../store/category-admin-store';
 
 @Component({
   selector: 'app-category-list',
-  imports: [ItemList, ItemListTableActions, SpinnerTables],
+  imports: [DatePipe, ItemList, ItemListTableActions, SpinnerTables],
   templateUrl: './category-list.html',
   styleUrl: './category-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

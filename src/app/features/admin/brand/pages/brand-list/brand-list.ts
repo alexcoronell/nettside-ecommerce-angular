@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { ItemList } from '@shared/components/ui/item-list/item-list';
 import { ItemListTableActions } from '@shared/components/ui/item-list-table-actions/item-list-table-actions';
 import { SpinnerTables } from '@shared/components/ui/spinner-tables/spinner-tables';
@@ -7,7 +8,7 @@ import { BrandAdminStore } from '../../store/brand-admin-store';
 import { ItemListImage } from '@shared/components/ui/item-list-image/item-list-image';
 @Component({
   selector: 'app-brand-list',
-  imports: [ItemList, ItemListTableActions, SpinnerTables, ItemListImage],
+  imports: [DatePipe, ItemList, ItemListTableActions, SpinnerTables, ItemListImage],
   templateUrl: './brand-list.html',
   styleUrl: './brand-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
