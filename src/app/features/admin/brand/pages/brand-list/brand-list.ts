@@ -4,10 +4,10 @@ import { ItemListTableActions } from '@shared/components/ui/item-list-table-acti
 import { SpinnerTables } from '@shared/components/ui/spinner-tables/spinner-tables';
 import { AdminDeleteConfirmStore } from '@shared/stores/admin-delete-confirm-store';
 import { BrandAdminStore } from '../../store/brand-admin-store';
-
+import { ItemListImage } from '@shared/components/ui/item-list-image/item-list-image';
 @Component({
   selector: 'app-brand-list',
-  imports: [ItemList, ItemListTableActions, SpinnerTables],
+  imports: [ItemList, ItemListTableActions, SpinnerTables, ItemListImage],
   templateUrl: './brand-list.html',
   styleUrl: './brand-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -57,7 +57,10 @@
             <td>{{ brand.name }}</td>
             <td class="max-md:hidden">{{ brand.slug }}</td>
             <td class="max-lg:hidden">
-              <img [src]="brand.logo" alt="{{ brand.name }}" class="h-10 w-10 object-cover" />
+              <app-item-list-image
+                [imageUrl]="brand.logo ?? null"
+                [altText]="brand.logo ? brand.name : null"
+              />
             </td>
             <td class="table-column-actions">
               <app-item-list-table-actions
