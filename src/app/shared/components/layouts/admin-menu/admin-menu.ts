@@ -12,6 +12,7 @@ export class AdminMenu {
   readonly adminNavItems = [
     { label: 'Brands', route: '/admin/brands' },
     { label: 'Categories', route: '/admin/categories' },
+    { label: 'Subcategories', route: '/admin/subcategories' },
     { label: 'Users', route: '/admin/users' },
   ];
 }
