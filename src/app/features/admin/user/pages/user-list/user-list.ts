@@ -20,7 +20,7 @@ export class UserList implements OnInit {
 
   showFiltersButtons = signal<boolean>(false);
 
-  readonly users = this.userAdminStore.users;
+  readonly users = this.userAdminStore.items;
   readonly isLoading = this.userAdminStore.isLoading;
   readonly error = this.userAdminStore.error;
   readonly errorMessage = this.userAdminStore.errorMessage;
@@ -49,7 +49,7 @@ export class UserList implements OnInit {
   }
 
   loadUsers(): void {
-    this.userAdminStore.getUsers();
+    this.userAdminStore.reload();
   }
 
   onItemsPerPage(limit: number) {
@@ -57,7 +57,7 @@ export class UserList implements OnInit {
   }
 
   onSearchUsers(search: string) {
-    this.userAdminStore.searchUsers(search);
+    this.userAdminStore.searchItems(search);
   }
 
   onFirstPage() {
@@ -89,7 +89,7 @@ export class UserList implements OnInit {
     this.adminDeleteConfirmStore.show(
       `Are you sure you want to delete user with id ${String(id)}?`,
       () => {
-        void this.userAdminStore.deleteUser(id);
+        void this.userAdminStore.deleteItem(id);
       }
     );
   }

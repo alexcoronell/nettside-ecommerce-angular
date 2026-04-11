@@ -16,7 +16,7 @@ export class BrandList implements OnInit {
   private readonly brandAdminStore = inject(BrandAdminStore);
   private readonly adminDeleteConfirmStore = inject(AdminDeleteConfirmStore);
 
-  readonly brands = this.brandAdminStore.brands;
+  readonly brands = this.brandAdminStore.items;
   readonly isLoading = this.brandAdminStore.isLoading;
   readonly error = this.brandAdminStore.error;
   readonly errorMessage = this.brandAdminStore.errorMessage;
@@ -35,7 +35,7 @@ export class BrandList implements OnInit {
   }
 
   loadBrands(): void {
-    this.brandAdminStore.getBrands();
+    this.brandAdminStore.reload();
   }
 
   onItemsPerPage(limit: number) {
@@ -43,7 +43,7 @@ export class BrandList implements OnInit {
   }
 
   onSearchBrands(search: string) {
-    this.brandAdminStore.searchBrands(search);
+    this.brandAdminStore.searchItems(search);
   }
 
   onFirstPage() {
@@ -66,7 +66,7 @@ export class BrandList implements OnInit {
     this.adminDeleteConfirmStore.show(
       `Are you sure you want to delete brand with id ${String(id)}?`,
       () => {
-        void this.brandAdminStore.deleteBrand(id);
+        void this.brandAdminStore.deleteItem(id);
       }
     );
   }

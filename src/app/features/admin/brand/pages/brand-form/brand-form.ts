@@ -67,7 +67,7 @@ export class BrandForm implements OnInit {
 
   onCreate() {
     const brand: CreateBrandDto = this.brandModel() as CreateBrandDto;
-    this.brandAdminStore.createBrand(brand).subscribe({
+    this.brandAdminStore.createItem(brand).subscribe({
       next: () => {
         this.adminFormNotificationStore.show('Brand created successfully', 'success');
       },
@@ -89,7 +89,7 @@ export class BrandForm implements OnInit {
     const brand: UpdateBrandDto = this.brandModel() as UpdateBrandDto;
     const brandId = this.brandId();
     if (!brandId) return;
-    this.brandAdminStore.updateBrand(brandId, brand).subscribe({
+    this.brandAdminStore.updateItem(brandId, brand).subscribe({
       next: () => {
         this.adminFormNotificationStore.show('Brand updated successfully', 'success');
       },
@@ -139,7 +139,7 @@ export class BrandForm implements OnInit {
   }
 
   loadBrand(id: number) {
-    this.brandAdminStore.getBrand(id).subscribe({
+    this.brandAdminStore.getItem(id).subscribe({
       next: (response) => {
         this.brand.set(response.data);
         this.brandModel.set(response.data as unknown as BrandModel);

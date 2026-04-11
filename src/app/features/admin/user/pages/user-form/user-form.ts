@@ -117,7 +117,7 @@ export class UserForm implements OnInit {
 
   onCreate() {
     const user: CreateUserDto = this.userModel();
-    this.userAdminStore.createUser(user).subscribe({
+    this.userAdminStore.createItem(user).subscribe({
       next: () => {
         this.adminFormNotificationStore.show('User created successfully', 'success');
       },
@@ -158,7 +158,7 @@ export class UserForm implements OnInit {
     const user: UpdateUserDto = this.userModel() as UpdateUserDto;
     const userId = this.userId();
     if (!userId) return;
-    this.userAdminStore.updateUser(userId, user).subscribe({
+    this.userAdminStore.updateItem(userId, user).subscribe({
       next: () => {
         this.adminFormNotificationStore.show('User updated successfully', 'success');
       },
@@ -213,7 +213,7 @@ export class UserForm implements OnInit {
   }
 
   loadUser(id: number) {
-    this.userAdminStore.getUser(id).subscribe({
+    this.userAdminStore.getItem(id).subscribe({
       next: (response) => {
         this.user.set(response.data);
         this.userModel.set(response.data as unknown as UserModel);
