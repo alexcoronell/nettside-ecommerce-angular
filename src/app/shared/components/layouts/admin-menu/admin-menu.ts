@@ -11,6 +11,7 @@ import { RouterLink } from '@angular/router';
 export class AdminMenu {
   readonly adminNavItems = [
     { label: 'Brands', route: '/admin/brands' },
+    { label: 'Categories', route: '/admin/categories' },
     { label: 'Users', route: '/admin/users' },
   ];
 }
