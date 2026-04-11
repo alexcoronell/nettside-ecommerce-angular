@@ -2,17 +2,17 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 
 /* Services */
-import { BrandHttpRepository } from '@infrastructure/http/repositories/brand-http-repository';
+import { CategoryHttpRepository } from '@infrastructure/http/repositories/category-http-repository';
 
 import { PaginationParams } from '@domain/types';
-import { CreateBrandDto, UpdateBrandDto } from '@infrastructure/http/dtos';
+import { CreateCategoryDto, UpdateCategoryDto } from '@infrastructure/http/dtos';
 import { mapHttpError } from '@shared/utils';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BrandAdminStore {
-  private readonly brandHttpRepository = inject(BrandHttpRepository);
+export class CategoryAdminStore {
+  private readonly categoryHttpRepository = inject(CategoryHttpRepository);
 
   /* Signals */
   readonly page = signal(1);
@@ -23,7 +23,7 @@ export class BrandAdminStore {
   readonly filterBy = signal<Record<string, string> | null>(null);
 
   /* Computed Signals */
-  readonly brands = computed(() => this.resource.value()?.data ?? []);
+  readonly categories = computed(() => this.resource.value()?.data ?? []);
   readonly total = computed(() => this.resource.value()?.meta?.total ?? 0);
   readonly status = computed(() => this.resource.status());
   readonly isLoading = computed(() => this.status() === 'loading' || this.status() === 'reloading');
@@ -32,8 +32,6 @@ export class BrandAdminStore {
   readonly errorMessage = computed(() => {
     const err = this.error();
     if (!err) return null;
-
-    console.log('[BrandAdminStore] Error detected:', err);
     return mapHttpError(err);
   });
 
@@ -56,14 +54,14 @@ export class BrandAdminStore {
     filterBy: this.filterBy(),
   }));
 
-  readonly resource = this.brandHttpRepository.getAll(() => this.paginationParams());
+  readonly resource = this.categoryHttpRepository.getAll(() => this.paginationParams());
 
-  searchBrands(search: string) {
+  searchCategories(search: string) {
     this.search.set(search);
-    this.getBrands();
+    this.getCategories();
   }
 
-  getBrands() {
+  getCategories() {
     this.resource.reload();
   }
 
@@ -102,24 +100,24 @@ export class BrandAdminStore {
     this.filterBy.set(null);
   }
 
-  getBrand(id: number) {
-    return this.brandHttpRepository.getById(id);
+  getCategory(id: number) {
+    return this.categoryHttpRepository.getById(id);
   }
 
-  createBrand(dto: CreateBrandDto) {
-    return this.brandHttpRepository.create(dto);
+  createCategory(dto: CreateCategoryDto) {
+    return this.categoryHttpRepository.create(dto);
   }
 
-  updateBrand(id: number, dto: UpdateBrandDto) {
-    return this.brandHttpRepository.update(id, dto);
+  updateCategory(id: number, dto: UpdateCategoryDto) {
+    return this.categoryHttpRepository.update(id, dto);
   }
 
-  async deleteBrand(id: number) {
+  async deleteCategory(id: number) {
     try {
-      await this.brandHttpRepository.delete(id);
+      await this.categoryHttpRepository.delete(id);
       this.resource.reload();
     } catch (error) {
-      console.error('Error deleting brand', error);
+      console.error('Error deleting category', error);
     }
   }
 }
