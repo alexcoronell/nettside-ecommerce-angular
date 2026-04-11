@@ -19,12 +19,11 @@ export const adminRoutes: Routes = [
       },
       {
         path: 'brands',
-        loadChildren: () =>
-          import('@features/admin/brands/brands.routes').then((r) => r.brandsRoutes),
+        loadChildren: () => import('@features/admin/brand/brand.routes').then((r) => r.brandRoutes),
       },
       {
         path: 'users',
-        loadChildren: () => import('@features/admin/users/users.routes').then((r) => r.usersRoutes),
+        loadChildren: () => import('@features/admin/user/user.routes').then((r) => r.userRoutes),
       },
     ],
   },
