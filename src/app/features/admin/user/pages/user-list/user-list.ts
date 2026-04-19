@@ -37,6 +37,7 @@ export class UserList implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers();
+    console.log(this.users());
   }
 
   readonly userRoles = [

@@ -1,4 +1,4 @@
-<p>category-list works!</p>
+@let colspan = '8';
 <app-item-list
   [title]="title"
   [add]="'create'"
@@ -32,13 +32,13 @@
     <tbody>
       @if (isLoading()) {
         <tr>
-          <td colspan="4" class="py-12 text-center">
+          <td [attr.colspan]="colspan" class="py-12 text-center">
             <app-spinner-tables />
           </td>
         </tr>
       } @else if (errorMessage()) {
         <tr>
-          <td colspan="4" class="py-12 text-center">
+          <td [attr.colspan]="colspan" class="py-12 text-center">
             <div
               class="bg-danger/5 border-danger/10 dark:border-danger/50 my-3 flex w-full flex-col items-center justify-center rounded-lg border p-6 dark:bg-transparent"
             >
@@ -79,7 +79,7 @@
           </tr>
         } @empty {
           <tr>
-            <td colspan="4" class="py-12 text-center">
+            <td [attr.colspan]="colspan" class="py-12 text-center">
               <p>No categories found</p>
             </td>
           </tr>

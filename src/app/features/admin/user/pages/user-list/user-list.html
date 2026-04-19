@@ -1,3 +1,5 @@
+@let colspan = '10';
+
 <app-item-list
   [title]="title"
   [add]="'create'"
@@ -56,13 +58,13 @@
     <tbody>
       @if (isLoading()) {
         <tr>
-          <td colspan="6" class="py-12 text-center">
+          <td [attr.colspan]="colspan" class="py-12 text-center">
             <app-spinner-tables />
           </td>
         </tr>
       } @else if (errorMessage()) {
         <tr>
-          <td colspan="6" class="py-12 text-center">
+          <td [attr.colspan]="colspan" class="py-12 text-center">
             <div
               class="bg-danger/5 border-danger/10 dark:border-danger/50 my-3 flex w-full flex-col items-center justify-center rounded-lg border p-6 dark:bg-transparent"
             >
@@ -90,7 +92,7 @@
               {{ user.createdBy.firstname }} {{ user.createdBy.lastname }}
             </td>
             <td class="max-xl:hidden">
-              {{ user.updatedBy.firstname }} {{ user.updatedBy.lastname }}
+              {{ user.createdBy.firstname }} {{ user.createdBy.lastname }}
             </td>
             <td class="max-2xl:hidden">{{ user.createdAt | date: 'dd/MM/yyyy' }}</td>
             <td class="max-2xl:hidden">{{ user.updatedAt | date: 'dd/MM/yyyy' }}</td>
@@ -99,7 +101,11 @@
             </td>
           </tr>
         } @empty {
-          <p>No users found</p>
+          <tr>
+            <td [attr.colspan]="colspan" class="py-12 text-center">
+              <p>No users found</p>
+            </td>
+          </tr>
         }
       }
     </tbody>
