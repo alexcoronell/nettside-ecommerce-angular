@@ -1,10 +1,10 @@
 import { AuditModel } from 'src/app/domain/models/audit-model';
 
 export interface Discount extends AuditModel {
-  code: string;
+  name: string;
   description: string;
   discountType: string;
-  discountvalue: number;
+  discountValue: number;
   startDate: Date;
   endDate: Date;
   minimumOrderAmount: number;

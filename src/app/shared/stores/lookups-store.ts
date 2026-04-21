@@ -2,6 +2,7 @@ import { Injectable, computed, inject } from '@angular/core';
 
 import { BrandHttpRepository } from '@infrastructure/http/repositories/brand-http-repository';
 import { CategoryHttpRepository } from '@infrastructure/http/repositories/category-http-repository';
+import { DiscountHttpRepository } from '@infrastructure/http/repositories/discount-http-repository';
 import { SubcategoryHttpRepository } from '@infrastructure/http/repositories/subcategory-http-repository';
 
 @Injectable({
@@ -10,10 +11,12 @@ import { SubcategoryHttpRepository } from '@infrastructure/http/repositories/sub
 export class LookupsStore {
   private readonly brandRepository = inject(BrandHttpRepository);
   private readonly categoryRepository = inject(CategoryHttpRepository);
+  private readonly discountRepository = inject(DiscountHttpRepository);
   private readonly subcategoryRepository = inject(SubcategoryHttpRepository);
 
   readonly brandsResource = this.brandRepository.getAllNoPagination();
   readonly categoriesResource = this.categoryRepository.getAllNoPagination();
+  readonly discountsResource = this.discountRepository.getAllNoPagination();
   readonly subcategoriesResource = this.subcategoryRepository.getAllNoPagination();
 
   readonly brands = computed(() => {
@@ -26,6 +29,14 @@ export class LookupsStore {
 
   readonly categories = computed(() => {
     const result = this.categoriesResource.value();
+    return result.data.map((item) => ({
+      label: item.name,
+      value: item.id.toString(),
+    }));
+  });
+
+  readonly discounts = computed(() => {
+    const result = this.discountsResource.value();
     return result.data.map((item) => ({
       label: item.name,
       value: item.id.toString(),
