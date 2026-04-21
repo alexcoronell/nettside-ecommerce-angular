@@ -4,18 +4,22 @@
   </label>
 
   <div class="mt-1">
-    <select
-      [id]="id()"
-      [formField]="field()"
-      [attr.aria-describedby]="isInvalid() ? id() + '-error' : null"
-      [attr.aria-invalid]="isInvalid() || null"
-      [class.outline-red-500]="isInvalid()"
-    >
-      <option value="" disabled selected>Select an option</option>
-      @for (option of options(); track option['value']) {
-        <option [value]="option['value']">{{ option['label'] }}</option>
-      }
-    </select>
+    @if (statusForm() === 'detail') {
+      <input type="text" readonly [value]="currentValue()" />
+    } @else {
+      <select
+        [id]="id()"
+        [formField]="field()"
+        [attr.aria-describedby]="isInvalid() ? id() + '-error' : null"
+        [attr.aria-invalid]="isInvalid() || null"
+        [class.outline-red-500]="isInvalid()"
+      >
+        <option value="" disabled selected>Select an option</option>
+        @for (option of options(); track option['value']) {
+          <option [value]="option['value']">{{ option['label'] }}</option>
+        }
+      </select>
+    }
   </div>
 
   @if (isInvalid()) {

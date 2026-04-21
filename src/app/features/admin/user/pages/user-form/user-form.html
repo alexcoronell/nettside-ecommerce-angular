@@ -54,6 +54,8 @@
             placeholder="Admin"
             [field]="userForm.role"
             [options]="userRoles()"
+            [currentValue]="user()?.role"
+            [statusForm]="statusForm()"
           />
           <app-input
             id="department"

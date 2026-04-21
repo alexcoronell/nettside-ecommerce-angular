@@ -20,6 +20,8 @@
             label="Category"
             [options]="categories()"
             [field]="subcategoryForm.categoryId"
+            [currentValue]="subcategory()?.category?.name"
+            [statusForm]="statusForm()"
           />
         </div>
 
