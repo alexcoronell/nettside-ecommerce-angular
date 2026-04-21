@@ -7,6 +7,7 @@ import { Brand } from '@domain/models';
 import { CreateBrandDto, UpdateBrandDto } from '@infrastructure/http/dtos';
 import { BrandRepository } from '@domain/repositories/brand.repository';
 import { ItemResult } from '@domain/types';
+import { NameOnly } from '@domain/types/name-only.type';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +29,10 @@ export class BrandHttpRepository
       formData.append('file', dto.logo);
     }
     return this.http.post<Brand>(this.url, formData);
+  }
+
+  getAllNoPagination(): HttpResourceRef<ItemResult<NameOnly[]>> {
+    return httpResource(() => `${this.url}/all`) as HttpResourceRef<ItemResult<NameOnly[]>>;
   }
 
   override update(id: number, dto: UpdateBrandDto): Observable<Brand> {
