@@ -5,10 +5,11 @@ import { ItemListTableActions } from '@shared/components/ui/item-list-table-acti
 import { SpinnerTables } from '@shared/components/ui/spinner-tables/spinner-tables';
 import { AdminDeleteConfirmStore } from '@shared/stores/admin-delete-confirm-store';
 import { DiscountAdminStore } from '@features/admin/discount/store/discount-admin-store';
+import { ItemListActive } from '@shared/components/ui/item-list-active/item-list-active';
 
 @Component({
   selector: 'app-discount-list',
-  imports: [DatePipe, ItemList, ItemListTableActions, SpinnerTables],
+  imports: [DatePipe, ItemList, ItemListTableActions, SpinnerTables, ItemListActive],
   templateUrl: './discount-list.html',
   styleUrl: './discount-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

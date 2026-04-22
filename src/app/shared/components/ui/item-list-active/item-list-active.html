@@ -1,0 +1,7 @@
+<div class="flex items-center justify-center">
+  @if (active()) {
+    <svg [lucideIcon]="lucideCircleCheck" size="18" class="text-success"></svg>
+  } @else {
+    <svg [lucideIcon]="lucideCircleAlert" size="18" class="text-danger"></svg>
+  }
+</div>

@@ -24,14 +24,15 @@
       <tr>
         <th class="table-col-id text-center">Id</th>
         <th>Name</th>
-        <th class="max-sm:hidden">Value</th>
-        <th class="max-md:hidden">Type</th>
+        <th class="max-md:hidden">Value</th>
+        <th class="hidden">Type</th>
         <th class="max-lg:hidden">Start Date</th>
         <th class="max-lg:hidden">End Date</th>
-        <th class="max-xl:hidden">Minimum Order Amount</th>
-        <th class="max-xl:hidden">Usage Limit</th>
-        <th class="max-xl:hidden">Usage Limit Per User</th>
         <th class="max-xl:hidden">Created By</th>
+        <th class="max-xl:hidden">Updated By</th>
+        <th class="max-2xl:hidden">Created At</th>
+        <th class="max-2xl:hidden">Updated At</th>
+        <th class="max-sm:hidden">Active</th>
         <th class="table-column-actions">Actions</th>
       </tr>
     </thead>
@@ -67,15 +68,20 @@
           <tr>
             <td class="table-col-id">{{ discount.id }}</td>
             <td>{{ discount.name }}</td>
-            <td class="max-sm:hidden">{{ discount.value }}</td>
-            <td class="max-md:hidden">{{ discount.type }}</td>
+            <td class="max-md:hidden">{{ discount.value }}</td>
+            <td class="hidden">{{ discount.type }}</td>
             <td class="max-lg:hidden">{{ discount.startDate | date: 'dd/MM/yyyy' }}</td>
             <td class="max-lg:hidden">{{ discount.endDate | date: 'dd/MM/yyyy' }}</td>
-            <td class="max-xl:hidden">{{ discount.minimumOrderAmount }}</td>
-            <td class="max-2xl:hidden">{{ discount.usageLimit }}</td>
-            <td class="max-2xl:hidden">{{ discount.usageLimitPerUser }}</td>
-            <td class="max-2xl:hidden">
+            <td class="max-xl:hidden">
               {{ discount.createdBy.firstname }} {{ discount.createdBy.lastname }}
+            </td>
+            <td class="max-xl:hidden">
+              {{ discount.updatedBy.firstname }} {{ discount.updatedBy.lastname }}
+            </td>
+            <td class="max-2xl:hidden">{{ discount.createdAt | date: 'dd/MM/yyyy' }}</td>
+            <td class="max-2xl:hidden">{{ discount.updatedAt | date: 'dd/MM/yyyy' }}</td>
+            <td class="text-center max-sm:hidden">
+              <app-item-list-active [active]="discount.active" />
             </td>
             <td class="table-column-actions">
               <app-item-list-table-actions
