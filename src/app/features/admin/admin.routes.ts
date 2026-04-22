@@ -37,6 +37,11 @@ export const adminRoutes: Routes = [
           import('@features/admin/subcategory/subcategory.routes').then((r) => r.subcategoryRoutes),
       },
       {
+        path: 'suppliers',
+        loadChildren: () =>
+          import('@features/admin/supplier/supplier.routes').then((r) => r.supplierRoutes),
+      },
+      {
         path: 'users',
         loadChildren: () => import('@features/admin/user/user.routes').then((r) => r.userRoutes),
       },

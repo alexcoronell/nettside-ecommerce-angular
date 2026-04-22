@@ -61,6 +61,7 @@ export class SubcategoryForm implements OnInit {
   });
 
   readonly formIsReadonly = computed(() => this.statusForm() === 'detail');
+
   readonly categories = this.lookupsStore.categories;
 
   reloadCategories() {
@@ -207,6 +208,7 @@ export class SubcategoryForm implements OnInit {
       this.subcategoryId.set(Number(id));
       this.title.set('Detail Subcategory');
       this.loadSubcategory(Number(id));
+      this.statusForm.set('detail');
     } else {
       this.title.set('Create Subcategory');
       this.statusForm.set('create');

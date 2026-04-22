@@ -4,6 +4,7 @@ import { BrandHttpRepository } from '@infrastructure/http/repositories/brand-htt
 import { CategoryHttpRepository } from '@infrastructure/http/repositories/category-http-repository';
 import { DiscountHttpRepository } from '@infrastructure/http/repositories/discount-http-repository';
 import { SubcategoryHttpRepository } from '@infrastructure/http/repositories/subcategory-http-repository';
+import { SupplierHttpRepository } from '@infrastructure/http/repositories/supplier-http-repository';
 
 @Injectable({
   providedIn: 'root',
@@ -13,11 +14,13 @@ export class LookupsStore {
   private readonly categoryRepository = inject(CategoryHttpRepository);
   private readonly discountRepository = inject(DiscountHttpRepository);
   private readonly subcategoryRepository = inject(SubcategoryHttpRepository);
+  private readonly supplierRepository = inject(SupplierHttpRepository);
 
   readonly brandsResource = this.brandRepository.getAllNoPagination();
   readonly categoriesResource = this.categoryRepository.getAllNoPagination();
   readonly discountsResource = this.discountRepository.getAllNoPagination();
   readonly subcategoriesResource = this.subcategoryRepository.getAllNoPagination();
+  readonly suppliersResource = this.supplierRepository.getAllNoPagination();
 
   readonly brands = computed(() => {
     const result = this.brandsResource.value();
@@ -45,6 +48,14 @@ export class LookupsStore {
 
   readonly subcategories = computed(() => {
     const result = this.subcategoriesResource.value();
+    return result.data.map((item) => ({
+      label: item.name,
+      value: item.id.toString(),
+    }));
+  });
+
+  readonly suppliers = computed(() => {
+    const result = this.suppliersResource.value();
     return result.data.map((item) => ({
       label: item.name,
       value: item.id.toString(),

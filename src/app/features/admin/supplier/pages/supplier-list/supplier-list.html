@@ -1,0 +1,94 @@
+@let colspan = '8';
+<app-item-list
+  [title]="title"
+  [add]="'create'"
+  [page]="page()"
+  [limit]="limit()"
+  [total]="total()"
+  [totalPages]="totalPages()"
+  [hasPreviousPage]="hasPreviousPage()"
+  [hasNextPage]="hasNextPage()"
+  (refresh)="loadSuppliers()"
+  (firstPage)="onFirstPage()"
+  (lastPage)="onLastPage()"
+  (nextPage)="onNextPage()"
+  (previousPage)="onPreviousPage()"
+  (itemsPerPage)="onItemsPerPage($event)"
+  (searchUsers)="onSearchSuppliers($event)"
+>
+  <table class="item-list-table w-full">
+    <thead class="w-full">
+      <tr>
+        <th class="table-col-id text-center">Id</th>
+        <th>Name</th>
+        <th class="max-sm:hidden">Contact</th>
+        <th class="hidden">Email</th>
+        <th class="max-lg:hidden">Phone</th>
+        <th class="max-xl:hidden">Created By</th>
+        <th class="max-xl:hidden">Updated By</th>
+        <th class="max-2xl:hidden">Created At</th>
+        <th class="max-2xl:hidden">Updated At</th>
+        <th class="table-column-actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (isLoading()) {
+        <tr>
+          <td [attr.colspan]="colspan" class="py-12 text-center">
+            <app-spinner-tables />
+          </td>
+        </tr>
+      } @else if (errorMessage()) {
+        <tr>
+          <td [attr.colspan]="colspan" class="py-12 text-center">
+            <div
+              class="bg-danger/5 border-danger/10 dark:border-danger/50 my-3 flex w-full flex-col items-center justify-center rounded-lg border p-6 dark:bg-transparent"
+            >
+              <p class="text-danger mb-2 text-xl font-bold">
+                @if (errorMessage()?.includes('connect')) {
+                  Server Connection Error
+                } @else {
+                  Error
+                }
+              </p>
+              <p class="text-dark-text dark:text-light-text">{{ errorMessage() }}</p>
+              <button (click)="loadSuppliers()" class="btn btn-primary mt-4">
+                Retry Connection
+              </button>
+            </div>
+          </td>
+        </tr>
+      } @else {
+        @for (supplier of suppliers(); track supplier.id) {
+          <tr>
+            <td class="table-col-id">{{ supplier.id }}</td>
+            <td>{{ supplier.name }}</td>
+            <td class="max-sm:hidden">{{ supplier.contactName }}</td>
+            <td class="hidden">{{ supplier.email }}</td>
+            <td class="max-lg:hidden">{{ supplier.phoneNumber }}</td>
+            <td class="max-xl:hidden">
+              {{ supplier.createdBy.firstname }} {{ supplier.createdBy.lastname }}
+            </td>
+            <td class="max-xl:hidden">
+              {{ supplier.updatedBy.firstname }} {{ supplier.updatedBy.lastname }}
+            </td>
+            <td class="max-2xl:hidden">{{ supplier.createdAt | date: 'dd/MM/yyyy' }}</td>
+            <td class="max-2xl:hidden">{{ supplier.updatedAt | date: 'dd/MM/yyyy' }}</td>
+            <td class="table-column-actions">
+              <app-item-list-table-actions
+                [itemId]="supplier.id"
+                (deleteItem)="onDeleteItem($event)"
+              />
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td [attr.colspan]="colspan" class="py-12 text-center">
+              <p>No suppliers found</p>
+            </td>
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+</app-item-list>
