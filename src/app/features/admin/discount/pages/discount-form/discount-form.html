@@ -1,1 +1,124 @@
-<p>discount-form works!</p>
+<div class="AdminForm max-w-[400px] px-6">
+  <h1>{{ title() }}</h1>
+  <div class="AdminForm__container">
+    <form (submit)="onSubmit($event)" novalidate>
+      <fieldset [disabled]="isLoading()" class="contents">
+        <div class="mb-6">
+          <app-input
+            id="name"
+            label="Name"
+            type="text"
+            autocomplete="name"
+            placeholder="Nike"
+            [field]="discountForm.name"
+          />
+        </div>
+        <div class="mb-6">
+          <app-input
+            id="description"
+            label="Description"
+            type="text"
+            autocomplete="description"
+            placeholder="Description"
+            [field]="discountForm.description"
+          />
+        </div>
+        <div class="mb-6">
+          <app-input
+            id="type"
+            label="Type"
+            type="text"
+            autocomplete="type"
+            placeholder="Type"
+            [field]="discountForm.type"
+          />
+        </div>
+        <div class="mb-6">
+          <app-input
+            id="value"
+            label="Value (percentage)"
+            type="number"
+            autocomplete="value"
+            placeholder="Value"
+            [field]="discountForm.value"
+          />
+        </div>
+        <div class="mb-6">
+          <app-input
+            id="startDate"
+            label="Start Date"
+            type="date"
+            autocomplete="startDate"
+            placeholder="Start Date"
+            [field]="discountForm.startDate"
+          />
+        </div>
+        <div class="mb-6">
+          <app-input
+            id="endDate"
+            label="End Date"
+            type="date"
+            autocomplete="endDate"
+            placeholder="End Date"
+            [field]="discountForm.endDate"
+          />
+        </div>
+        <div class="mb-6">
+          <app-input
+            id="minimumOrderAmount"
+            label="Minimum Order Amount"
+            type="number"
+            autocomplete="minimumOrderAmount"
+            placeholder="Minimum Order Amount"
+            [field]="discountForm.minimumOrderAmount"
+          />
+        </div>
+        <div class="mb-6">
+          <app-input
+            id="minimumProductsCount"
+            label="Minimum Products Count"
+            type="number"
+            autocomplete="minimumProductsCount"
+            placeholder="Minimum Products Count"
+            [field]="discountForm.minimumProductsCount"
+          />
+        </div>
+        <div class="mb-6">
+          <app-input
+            id="usageLimit"
+            label="Usage Limit"
+            type="number"
+            autocomplete="usageLimit"
+            placeholder="Usage Limit"
+            [field]="discountForm.usageLimit"
+          />
+        </div>
+        <div class="mb-6">
+          <app-input
+            id="usageLimitPerUser"
+            label="Usage Limit Per User"
+            type="number"
+            autocomplete="usageLimitPerUser"
+            placeholder="Usage Limit Per User"
+            [field]="discountForm.usageLimitPerUser"
+          />
+        </div>
+        <div class="mb-6">
+          <app-checkbox
+            id="isActive"
+            label="Is Active"
+            (toggleIsActive)="onToggleIsActive()"
+            [statusForm]="statusForm()"
+            [field]="discountForm.active"
+          />
+        </div>
+        <app-admin-form-buttons
+          [statusForm]="statusForm()"
+          [isLoading]="isLoading()"
+          (onEdit)="onEdit()"
+          (onCancel)="onCancel()"
+        />
+      </fieldset>
+    </form>
+  </div>
+</div>

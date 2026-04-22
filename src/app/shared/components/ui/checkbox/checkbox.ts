@@ -1,5 +1,6 @@
 import { Component, input, computed, output, ChangeDetectionStrategy } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
+import { StatusForm } from '@shared/types';
 
 @Component({
   selector: 'app-checkbox',
@@ -14,8 +15,10 @@ export class Checkbox {
   id = input.required<string>();
   label = input.required<string>();
   toggleIsActive = output<boolean>();
+  statusForm = input<StatusForm>('create');
 
   onToggleChecked() {
+    if (this.statusForm() === 'detail') return;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     this.toggleIsActive.emit(!this.field()().value());
   }

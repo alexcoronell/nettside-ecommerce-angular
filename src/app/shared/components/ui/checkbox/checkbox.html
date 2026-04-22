@@ -11,10 +11,12 @@
     <label [for]="id()">
       {{ label() }}
     </label>
-    <div
+    <button
+      type="button"
       class="border-primary flex h-6 w-6 items-center justify-center border-2"
       [class.bg-primary]="isChecked()"
       (click)="onToggleChecked()"
+      [disabled]="statusForm() === 'detail'"
     >
       <svg
         class="h-4 w-4"
@@ -26,7 +28,7 @@
       >
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
       </svg>
-    </div>
+    </button>
   </div>
 
   @if (isInvalid()) {

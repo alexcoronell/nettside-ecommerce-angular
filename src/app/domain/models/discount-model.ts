@@ -8,6 +8,7 @@ export interface Discount extends AuditModel {
   startDate: Date;
   endDate: Date;
   minimumOrderAmount: number;
+  minimumProductsCount: number;
   usageLimit: number;
   usageLimitPerUser: number;
   active: boolean;
