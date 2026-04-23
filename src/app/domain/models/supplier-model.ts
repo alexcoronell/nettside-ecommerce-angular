@@ -5,11 +5,11 @@ export interface Supplier extends AuditModel {
   contactName: string;
   phoneNumber: string;
   email: string;
-  website: string;
-  state: string;
-  city: string;
-  county: string;
-  streetAddress: string;
-  postalCode: string;
-  notes: string;
+  website?: string;
+  state?: string;
+  city?: string;
+  county?: string;
+  streetAddress?: string;
+  postalCode?: string;
+  notes?: string;
 }

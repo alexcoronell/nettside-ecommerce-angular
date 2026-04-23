@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { LucideDynamicIcon, LucideCircleCheck, LucideCircleAlert } from '@lucide/angular';
 
 @Component({
@@ -6,6 +6,7 @@ import { LucideDynamicIcon, LucideCircleCheck, LucideCircleAlert } from '@lucide
   imports: [LucideDynamicIcon, LucideCircleCheck, LucideCircleAlert],
   templateUrl: './item-list-active.html',
   styleUrl: './item-list-active.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemListActive {
   public active = input<boolean>(false);

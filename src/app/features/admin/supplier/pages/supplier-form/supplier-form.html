@@ -1,1 +1,134 @@
-<p>supplier-form works!</p>
+<div
+  class="AdminForm max-w-[400px] max-md:px-6 md:max-w-[750px] lg:max-w-[900px] 2xl:max-w-[1500px]"
+>
+  <h1>{{ title() }}</h1>
+  <div class="AdminForm__container">
+    <form (submit)="onSubmit($event)" novalidate>
+      <fieldset
+        [disabled]="isLoading()"
+        class="contents space-y-1 md:grid md:grid-cols-2 md:gap-x-6"
+      >
+        <div class="2xl:grid 2xl:grid-cols-2 2xl:place-content-start 2xl:gap-x-6">
+          <p class="my-3 font-bold md:mt-0 2xl:col-span-2">General Information</p>
+          <div>
+            <app-input
+              id="name"
+              label="Name"
+              type="text"
+              autocomplete="name"
+              placeholder="Nike"
+              [field]="supplierForm.name"
+            />
+          </div>
+
+          <div>
+            <app-input
+              id="contactName"
+              label="Contact Name"
+              type="text"
+              autocomplete="contactName"
+              placeholder="Contact Name"
+              [field]="supplierForm.contactName"
+            />
+          </div>
+
+          <div>
+            <app-input
+              id="phoneNumber"
+              label="Phone Number"
+              type="tel"
+              autocomplete="phoneNumber"
+              placeholder="Phone Number"
+              [field]="supplierForm.phoneNumber"
+            />
+          </div>
+
+          <div>
+            <app-input
+              id="email"
+              label="Email"
+              type="email"
+              autocomplete="email"
+              placeholder="Email"
+              [field]="supplierForm.email"
+            />
+          </div>
+
+          <div class="2xl:col-span-2">
+            <app-input
+              id="website"
+              label="Website"
+              type="url"
+              autocomplete="website"
+              placeholder="Website"
+              [field]="supplierForm.website"
+            />
+          </div>
+        </div>
+
+        <div class="2xl:grid 2xl:grid-cols-2 2xl:place-content-start 2xl:gap-x-6">
+          <p class="my-3 font-bold md:mt-0 2xl:col-span-2">Location Information</p>
+          <div>
+            <app-input
+              id="state"
+              label="State"
+              type="text"
+              autocomplete="state"
+              placeholder="State"
+              [field]="supplierForm.state"
+            />
+          </div>
+
+          <div>
+            <app-input
+              id="city"
+              label="City"
+              type="text"
+              autocomplete="city"
+              placeholder="City"
+              [field]="supplierForm.city"
+            />
+          </div>
+
+          <div>
+            <app-input
+              id="county"
+              label="County"
+              type="text"
+              autocomplete="county"
+              placeholder="County"
+              [field]="supplierForm.county"
+            />
+          </div>
+
+          <div>
+            <app-input
+              id="postalCode"
+              label="Postal Code"
+              type="text"
+              autocomplete="postalCode"
+              placeholder="Postal Code"
+              [field]="supplierForm.postalCode"
+            />
+          </div>
+
+          <div class="2xl:col-span-2">
+            <app-text-area
+              id="streetAddress"
+              label="Street Address"
+              [field]="supplierForm.streetAddress"
+              [rows]="2"
+            />
+          </div>
+        </div>
+        <app-admin-form-buttons
+          [statusForm]="statusForm()"
+          [isLoading]="isLoading()"
+          (onEdit)="onEdit()"
+          (onCancel)="onCancel()"
+          class="md:col-span-2"
+        />
+      </fieldset>
+    </form>
+  </div>
+</div>
