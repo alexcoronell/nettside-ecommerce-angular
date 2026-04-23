@@ -14,13 +14,22 @@ import { BaseHttpRepository } from '../shared/base-http.repository';
 export class StoreDetailHttpRepository extends BaseHttpRepository implements StoreDetailRepository {
   protected readonly path = 'store-detail';
 
-  get(): HttpResourceRef<ItemResult<StoreDetail>> {
-    return httpResource(() => this.apiUrl) as HttpResourceRef<ItemResult<StoreDetail>>;
+  private readonly id = 1;
+
+  protected get url(): string {
+    return `${this.apiUrl}${this.path}`;
   }
+
+  get(): HttpResourceRef<ItemResult<StoreDetail>> {
+    return httpResource(() => `${this.url}/${this.id.toString()}`) as HttpResourceRef<
+      ItemResult<StoreDetail>
+    >;
+  }
+
   update(
     id: number,
     dto: UpdateStoreDetailDto
   ): Observable<ItemResult<StoreDetail>> | Promise<ItemResult<StoreDetail>> {
-    return this.http.patch<ItemResult<StoreDetail>>(`${this.apiUrl}/${id.toString()}`, dto);
+    return this.http.patch<ItemResult<StoreDetail>>(`${this.url}/${id.toString()}`, dto);
   }
 }
