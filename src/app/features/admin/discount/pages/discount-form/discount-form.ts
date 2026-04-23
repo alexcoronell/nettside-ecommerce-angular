@@ -11,9 +11,10 @@ import { form, required, min, submit, readonly, validate } from '@angular/forms/
 import { Router, ActivatedRoute } from '@angular/router';
 
 /* Components */
-import { Input } from '@shared/components/ui/input/input';
-import { Checkbox } from '@shared/components/ui/checkbox/checkbox';
 import { AdminFormButtons } from '@shared/components/ui/admin-form-buttons/admin-form-buttons';
+import { Checkbox } from '@shared/components/ui/checkbox/checkbox';
+import { Input } from '@shared/components/ui/input/input';
+import { TextArea } from '@shared/components/ui/text-area/text-area';
 
 /* Models */
 import { Discount } from '@domain/models';
@@ -44,7 +45,7 @@ interface DiscountModel {
 
 @Component({
   selector: 'app-discount-form',
-  imports: [Input, Checkbox, AdminFormButtons],
+  imports: [AdminFormButtons, Checkbox, Input, TextArea],
   templateUrl: './discount-form.html',
   styleUrl: './discount-form.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

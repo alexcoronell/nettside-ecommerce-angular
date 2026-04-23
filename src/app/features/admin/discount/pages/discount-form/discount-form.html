@@ -1,39 +1,66 @@
-<div class="AdminForm max-w-[400px] px-6">
+<div
+  class="AdminForm max-w-[400px] max-md:px-6 md:max-w-[750px] lg:max-w-[1000px] 2xl:max-w-[1500px]"
+>
   <h1>{{ title() }}</h1>
   <div class="AdminForm__container">
     <form (submit)="onSubmit($event)" novalidate>
-      <fieldset [disabled]="isLoading()" class="contents">
-        <div class="mb-6">
-          <app-input
-            id="name"
-            label="Name"
-            type="text"
-            autocomplete="name"
-            placeholder="Nike"
-            [field]="discountForm.name"
-          />
+      <fieldset
+        [disabled]="isLoading()"
+        class="contents md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-2 2xl:grid-cols-3"
+      >
+        <div class="2xl:order-1">
+          <div class="mb-6 md:mb-1.5 2xl:mb-1.5">
+            <app-input
+              id="name"
+              label="Name"
+              type="text"
+              autocomplete="name"
+              placeholder="Nike"
+              [field]="discountForm.name"
+            />
+          </div>
+          <div class="mb-6 md:mb-0">
+            <app-input
+              id="type"
+              label="Type"
+              type="text"
+              autocomplete="type"
+              placeholder="Type"
+              [field]="discountForm.type"
+            />
+          </div>
         </div>
-        <div class="mb-6">
-          <app-input
+        <div class="mb-6 md:mb-0 2xl:order-3">
+          <app-text-area
             id="description"
             label="Description"
-            type="text"
-            autocomplete="description"
-            placeholder="Description"
             [field]="discountForm.description"
+            [rows]="5"
           />
         </div>
-        <div class="mb-6">
-          <app-input
-            id="type"
-            label="Type"
-            type="text"
-            autocomplete="type"
-            placeholder="Type"
-            [field]="discountForm.type"
-          />
+        <div class="2xl:order-2">
+          <div class="mb-6 md:mb-0 2xl:mb-1.5">
+            <app-input
+              id="startDate"
+              label="Start Date"
+              type="date"
+              autocomplete="startDate"
+              placeholder="Start Date"
+              [field]="discountForm.startDate"
+            />
+          </div>
+          <div class="mb-6 md:mb-0">
+            <app-input
+              id="endDate"
+              label="End Date"
+              type="date"
+              autocomplete="endDate"
+              placeholder="End Date"
+              [field]="discountForm.endDate"
+            />
+          </div>
         </div>
-        <div class="mb-6">
+        <div class="mb-6 md:mb-0 2xl:order-4">
           <app-input
             id="value"
             label="Value (percentage)"
@@ -43,27 +70,7 @@
             [field]="discountForm.value"
           />
         </div>
-        <div class="mb-6">
-          <app-input
-            id="startDate"
-            label="Start Date"
-            type="date"
-            autocomplete="startDate"
-            placeholder="Start Date"
-            [field]="discountForm.startDate"
-          />
-        </div>
-        <div class="mb-6">
-          <app-input
-            id="endDate"
-            label="End Date"
-            type="date"
-            autocomplete="endDate"
-            placeholder="End Date"
-            [field]="discountForm.endDate"
-          />
-        </div>
-        <div class="mb-6">
+        <div class="mb-6 md:mb-0 2xl:order-5">
           <app-input
             id="minimumOrderAmount"
             label="Minimum Order Amount"
@@ -73,7 +80,7 @@
             [field]="discountForm.minimumOrderAmount"
           />
         </div>
-        <div class="mb-6">
+        <div class="mb-6 md:mb-0 2xl:order-6">
           <app-input
             id="minimumProductsCount"
             label="Minimum Products Count"
@@ -83,7 +90,7 @@
             [field]="discountForm.minimumProductsCount"
           />
         </div>
-        <div class="mb-6">
+        <div class="mb-6 md:mb-0 2xl:order-7">
           <app-input
             id="usageLimit"
             label="Usage Limit"
@@ -93,7 +100,7 @@
             [field]="discountForm.usageLimit"
           />
         </div>
-        <div class="mb-6">
+        <div class="mb-6 md:mb-0 2xl:order-8">
           <app-input
             id="usageLimitPerUser"
             label="Usage Limit Per User"
@@ -103,7 +110,7 @@
             [field]="discountForm.usageLimitPerUser"
           />
         </div>
-        <div class="mb-6">
+        <div class="mb-6 md:mb-0 md:pt-7 2xl:order-9">
           <app-checkbox
             id="isActive"
             label="Is Active"
@@ -117,6 +124,7 @@
           [isLoading]="isLoading()"
           (onEdit)="onEdit()"
           (onCancel)="onCancel()"
+          class="md:col-span-2 2xl:order-10 2xl:col-span-3"
         />
       </fieldset>
     </form>

@@ -1,0 +1,29 @@
+<div class="form-group">
+  <label [for]="id()">
+    {{ label() }}
+  </label>
+
+  <div class="mt-1">
+    <textarea
+      [id]="id()"
+      [formField]="field()"
+      [placeholder]="placeholder()"
+      [attr.aria-describedby]="isInvalid() ? id() + '-error' : null"
+      [attr.aria-invalid]="isInvalid() || null"
+      [class.outline-red-500]="isInvalid()"
+      [rows]="rows()"
+    ></textarea>
+  </div>
+
+  @if (isInvalid()) {
+    @for (error of errors(); track error.message) {
+      <p
+        [id]="id() + '-error'"
+        role="alert"
+        class="absolute top-auto bottom-1 left-0 text-xs text-red-400"
+      >
+        {{ error.message }}
+      </p>
+    }
+  }
+</div>
