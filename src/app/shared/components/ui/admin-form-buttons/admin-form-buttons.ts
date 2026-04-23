@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+
 import { StatusForm } from '@shared/types';
 
 @Component({
@@ -11,14 +13,21 @@ import { StatusForm } from '@shared/types';
 })
 export class AdminFormButtons {
   private readonly location = inject(Location);
+  private readonly router = inject(Router);
 
   statusForm = input.required<StatusForm>();
   isLoading = input<boolean>(false);
+  goto = input<string | null>(null);
 
   onEdit = output();
   onCancel = output();
 
   onBack() {
-    this.location.back();
+    const url = this.goto();
+    if (url) {
+      void this.router.navigate([url]);
+    } else {
+      this.location.back();
+    }
   }
 }

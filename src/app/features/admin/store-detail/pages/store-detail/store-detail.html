@@ -1,1 +1,123 @@
-<p>store-detail works!</p>
+<div
+  class="AdminForm max-w-[400px] max-md:px-6 md:max-w-[750px] lg:max-w-[900px] 2xl:max-w-[1500px]"
+>
+  <h1>{{ title() }}</h1>
+  <div class="AdminForm__container">
+    <form (submit)="onSubmit($event)" novalidate>
+      <fieldset
+        [disabled]="isLoading()"
+        class="contents space-y-1 md:grid md:grid-cols-2 md:gap-x-6"
+      >
+        <div class="2xl:grid 2xl:grid-cols-2 2xl:place-content-start 2xl:gap-x-6">
+          <p class="my-3 font-bold md:mt-0 2xl:col-span-2">General Information</p>
+          <div>
+            <app-input
+              id="name"
+              label="Name"
+              type="text"
+              autocomplete="name"
+              placeholder="Store Name"
+              [field]="storeDetailForm.name"
+            />
+          </div>
+
+          <div>
+            <app-input
+              id="email"
+              label="Email"
+              type="email"
+              autocomplete="email"
+              placeholder="store@example.com"
+              [field]="storeDetailForm.email"
+            />
+          </div>
+
+          <div>
+            <app-input
+              id="phone"
+              label="Phone Number"
+              type="tel"
+              autocomplete="tel"
+              placeholder="Phone Number"
+              [field]="storeDetailForm.phone"
+            />
+          </div>
+        </div>
+
+        <div class="2xl:grid 2xl:grid-cols-2 2xl:place-content-start 2xl:gap-x-6">
+          <p class="my-3 font-bold md:mt-0 2xl:col-span-2">Location Information</p>
+          <div>
+            <app-input
+              id="country"
+              label="Country"
+              type="text"
+              autocomplete="country"
+              placeholder="Country"
+              [field]="storeDetailForm.country"
+            />
+          </div>
+
+          <div>
+            <app-input
+              id="state"
+              label="State"
+              type="text"
+              autocomplete="state"
+              placeholder="State"
+              [field]="storeDetailForm.state"
+            />
+          </div>
+
+          <div>
+            <app-input
+              id="city"
+              label="City"
+              type="text"
+              autocomplete="city"
+              placeholder="City"
+              [field]="storeDetailForm.city"
+            />
+          </div>
+
+          <div>
+            <app-input
+              id="neighborhood"
+              label="Neighborhood"
+              type="text"
+              placeholder="Neighborhood"
+              [field]="storeDetailForm.neighborhood"
+            />
+          </div>
+
+          <div class="2xl:col-span-2">
+            <app-text-area
+              id="address"
+              label="Full Address"
+              [field]="storeDetailForm.address"
+              [rows]="2"
+            />
+          </div>
+        </div>
+
+        <div class="md:col-span-2">
+          <p class="my-3 font-bold">Legal Information</p>
+          <app-text-area
+            id="legalInformation"
+            label="Legal Information & Terms"
+            [field]="storeDetailForm.legalInformation"
+            [rows]="4"
+          />
+        </div>
+
+        <app-admin-form-buttons
+          [statusForm]="statusForm()"
+          [isLoading]="isLoading()"
+          (onEdit)="onEdit()"
+          (onCancel)="onCancel()"
+          goto="admin/dashboard"
+          class="md:col-span-2"
+        />
+      </fieldset>
+    </form>
+  </div>
+</div>
