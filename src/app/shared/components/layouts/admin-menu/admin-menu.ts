@@ -15,6 +15,7 @@ export class AdminMenu {
     { label: 'Discounts', route: '/admin/discounts' },
     { label: 'Subcategories', route: '/admin/subcategories' },
     { label: 'Suppliers', route: '/admin/suppliers' },
+    { label: 'Store Detail', route: '/admin/store-detail' },
     { label: 'Users', route: '/admin/users' },
   ];
 }
