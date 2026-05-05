@@ -13,6 +13,7 @@ export class AdminMenu {
     { label: 'Brands', route: '/admin/brands' },
     { label: 'Categories', route: '/admin/categories' },
     { label: 'Discounts', route: '/admin/discounts' },
+    { label: 'Products', route: '/admin/products' },
     { label: 'Subcategories', route: '/admin/subcategories' },
     { label: 'Suppliers', route: '/admin/suppliers' },
     { label: 'Store Detail', route: '/admin/store-detail' },
