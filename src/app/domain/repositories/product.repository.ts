@@ -1,8 +1,8 @@
 import { BaseRepository } from '@domain/shared/base.repository';
-import { PaginationParams } from '@domain/types';
+import { HttpResourceRef } from '@angular/common/http';
+import { ItemResult } from '@domain/types';
 import { Product } from '@domain/models';
 import { CreateProductDto, UpdateProductDto } from '@infrastructure/http/dtos/product.dto';
-import { PaginatedResult } from '@domain/types';
 
 export interface ProductFilters {
   brandSlug?: string;
@@ -18,8 +18,5 @@ export abstract class ProductRepository extends BaseRepository<
   CreateProductDto,
   UpdateProductDto
 > {
-  abstract override getAll(
-    filters?: ProductFilters,
-    pagination?: PaginationParams
-  ): Promise<PaginatedResult<Product>>;
+  abstract getBySlug(slug: string): HttpResourceRef<ItemResult<Product>>;
 }
